@@ -1,0 +1,16 @@
+PODS:
+  - FoundationExtended (3.0)
+
+DEPENDENCIES:
+  - FoundationExtended
+
+SPEC REPOS:
+  https://github.com/ITV/iOS-Podspecs.git:
+    - FoundationExtended
+
+SPEC CHECKSUMS:
+  FoundationExtended: 1b7ff86f5c298c6c8869c32579c5a9bb190c9f01
+
+PODFILE CHECKSUM: 20ce68f617dce00636cd098666cf0f9108c9b017
+
+COCOAPODS: 1.9.1
