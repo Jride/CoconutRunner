@@ -11,6 +11,8 @@
 		222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC312454CEC400F38F79 /* BackgroundManager.swift */; };
 		222EDC352455D9EB00F38F79 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC342455D9EB00F38F79 /* Cloud.swift */; };
 		22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22301E08245E082E00FF0AD0 /* Bomb.swift */; };
+		2242E03F24647623003889EA /* Banana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E03E24647623003889EA /* Banana.swift */; };
+		2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2242E0482469D9CC003889EA /* BananaCollection.sks */; };
 		224B1295243FB5B400A540E5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224B1294243FB5B400A540E5 /* Player.swift */; };
 		224B12992444CE3F00A540E5 /* Coconut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224B12982444CE3F00A540E5 /* Coconut.swift */; };
 		224B129B2444EF8600A540E5 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224B129A2444EF8600A540E5 /* Background.swift */; };
@@ -52,6 +54,8 @@
 		222EDC312454CEC400F38F79 /* BackgroundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		222EDC342455D9EB00F38F79 /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		22301E08245E082E00FF0AD0 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
+		2242E03E24647623003889EA /* Banana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banana.swift; sourceTree = "<group>"; };
+		2242E0482469D9CC003889EA /* BananaCollection.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BananaCollection.sks; sourceTree = "<group>"; };
 		224B1294243FB5B400A540E5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		224B129624425D4800A540E5 /* FoundationExtended.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FoundationExtended.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224B12982444CE3F00A540E5 /* Coconut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coconut.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				22F2CF66243BDDE500858120 /* PalmTree.swift */,
 				224B12982444CE3F00A540E5 /* Coconut.swift */,
 				22301E08245E082E00FF0AD0 /* Bomb.swift */,
+				2242E03E24647623003889EA /* Banana.swift */,
 			);
 			path = "Palm Tree";
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 		229D56D6244B60030067465D /* Emitters */ = {
 			isa = PBXGroup;
 			children = (
+				2242E0482469D9CC003889EA /* BananaCollection.sks */,
 				22F2CF62243B9F4A00858120 /* CoconutExplosion.sks */,
 				224B129D2444F30C00A540E5 /* CoconutExplosionUp.sks */,
 				22EF07A6245F2C4F0085ABCC /* Explosion.sks */,
@@ -366,6 +372,7 @@
 				22F2CF17243B0C1400858120 /* LaunchScreen.storyboard in Resources */,
 				22EF07A8245F2C4F0085ABCC /* Explosion.sks in Resources */,
 				224B12A42445958C00A540E5 /* impactFloor.mp3 in Resources */,
+				2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */,
 				22EF07A9245F2C4F0085ABCC /* Assets.xcassets in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
 				224B12A22445946800A540E5 /* impactPlayer.mp3 in Resources */,
@@ -464,6 +471,7 @@
 				22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */,
 				222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */,
 				22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */,
+				2242E03F24647623003889EA /* Banana.swift in Sources */,
 				224B12992444CE3F00A540E5 /* Coconut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

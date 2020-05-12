@@ -16,12 +16,16 @@ class GameState {
     var speed: Double = 0.75
     var isPlayerAlive: Bool = true
     var playerLives = 40
+    var collectedBananas = 0
+    
+    var yOffset: CGFloat = 0
+    var scaleFactor: CGFloat = 1
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player: Player!
-    let floorMargin: CGFloat = 50
+    var floorMargin: CGFloat = 50
     
     private var lastUpdateTime: TimeInterval = 0
     
@@ -33,6 +37,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
+        
+        GameState.shared.yOffset = ((size.height - 768) / 2).constrained(min: 0)
+        GameState.shared.scaleFactor = size.height / 768
+        
+        floorMargin *= GameState.shared.scaleFactor
         
         backgroundColor = UIColor(hex: 0xCFEFFC)
         backgroundManager = BackgroundManager(gameScene: self)
@@ -49,8 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundManager.gameSceneDidLoad()
         
         player = Player.newInstance()
-        player.position = CGPoint(x: frame.midX,
-                                  y: frame.minY + floorMargin + player.texture!.size().height / 2)
+        player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
         addChild(player)
     }
     
@@ -91,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         isPlayerMoving = true
         
-        if touchLocation.y > frame.midY {
+        if touchLocation.y > frame.height/2 {
             player.startAction(.running)
         } else {
             player.startAction(.jumping)

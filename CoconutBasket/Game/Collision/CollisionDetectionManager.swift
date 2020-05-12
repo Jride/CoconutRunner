@@ -33,7 +33,6 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate {
         
         let explosionCircle = SKNode()
         
-//        explosionCircle.fillColor = .red
         explosionCircle.name = "explosionRadius"
         explosionCircle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         explosionCircle.physicsBody?.isDynamic = true
@@ -61,50 +60,84 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate {
             
             guard isPlayerAlive else { return }
             
+            // Non-damaging collisions
+            
+            if let banana = firstNode as? Banana, let tree = banana.palmTree {
+                
+                // TODO: Add game logic for collecting a banana
+                gameState.collectedBananas += 1
+                
+                let bananaCollection = SKEmitterNode(fileNamed: "BananaCollection").require("")
+                bananaCollection.position = firstNode.position
+                bananaCollection.zPosition = 3
+                tree.addChild(bananaCollection)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+                    bananaCollection.removeFromParent()
+                }
+                
+                firstNode.removeFromParent()
+            }
+            
+            // Damaging collisions
+            
+            // If the player is in mid-hit then ignore this second hit
+            guard gameScene.player.playerAction.action != .hit else {
+                firstNode.removeFromParent()
+                return
+            }
+            
+            var tookDamage = false
+            
             if let coconut = firstNode as? Coconut, let tree = coconut.palmTree {
                 
+                tookDamage = true
                 gameState.playerLives -= 1
                 
-                if let explosion = SKEmitterNode(fileNamed: "CoconutExplosion") {
-                    explosion.position = firstNode.position
-                    explosion.zPosition = 3
-                    tree.addChild(explosion)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        explosion.removeFromParent()
-                    }
+                let explosion = SKEmitterNode(fileNamed: "CoconutExplosion").require("")
+                explosion.position = firstNode.position
+                explosion.zPosition = 3
+                tree.addChild(explosion)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    explosion.removeFromParent()
                 }
                 
             } else if let bomb = firstNode as? Bomb, let tree = bomb.palmTree {
                 
                 // TODO: Add game logic for getting hit by bomb
-                
+                tookDamage = true
                 gameState.playerLives -= 3
                 
-                if let explosion = SKEmitterNode(fileNamed: "Explosion") {
-                    explosion.position = firstNode.position
-                    explosion.zPosition = 3
-                    tree.addChild(explosion)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        explosion.removeFromParent()
-                    }
+                let explosion = SKEmitterNode(fileNamed: "Explosion").require("")
+                explosion.position = firstNode.position
+                explosion.zPosition = 3
+                tree.addChild(explosion)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    explosion.removeFromParent()
                 }
                 
             } else if firstNode.name == "explosionRadius" {
                 
-                print("EXPLOSION HIT PLAYER!!!")
+                // TODO: Add game logic for getting hit by bombs blast
+                tookDamage = true
+                gameState.playerLives -= 1
                 
             } else {
+                
+                // Collided with an unknown damaging object
                 return
             }
             
-            gameScene.run(playerHitSoundAction)
-            gameScene.player.hit()
-            
-            if gameState.playerLives == 0 {
-                gameScene.gameOver()
-                secondNode.removeFromParent()
+            if tookDamage {
+                gameScene.run(playerHitSoundAction)
+                gameScene.player.hit()
+                
+                if gameState.playerLives == 0 {
+                    gameScene.gameOver()
+                    secondNode.removeFromParent()
+                }
             }
             
             firstNode.removeFromParent()
@@ -113,82 +146,40 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate {
             
             if let coconut = firstNode as? Coconut, let tree = coconut.palmTree {
                 
-                if let explosion = SKEmitterNode(fileNamed: "CoconutExplosionUp") {
-                    explosion.position = firstNode.position
-                    explosion.zPosition = 3
-                    tree.addChild(explosion)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        explosion.removeFromParent()
-                    }
+                let explosion = SKEmitterNode(fileNamed: "CoconutExplosionUp").require("")
+                explosion.position = firstNode.position
+                explosion.zPosition = 3
+                tree.addChild(explosion)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    explosion.removeFromParent()
                 }
                 
             } else if let bomb = firstNode as? Bomb, let tree = bomb.palmTree {
                 
-                if let explosion = SKEmitterNode(fileNamed: "ExplosionUp") {
-                    explosion.position = firstNode.position
-                    explosion.zPosition = 3
-                    tree.addChild(explosion)
-                    
-                    let duration = TimeInterval(explosion.particleLifetime) / 2
-                    let maxRadius = explosion.particlePositionRange.dx
-                    
-                    var explosionCircle = makeExplosion(withRadius: 10)
-                    explosionCircle.position = firstNode.position
-                    tree.addChild(explosionCircle)
-                    
-                    explosionCircle.run(
-                        .sequence([
-                            .scale(to: ((maxRadius*2) / 10), duration: duration),
-//                            .resize(toWidth: maxRadius*2, height: maxRadius*2, duration: duration),
-                            .run {
-                                explosionCircle.removeFromParent()
-                            }
-                        ])
-                    )
-                    
-//                    var currentRadius: CGFloat = 10
-//                    explosion.run(.sequence([
-//                        .customAction(withDuration: duration) { (node, elapsedTime) in
-//
-//                            let percent = elapsedTime / CGFloat(duration)
-//                            var newRadius: CGFloat?
-//
-//                            if percent < 0.25 {
-//                                let radius = maxRadius * 0.25
-//                                guard currentRadius < radius else { return }
-//                                newRadius = radius
-//                            } else if percent < 0.50 {
-//                                let radius = maxRadius * 0.50
-//                                guard currentRadius < radius else { return }
-//                                newRadius = radius
-//                            } else if percent < 0.75 {
-//                                let radius = maxRadius * 0.75
-//                                guard currentRadius < radius else { return }
-//                                newRadius = radius
-//                            } else {
-//                                let radius = maxRadius
-//                                guard currentRadius < radius else { return }
-//                                newRadius = radius
-//                            }
-//
-//                            if let radius = newRadius {
-//                                currentRadius = radius
-//                                explosionCircle.removeFromParent()
-//                                explosionCircle = self.makeExplosion(withRadius: radius)
-//                                explosionCircle.position = node.position
-//                                tree.addChild(explosionCircle)
-//                            }
-//
-//                        },
-//                        .run {
-//                            explosionCircle.removeFromParent()
-//                        }
-//                    ]))
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        explosion.removeFromParent()
-                    }
+                let explosion = SKEmitterNode(fileNamed: "ExplosionUp").require("")
+                explosion.position = firstNode.position
+                explosion.zPosition = 3
+                tree.addChild(explosion)
+                
+                let duration = TimeInterval(explosion.particleLifetime) / 2
+                let maxRadius: CGFloat = 55 * GameState.shared.scaleFactor
+                
+                let explosionCircle = makeExplosion(withRadius: 10)
+                explosionCircle.position = firstNode.position
+                tree.addChild(explosionCircle)
+                
+                explosionCircle.run(
+                    .sequence([
+                        .scale(to: ((maxRadius*2) / 10), duration: duration),
+                        .run {
+                            explosionCircle.removeFromParent()
+                        }
+                    ])
+                )
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    explosion.removeFromParent()
                 }
                 
             } else {

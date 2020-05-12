@@ -9,9 +9,10 @@
 import Foundation
 
 enum CollisionType: UInt32 {
-    case bomb = 1
-    case coconut = 2
-    case explosionRadius = 4
-    case floor = 8
-    case player = 16
+    case banana = 1
+    case bomb = 2
+    case coconut = 4
+    case explosionRadius = 8
+    case floor = 16
+    case player = 32
 }

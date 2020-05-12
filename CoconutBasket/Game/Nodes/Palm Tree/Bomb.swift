@@ -10,12 +10,10 @@ import SpriteKit
 
 class Bomb: SKSpriteNode {
     
-    private var igniteAction: SKAction!
-    
     static func size() -> CGSize {
         let textureSize = SKTexture(imageNamed: "bomb").size()
         let ratio = textureSize.width / textureSize.height
-        let newHeight: CGFloat = 55
+        let newHeight: CGFloat = 55 * GameState.shared.scaleFactor
         return CGSize(width: newHeight * ratio, height: newHeight)
     }
     
@@ -27,6 +25,9 @@ class Bomb: SKSpriteNode {
         
         return newBomb
     }
+    
+    var palmTree: PalmTree?
+    private var igniteAction: SKAction!
     
     convenience init() {
         self.init(imageNamed: "bomb")
@@ -49,6 +50,4 @@ class Bomb: SKSpriteNode {
     func ignite() {
         run(.repeatForever(igniteAction), withKey: "ignite")
     }
-    
-    var palmTree: PalmTree?
 }

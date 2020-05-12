@@ -17,8 +17,8 @@ class BackgroundManager {
     private var backgroundCloudsBack = [BackgroundCloudBack]()
     private var clouds = [Cloud]()
     
-    private let treePadding: CGFloat = 10
-    private let treeMarginToPlayer: CGFloat = 80
+    private var treePadding: CGFloat = 10
+    private var treeMarginToPlayer: CGFloat = 80
     private var accumulatedDeltaTime: TimeInterval = 0
     private var timeToAddCloud: TimeInterval = 0
     
@@ -37,7 +37,7 @@ class BackgroundManager {
     private lazy var treeSize: CGSize = {
         let originalSize = PalmTree.originalSize
         let ratio = originalSize.width / originalSize.height
-        let newHeight = originalSize.height + 100
+        let newHeight = 338 * GameState.shared.scaleFactor
         
         return CGSize(width: newHeight * ratio, height: newHeight)
     }()
@@ -53,11 +53,14 @@ class BackgroundManager {
     private let gameScene: GameScene
     
     init(gameScene: GameScene) {
+        
         self.gameScene = gameScene
+        treePadding *= GameState.shared.scaleFactor
+        treeMarginToPlayer *= GameState.shared.scaleFactor
         
         for _ in 0...10 {
             let cloud = Cloud.newInstance()
-            cloud.position = CGPoint(x: frame.maxX + 200, y: frame.midY)
+            cloud.position = CGPoint(x: frame.maxX + 200, y: 0)
             gameScene.addChild(cloud)
             clouds.append(cloud)
         }
@@ -72,30 +75,30 @@ class BackgroundManager {
         
         timeToAddCloud += .random(in: 5...10)
         
-        let minY = frame.midY + (cloud.size.height/2) + 40
-        let maxY = frame.maxY - (cloud.size.height/2) - 20
+        let minY = (cloud.size.height/2) + 40
+        let maxY = (frame.height/2) - (cloud.size.height/2) - 20
         
-        cloud.position = CGPoint(x: frame.maxX + 100, y: .random(in: minY...maxY))
+        cloud.position = CGPoint(x: (frame.width/2) + 100, y: .random(in: minY...maxY))
         
         cloud.move(by: -(frame.width + 200))
     }
     
     private func setupBackground() {
         
-        var currentX: CGFloat = frame.minX + backgroundSize.width / 2
+        var currentX: CGFloat = backgroundSize.width / 2
         
         let numBackgroundsNeeded = Int((frame.width / backgroundSize.width).rounded(.up)) + 1
         for _ in 0..<numBackgroundsNeeded {
             
             let bg = Background(size: backgroundSize)
-            bg.position = CGPoint(x: currentX, y: frame.midY)
+            bg.position = CGPoint(x: currentX, y: frame.height/2)
             
             let bgCloudFront = BackgroundCloudFront(size: backgroundSize)
-            bgCloudFront.position = CGPoint(x: currentX, y: frame.midY + 80)
+            bgCloudFront.position = CGPoint(x: currentX, y: frame.height/2 + 80)
             bgCloudFront.isAnimating = true
             
             let bgCloudBack = BackgroundCloudBack(size: backgroundSize)
-            bgCloudBack.position = CGPoint(x: currentX, y: frame.midY + 100)
+            bgCloudBack.position = CGPoint(x: currentX, y: frame.height/2 + 100)
             bgCloudBack.isAnimating = true
             
             currentX += backgroundSize.width
@@ -112,12 +115,12 @@ class BackgroundManager {
     private func setupPalmTrees() {
         
         let offset = (treeSize.width / 2) + 22 + treePadding
-        var currentX: CGFloat = frame.midX - offset - treeSize.width - treePadding
+        var currentX: CGFloat = frame.width/2 - offset - treeSize.width - treePadding
         
         let numTreesNeeded = Int((frame.width / treeSize.width).rounded(.up)) + 1
         for _ in 0..<numTreesNeeded {
             let tree = PalmTree(size: treeSize)
-            tree.position = CGPoint(x: currentX, y: frame.midY - treeMarginToPlayer)
+            tree.position = CGPoint(x: currentX, y: frame.height/2 - treeMarginToPlayer)
             tree.zPosition = -1
             currentX += tree.size.width + treePadding
             gameScene.addChild(tree)
@@ -129,7 +132,7 @@ class BackgroundManager {
     private func setupFloor() {
         
         let floor = SKShapeNode(rectOf: CGSize(width: size.width, height: floorMargin))
-        floor.position = CGPoint(x: frame.midX, y: frame.minY + floorMargin/2)
+        floor.position = CGPoint(x: frame.width/2, y: floorMargin/2)
         floor.zPosition = -1
         floor.alpha = 0
         gameScene.addChild(floor)
@@ -152,6 +155,7 @@ class BackgroundManager {
             
             removedTree.position.x = lastTree.position.x + treeSize.width + treePadding
             trees.append(removedTree)
+            removedTree.reset()
         }
         
         if let firstBg = backgrounds.first,

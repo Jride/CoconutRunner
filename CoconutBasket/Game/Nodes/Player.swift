@@ -14,6 +14,13 @@ class Player: SKSpriteNode {
     
     static func newInstance() -> Player {
         let newPlayer = Player(imageNamed: "\(prefix)idle")
+        
+        let textureSize = newPlayer.texture!.size()
+        let ratio = textureSize.width / textureSize.height
+        let newHeight: CGFloat = 128 * GameState.shared.scaleFactor
+        
+        newPlayer.size = CGSize(width: newHeight * ratio, height: newHeight)
+        
         newPlayer.setup()
         return newPlayer
     }
@@ -41,19 +48,16 @@ class Player: SKSpriteNode {
         
         var action: Action = .idle
         var accumulatedTime: TimeInterval = 0
-        
-        var isMoving: Bool {
-            return action != .idle
-        }
     }
     
-    private var playerAction = PlayerAction()
+    private(set) var playerAction = PlayerAction()
     private var movement: Movement = .idle
     private var previousAction: Action?
     private var playerTextures = PlayerTextures()
     private var runningAction: SKAction!
     private let hitAnimationDuration: TimeInterval = 0.3
-    private let jumpHeight: CGFloat = 100
+    private var jumpHeight: CGFloat { 120 * GameState.shared.scaleFactor }
+    private var isMoving: Bool = false
     
     private var originalPosition: CGPoint!
     
@@ -98,14 +102,13 @@ class Player: SKSpriteNode {
     
     func update(deltaTime: TimeInterval) {
         
-        guard playerAction.isMoving else { return }
-        
         accumulatedDeltaTime += deltaTime
         
         if accumulatedDeltaTime >= GameState.shared.speed {
             accumulatedDeltaTime = 0
             setPlayerAction(.idle)
             movement = .idle
+            isMoving = false
         } else {
             
             playerAction.accumulatedTime += deltaTime
@@ -122,8 +125,11 @@ class Player: SKSpriteNode {
             
             case .hit:
                 if playerAction.accumulatedTime > hitAnimationDuration {
-                    if let prevAction = previousAction {
+                    if isMoving {
+                        guard let prevAction = previousAction else { return }
                         setPlayerAction(prevAction)
+                    } else {
+                        setPlayerAction(.idle)
                     }
                 }
                 
@@ -162,9 +168,12 @@ class Player: SKSpriteNode {
         
         name = "player"
         zPosition = 1
-        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width-23,
-                                                        height: size.height-33),
-                                    center: CGPoint(x: 0, y: -18))
+        
+        let centerY = GameState.shared.scaleFactor * 18
+        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width - (23 * GameState.shared.scaleFactor),
+                                                        height: size.height - (33 * GameState.shared.scaleFactor)),
+                                    center: CGPoint(x: 0, y: -centerY))
+        
         physicsBody?.categoryBitMask = CollisionType.player.rawValue
         
         physicsBody?.collisionBitMask =
@@ -190,7 +199,11 @@ class Player: SKSpriteNode {
     }
     
     func startAction(_ action: Action) {
-        guard playerAction.isMoving == false else { return }
+        
+        guard isMoving == false else { return }
+        isMoving = true
+        
+        accumulatedDeltaTime = 0
         originalPosition = position
         
         switch action {
@@ -198,6 +211,12 @@ class Player: SKSpriteNode {
             movement = .jumping
         case .idle, .hit, .running:
             break
+        }
+        
+        // If we started running or jumping mid hit then we need to update the
+        // previous player action
+        if playerAction.action == .hit {
+            previousAction = action
         }
         
         setPlayerAction(action)
