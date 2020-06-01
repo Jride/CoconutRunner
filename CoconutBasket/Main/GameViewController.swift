@@ -6,13 +6,24 @@
 //  Copyright © 2020 JoshRideout. All rights reserved.
 //
 
+import AVKit
 import UIKit
 import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    @IBOutlet private var healthBarView: HealthBarView!
 
     override func viewDidLoad() {
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
         super.viewDidLoad()
         
         if let view = self.view as? SKView {

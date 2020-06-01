@@ -1,16 +1,21 @@
 PODS:
   - FoundationExtended (3.0)
+  - TweenKit (0.6)
 
 DEPENDENCIES:
   - FoundationExtended
+  - TweenKit
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - TweenKit
   https://github.com/ITV/iOS-Podspecs.git:
     - FoundationExtended
 
 SPEC CHECKSUMS:
   FoundationExtended: 1b7ff86f5c298c6c8869c32579c5a9bb190c9f01
+  TweenKit: 0abfef083a278b59ed784b5ea319a400ff3e14be
 
-PODFILE CHECKSUM: 20ce68f617dce00636cd098666cf0f9108c9b017
+PODFILE CHECKSUM: 504f633b647f21ea6a21c987b2761a15debbec19
 
 COCOAPODS: 1.9.1
