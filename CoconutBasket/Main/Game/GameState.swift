@@ -57,12 +57,12 @@ class GameState: GameStateDispatcher, Observable {
 
 extension GameState: CollisionEventsDispatcherObserver {
     
-    func playerWasHitByEnemy(_ enemyType: EnemyType) {
+    func playerWasHitByEnemy(_ enemy: Enemy) {
         
         guard isPlayerAlive else { return }
         
         let healthReduction: Int
-        switch enemyType {
+        switch enemy {
         case .bomb:
             healthReduction = 7
         case .coconut:

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Background: GameNode {
+class Background: GameSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "background").size()
     
@@ -17,7 +17,7 @@ class Background: GameNode {
         let texture = SKTexture(imageNamed: "background")
         super.init(texture: texture, color: .white, size: size)
         
-        zPosition = -2
+        zPosition = ZPosition.Background.main
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +36,7 @@ class BackgroundCloudFront: SKSpriteNode {
         let texture = SKTexture(imageNamed: "BackgroundCloudLayerA")
         super.init(texture: texture, color: .white, size: size)
         
-        zPosition = -3
+        zPosition = ZPosition.Background.frontClouds
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ class BackgroundCloudBack: SKSpriteNode {
         let texture = SKTexture(imageNamed: "BackgroundCloudLayerB")
         super.init(texture: texture, color: .white, size: size)
         
-        zPosition = -4
+        zPosition = ZPosition.Background.backClouds
     }
     
     required init?(coder aDecoder: NSCoder) {

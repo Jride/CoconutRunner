@@ -9,20 +9,20 @@
 import SpriteKit
 import Foundation
 
-enum EnemyType {
+enum Enemy {
     case coconut(Coconut)
     case bomb(Bomb)
     case explosion(SKNode)
 }
 
 protocol CollisionEventsDispatcherObserver: class {
-    func playerWasHitByEnemy(_ enemyType: EnemyType)
-    func enemyCollidedWithFloor(_ enemyType: EnemyType)
+    func playerWasHitByEnemy(_ enemy: Enemy)
+    func enemyCollidedWithFloor(_ enemy: Enemy)
 }
 
 extension CollisionEventsDispatcherObserver {
-    func playerWasHitByEnemy(_ enemyType: EnemyType) {}
-    func enemyCollidedWithFloor(_ enemyType: EnemyType) {}
+    func playerWasHitByEnemy(_ enemy: Enemy) {}
+    func enemyCollidedWithFloor(_ enemy: Enemy) {}
 }
 
 protocol CollisionEventsDispatcher {

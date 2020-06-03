@@ -20,7 +20,7 @@ class Player: SKSpriteNode {
         let newHeight: CGFloat = 128 * Env.gameState.scaleFactor
         
         newPlayer.size = CGSize(width: newHeight * ratio, height: newHeight)
-        
+        newPlayer.zPosition = ZPosition.player
         newPlayer.setup()
         return newPlayer
     }
@@ -179,7 +179,7 @@ class Player: SKSpriteNode {
         runningAction = .animate(with: runningTextures, timePerFrame: 0.1)
         
         name = "player"
-        zPosition = 1
+        zPosition = ZPosition.player
         
         let centerY = Env.gameState.scaleFactor * 18
         physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width - (23 * Env.gameState.scaleFactor),
@@ -227,7 +227,7 @@ class Player: SKSpriteNode {
 
 extension Player: CollisionEventsDispatcherObserver {
     
-    func playerWasHitByEnemy(_ enemyType: EnemyType) {
+    func playerWasHitByEnemy(_ enemy: Enemy) {
         animateHitSequence()
     }
     

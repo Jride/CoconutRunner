@@ -15,7 +15,6 @@ class BackgroundManager {
     private var backgrounds = [Background]()
     private var backgroundCloudsFront = [BackgroundCloudFront]()
     private var backgroundCloudsBack = [BackgroundCloudBack]()
-    private var clouds = [Cloud]()
     
     private var treePadding: CGFloat = 10
     private var treeMarginToPlayer: CGFloat = 80
@@ -25,8 +24,7 @@ class BackgroundManager {
     private var gameNodes: [GameNode] {
         return [
             trees.map { $0 as GameNode },
-            backgrounds.map { $0 as GameNode },
-            clouds.map { $0 as GameNode }
+            backgrounds.map { $0 as GameNode }
         ].reduce([], +)
     }
     
@@ -58,32 +56,9 @@ class BackgroundManager {
         
         treePadding *= Env.gameState.scaleFactor
         treeMarginToPlayer *= Env.gameState.scaleFactor
-        
-        for _ in 0...10 {
-            let cloud = Cloud.newInstance()
-            cloud.position = CGPoint(x: frame.maxX + 200, y: 0)
-            gameScene.addChild(cloud)
-            clouds.append(cloud)
-        }
     }
     
-    private func addCloudToSceneIfNecessary() {
-        
-        guard
-            let cloud = clouds.first(where: { $0.isMoving == false && gameScene.intersects($0) == false }),
-            accumulatedDeltaTime > timeToAddCloud
-            else { return }
-        
-        timeToAddCloud += .random(in: 5...10)
-        
-        let minY = (cloud.size.height/2) + 40
-        let maxY = (frame.height/2) - (cloud.size.height/2) - 20
-        
-        cloud.position = CGPoint(x: (frame.width/2) + 100, y: .random(in: minY...maxY))
-        
-        cloud.move(by: -(frame.width + 200))
-    }
-    
+    // MARK: - Add Background
     private func setupBackground() {
         
         var currentX: CGFloat = backgroundSize.width / 2
@@ -113,6 +88,7 @@ class BackgroundManager {
         }
     }
     
+    // MARK: - Add Palm Trees
     private func setupPalmTrees() {
         
         let offset = (treeSize.width / 2) + 22 + treePadding
@@ -122,7 +98,7 @@ class BackgroundManager {
         for _ in 0..<numTreesNeeded {
             let tree = PalmTree(size: treeSize)
             tree.position = CGPoint(x: currentX, y: frame.height/2 - treeMarginToPlayer)
-            tree.zPosition = -1
+            tree.zPosition = ZPosition.palmTree
             currentX += tree.size.width + treePadding
             gameScene.addChild(tree)
             
@@ -130,11 +106,12 @@ class BackgroundManager {
         }
     }
     
+    // MARK: - Add Floor
     private func setupFloor() {
         
         let floor = SKShapeNode(rectOf: CGSize(width: size.width, height: floorMargin))
         floor.position = CGPoint(x: frame.width/2, y: floorMargin/2)
-        floor.zPosition = -1
+        floor.zPosition = ZPosition.floor
         floor.alpha = 0
         gameScene.addChild(floor)
         
@@ -150,7 +127,7 @@ class BackgroundManager {
     private func recycleGameObjectsIfNecessary() {
         
         if let firstTree = trees.first,
-            gameScene.intersects(firstTree) == false,
+            gameScene.intersects(firstTree.treeNode) == false,
             let removedTree = trees.popFirst(),
             let lastTree = trees.last {
             
@@ -167,10 +144,6 @@ class BackgroundManager {
             removedBg.position.x = lastBg.position.x + backgroundSize.width
             backgrounds.append(removedBg)
         }
-        
-        let multiplyer = CGFloat(backgroundCloudsFront.count) - 1
-        var amountToMoveCloudBackground = backgroundSize.width * multiplyer
-        amountToMoveCloudBackground += 5 * multiplyer
         
         if let firstBgCloudFront = backgroundCloudsFront.first,
             gameScene.intersects(firstBgCloudFront) == false,
@@ -192,8 +165,9 @@ class BackgroundManager {
     }
     
     @objc private func knockDownCoconut() {
-        let visibleTrees = trees.filter { gameScene.intersects($0) }
-        let randomIndex: Int = Int.random(in: 0..<visibleTrees.count)
+        let visibleTrees = trees.filter { gameScene.intersects($0.treeNode) }
+        let start = Int(visibleTrees.count/2)
+        let randomIndex: Int = Int.random(in: start..<visibleTrees.count)
         if let tree = visibleTrees[maybe: randomIndex] {
             tree.knockRandChild()
         }
@@ -206,9 +180,7 @@ extension BackgroundManager {
     
     func gameSceneDidLoad() {
 
-        Env.audioPlayer.shouldLoopMusic = true
-        Env.audioPlayer.musicVolume = 0.3
-        Env.audioPlayer.play(music: Audio.MusicFiles.levelOne)
+        Env.audioManager.playBackgroundMusic()
         
         setupBackground()
         setupPalmTrees()
@@ -230,17 +202,15 @@ extension BackgroundManager {
         backgroundCloudsFront.forEach { $0.update(deltaTime: deltaTime) }
         backgroundCloudsBack.forEach { $0.update(deltaTime: deltaTime) }
         
-//        addCloudToSceneIfNecessary()
         recycleGameObjectsIfNecessary()
     }
     
     func playerDidStartMoving() {
-        clouds.forEach { $0.nodeSpeed = ($0.nodeSpeed - 2).constrained(min: 3) }
         trees.forEach { $0.move(by: -(treeSize.width + treePadding)) }
         backgrounds.forEach { $0.move(by: -(backgroundSize.width/10)) }
     }
     
     func playerDidStopMoving() {
-        clouds.forEach { $0.nodeSpeed = $0.cloudSpeed }
+        
     }
 }

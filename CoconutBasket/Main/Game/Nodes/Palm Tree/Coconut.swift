@@ -24,7 +24,7 @@ class Coconut: SKSpriteNode {
         newCoconut.size = Self.size()
         newCoconut.color = UIColor(red: 150/255, green: 90/255, blue: 62/255, alpha: 1)
         newCoconut.colorBlendFactor = 0.8
-        newCoconut.zPosition = 1
+        newCoconut.zPosition = ZPosition.Coconut.left
         
         return newCoconut
     }

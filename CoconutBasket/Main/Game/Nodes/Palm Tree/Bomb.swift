@@ -21,7 +21,7 @@ class Bomb: SKSpriteNode {
         
         let newBomb = Bomb()
         newBomb.size = Self.size()
-        newBomb.zPosition = 1
+        newBomb.zPosition = ZPosition.bombs
         
         return newBomb
     }

@@ -11,7 +11,7 @@ import Foundation
 var Env = EnvironmentConfigurer.buildEnvironment()
 
 struct Environment {
-    var audioPlayer: AudioPlayer
+    var audioManager: AudioManager
     var applicationEventsDispatcher: ApplicationEventsDispatcher
     var collisionEventsDispatcher: CollisionEventsDispatcher
     var gameState: GameState

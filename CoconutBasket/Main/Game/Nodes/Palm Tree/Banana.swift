@@ -22,7 +22,7 @@ class Banana: SKSpriteNode {
         let newBanana = Banana(imageNamed: "banana")
         
         newBanana.size = Self.size()
-        newBanana.zPosition = 1
+        newBanana.zPosition = ZPosition.banana
         
         newBanana.setupPhysicsBody()
         

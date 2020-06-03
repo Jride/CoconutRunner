@@ -13,7 +13,7 @@ class EnvironmentConfigurer {
     static func buildEnvironment() -> Environment {
         
         return Environment(
-            audioPlayer: AudioPlayerImpl(),
+            audioManager: AudioManager(),
             applicationEventsDispatcher: ApplicationEventsDispatcherImpl(),
             collisionEventsDispatcher: CollisionDetectionManager(),
             gameState: GameState()

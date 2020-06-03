@@ -7,8 +7,9 @@
 //
 
 import SpriteKit
+import Foundation
 
-class PalmTree: GameNode {
+class PalmTree: GameWrapperNode {
     
     enum Position: String {
         case top
@@ -17,9 +18,9 @@ class PalmTree: GameNode {
         
         var zPosition: CGFloat {
             switch self {
-            case .top: return 1
-            case .left: return 2
-            case .right: return 3
+            case .top: return ZPosition.Coconut.top
+            case .left: return ZPosition.Coconut.left
+            case .right: return ZPosition.Coconut.right
             }
         }
     }
@@ -27,7 +28,6 @@ class PalmTree: GameNode {
     class TreeChildNode {
         
         var coconutPos: CGPoint!
-        var bombPos: CGPoint!
        
         var coconut: Coconut? {
             didSet {
@@ -36,22 +36,12 @@ class PalmTree: GameNode {
                 coconut?.zPosition = position.zPosition
             }
         }
-        var bomb: Bomb? {
-            didSet {
-                guard let nodePos = bomb?.position else { return }
-                bombPos = nodePos
-            }
-        }
         
         var isActive: Bool = false
         var position: Position
         
         var node: SKSpriteNode? {
-            if let coconut = self.coconut {
-                return coconut
-            } else {
-                return bomb
-            }
+            return self.coconut
         }
         
         init(position: Position) {
@@ -62,8 +52,6 @@ class PalmTree: GameNode {
             self.position = position
             if let coconut = node as? Coconut {
                 self.coconut = coconut
-            } else if let bomb = node as? Bomb {
-                self.bomb = bomb
             } else {
                 fatalError("Not a valid tree child")
             }
@@ -84,7 +72,7 @@ class PalmTree: GameNode {
         }
         
         func randomChild() -> TreeChildNode? {
-            all.filter { $0.isActive && ($0.coconut != nil || $0.bomb != nil) }
+            all.filter { $0.isActive && $0.coconut != nil }
                 .randomElement()
         }
         
@@ -93,7 +81,7 @@ class PalmTree: GameNode {
         }
     }
     
-    var fallingChildNodes = [TreeChildNode]()
+    var fallingChildNodes = [SKSpriteNode]()
     
     static let originalSize = SKTexture(imageNamed: "palmTree").size()
     
@@ -101,14 +89,27 @@ class PalmTree: GameNode {
     private lazy var coconutSize: CGSize = {
         return Coconut.size()
     }()
+    private var monkey: Monkey?
+    private var scale: CGFloat {
+        return Env.gameState.scaleFactor
+    }
+    let treeNode: SKSpriteNode
+    let size: CGSize
     
     init(size: CGSize) {
+        self.size = size
         
         let texture = SKTexture(imageNamed: "palmTree")
-        super.init(texture: texture, color: .white, size: size)
+        treeNode = SKSpriteNode(texture: texture, color: .white, size: size)
+        treeNode.zPosition = ZPosition.palmTree
+        super.init()
         
+        addChild(treeNode)
+        
+        zPosition = ZPosition.palmTree
         configureCoconuts()
         addFloatingBananaNode(at: CGPoint(x: 0, y: 0))
+        addMonkeyWithBomb()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,15 +119,15 @@ class PalmTree: GameNode {
     private func configureCoconuts() {
         
         let top = makeCoconutNode(at: CGPoint(x: 0,
-                                              y: coconutSize.height/2 + (35 * Env.gameState.scaleFactor)))
+                                              y: coconutSize.height/2 + (35 * scale)))
         treeChildGroup.top.coconut = top
         
-        let left =  makeCoconutNode(at: CGPoint(x: -15,
-                                                y: coconutSize.height/2 + (15 * Env.gameState.scaleFactor)))
+        let left =  makeCoconutNode(at: CGPoint(x: -15 * scale,
+                                                y: coconutSize.height/2 + (15 * scale)))
         treeChildGroup.left.coconut = left
         
-        let right = makeCoconutNode(at: CGPoint(x: 15,
-                                                y: coconutSize.height/2 + (15 * Env.gameState.scaleFactor)))
+        let right = makeCoconutNode(at: CGPoint(x: 15 * scale,
+                                                y: coconutSize.height/2 + (15 * scale)))
         treeChildGroup.right.coconut = right
         
         treeChildGroup.coconuts().forEach {
@@ -154,11 +155,51 @@ class PalmTree: GameNode {
         return bomb
     }
     
+    private func addMonkeyWithBomb() {
+        
+        let monkey = Monkey.newInstance()
+        monkey.position = CGPoint(x: monkey.size.width/2 - (45 * scale),
+                                  y: treeNode.size.height/2 - (25 * scale))
+        monkey.palmTree = self
+        addChild(monkey)
+        self.monkey = monkey
+        
+        run(.sequence([
+            .wait(forDuration: 2),
+            .run {
+                
+                guard let monkey = self.monkey,
+                    let bomb = monkey.bomb else { return }
+                
+                monkey.runDropAnimation()
+                
+                let dropItem = self.makeBombNode(at: self.convert(bomb.position, from: monkey))
+                dropItem.name = "bomb"
+                dropItem.zPosition = ZPosition.bombs
+                let bombCircleRadius = (bomb.size.width * 0.64) / 2
+                dropItem.physicsBody = SKPhysicsBody(
+                    circleOfRadius: bombCircleRadius,
+                    center: CGPoint(x: bomb.size.width * 0.43 - (bomb.size.width/2),
+                                    y: bomb.size.height/2 - (bomb.size.height * 0.65))
+                )
+                dropItem.physicsBody?.categoryBitMask = CollisionType.bomb.rawValue
+                dropItem.physicsBody?.density = 352
+                dropItem.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
+                dropItem.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
+                
+                bomb.removeFromParent()
+                monkey.bomb = nil
+                self.addChild(dropItem)
+                self.fallingChildNodes.append(dropItem)
+            }
+        ]))
+    }
+    
     private func addFloatingBananaNode(at point: CGPoint) {
         
         let banana = Banana.newInstance()
-        banana.position = CGPoint(x: point.x + banana.size.width/2 + (10 * Env.gameState.scaleFactor),
-                                  y: point.y - 60 * Env.gameState.scaleFactor)
+        banana.position = CGPoint(x: point.x + banana.size.width/2 + (10 * scale),
+                                  y: point.y - 60 * scale)
         banana.palmTree = self
         addChild(banana)
         
@@ -182,9 +223,8 @@ class PalmTree: GameNode {
         
         // Remove all the coconuts that are out of frame
         fallingChildNodes.removeAll {
-            guard let coconut = $0.coconut else { return true }
-            if parent.intersects(coconut) == false {
-                coconut.removeFromParent()
+            if parent.intersects($0) == false {
+                $0.removeFromParent()
                 return true
             } else {
                 return false
@@ -201,32 +241,16 @@ class PalmTree: GameNode {
         
         let dropItem: SKSpriteNode
         
-        if childNode is Coconut {
-            dropItem = makeCoconutNode(at: childNode.position)
-            dropItem.zPosition = childNode.zPosition
-            dropItem.name = "coconut"
-            dropItem.physicsBody = SKPhysicsBody(circleOfRadius: childNode.size.width/2 - 9)
-            dropItem.physicsBody?.categoryBitMask = CollisionType.coconut.rawValue
-        } else {
-            treeChild.bomb?.ignite()
-            
-            let bombItem = makeBombNode(at: childNode.position)
-            bombItem.zPosition = childNode.zPosition
-            bombItem.ignite()
-            
-            dropItem = bombItem
-            dropItem.name = "bomb"
-            dropItem.physicsBody = SKPhysicsBody(circleOfRadius: (bombItem.size.width * 0.64) / 2,
-                                                 center: CGPoint(x: bombItem.size.width * 0.43 - (bombItem.size.width/2),
-                                                                 y: bombItem.size.height/2 - (bombItem.size.height * 0.65)))
-            dropItem.physicsBody?.categoryBitMask = CollisionType.bomb.rawValue
-        }
+        dropItem = makeCoconutNode(at: childNode.position)
+        dropItem.zPosition = childNode.zPosition
+        dropItem.name = "coconut"
+        dropItem.physicsBody = SKPhysicsBody(circleOfRadius: childNode.size.width/2 - 9)
+        dropItem.physicsBody?.categoryBitMask = CollisionType.coconut.rawValue
         
         dropItem.physicsBody?.density = 352
         dropItem.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
         dropItem.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
         
-        let position = childNode.position
         let size = childNode.size
         
         treeChild.isActive = false
@@ -246,57 +270,26 @@ class PalmTree: GameNode {
             childNode.removeAllActions()
             childNode.removeFromParent()
             treeChild.coconut = nil
-            treeChild.bomb = nil
             
             self.addChild(dropItem)
-            self.fallingChildNodes.append(.init(node: dropItem, position: treeChild.position))
+            self.fallingChildNodes.append(dropItem)
             
             let group = SKAction.group([
                 .scale(to: size, duration: 0.7),
                 .fadeIn(withDuration: 0.2)
             ])
             
-            func growCoconut() {
-                let newCoconut = self.makeCoconutNode(at: treeChild.coconutPos)
-                newCoconut.zPosition = treeChild.position.zPosition
-                newCoconut.alpha = 0
-                newCoconut.size = CGSize(width: 5, height: 5)
-                self.addChild(newCoconut)
-                
-                newCoconut.run(group) {
-                    treeChild.coconut = newCoconut
-                    treeChild.isActive = true
-                }
-            }
+            // regrow the coconut
+            let newCoconut = self.makeCoconutNode(at: treeChild.coconutPos)
+            newCoconut.zPosition = treeChild.position.zPosition
+            newCoconut.alpha = 0
+            newCoconut.size = CGSize(width: 5, height: 5)
+            self.addChild(newCoconut)
             
-            func growBomb() {
-                let newBomb = self.makeBombNode(at: position)
-                newBomb.zPosition = treeChild.position.zPosition
-                
-                // Adjust position of bomb compared to the position of the coconut
-                var newPos = newBomb.position
-                newPos.x += 2
-                newPos.y += 8
-                
-                newBomb.position = newPos
-                newBomb.alpha = 0
-                newBomb.size = CGSize(width: 5, height: 5)
-                self.addChild(newBomb)
-                
-                newBomb.run(group) {
-                    treeChild.bomb = newBomb
-                    treeChild.isActive = true
-                }
+            newCoconut.run(group) {
+                treeChild.coconut = newCoconut
+                treeChild.isActive = true
             }
-            
-            if dropItem is Bomb {
-                // If the dropped item was a bomb then we must regrow a coconut
-                growCoconut()
-            } else {
-                // TODO: Add game logic for bomb birth rate
-                growBomb()
-            }
-            
         }
     }
     
@@ -310,8 +303,10 @@ class PalmTree: GameNode {
         removeAllActions()
         
         fallingChildNodes = []
+        addChild(treeNode)
         treeChildGroup = TreeChildGroup()
         configureCoconuts()
         addFloatingBananaNode(at: CGPoint(x: 0, y: 0))
+        addMonkeyWithBomb()
     }
 }
