@@ -23,7 +23,7 @@ class Monkey: GameSpriteNode {
     
     static func newInstance() -> Monkey {
         
-        let newMonkey = Monkey(imageNamed: "monkey_arms_up1")
+        let newMonkey = Monkey(imageNamed: "monkey_head")
         
         newMonkey.size = Self.size()
         newMonkey.zPosition = ZPosition.monkey
@@ -39,46 +39,71 @@ class Monkey: GameSpriteNode {
     }
     var bomb: Bomb?
     
-    private var dropAction: SKAction!
-    
     private func setup() {
+        
+        let bomb = Bomb.newInstance()
+        bomb.position = CGPoint(x: position.x + (4 * scale),
+                                y: position.y + size.height/2 + (7 * scale))
+        
+        bomb.zPosition = ZPosition.monkey + 2
+        bomb.alpha = 0
+        addChild(bomb)
+        self.bomb = bomb
+    }
+    
+    func dropBombAnimation(dropBomb: @escaping () -> Void) {
+        
+        let originalPosition = position
         
         let textures: [SKTexture] = [
             .init(imageNamed: "monkey_arms_up1"),
             .init(imageNamed: "monkey_arms_up2")
         ]
         
-        dropAction = .sequence([
+        let dropAction = SKAction.sequence([
             .animate(with: textures, timePerFrame: 0.1),
             .wait(forDuration: 1.0),
             .setTexture(.init(imageNamed: "monkey_cross_arms")),
             .wait(forDuration: 0.2),
-            .moveBy(x: 20 * scale, y: -72 * scale, duration: 0.4),
-            .wait(forDuration: 0.4),
-            .run {
-                self.removeFromParent()
-            }
+            .group([
+                .moveBy(x: 20 * scale, y: -72 * scale, duration: 0.4),
+                .scale(by: 0.7, duration: 0.4)
+            ])
         ])
         
-        let bomb = Bomb.newInstance()
-        bomb.position = CGPoint(x: position.x + (4 * scale),
-                                y: position.y + size.height/2 + (7 * scale))
+        let ratio = size.width / size.height
+        let newSize = CGSize(width: 30 * ratio, height: 30)
         
-//        bomb.zPosition = ZPosition.monkey + 2
-        bomb.ignite()
-        addChild(bomb)
-        self.bomb = bomb
+        let hide = SKAction.group([
+            .moveBy(x: 20 * scale, y: -50 * scale, duration: 0.3),
+            .scale(to: newSize, duration: 0.3)
+        ])
         
-//        alpha = 0
+        let show = SKAction.group([
+            .moveBy(x: -20 * scale, y: 90 * scale, duration: 0.4),
+            .scale(to: Self.size(), duration: 0.4)
+        ])
+        
+        run(.sequence([
+            .wait(forDuration: 1),
+            .moveBy(x: 0, y: 40 * scale, duration: 0.3),
+            .wait(forDuration: 1.5),
+            hide,
+            .setTexture(SKTexture(imageNamed: "monkey_arms_up1")),
+            .run {
+                self.bomb?.alpha = 1
+                self.bomb?.ignite()
+            },
+            show,
+            .wait(forDuration: 0.5),
+            .run { dropBomb() },
+            dropAction,
+            .setTexture(SKTexture(imageNamed: "monkey_head")),
+            .move(to: originalPosition, duration: 0),
+            .run {
+                self.dropBombAnimation(dropBomb: dropBomb)
+            }
+        ]))
     }
     
-    func runAnimation() {
-        
-        
-        
-    }
-    
-    func runDropAnimation() {
-        run(dropAction)
-    }
 }

@@ -158,41 +158,38 @@ class PalmTree: GameWrapperNode {
     private func addMonkeyWithBomb() {
         
         let monkey = Monkey.newInstance()
-        monkey.position = CGPoint(x: monkey.size.width/2 - (45 * scale),
-                                  y: treeNode.size.height/2 - (25 * scale))
+        
+//        monkey.position = CGPoint(x: monkey.size.width/2 - (45 * scale),
+//                                  y: treeNode.size.height/2 - (25 * scale))
+        
+        monkey.position = CGPoint(x: monkey.size.width/2 - (40 * scale),
+                                  y: treeNode.size.height/2 - (110 * scale))
         monkey.palmTree = self
+        monkey.dropBombAnimation {
+            
+            guard let bomb = monkey.bomb else { return }
+            
+            let dropItem = self.makeBombNode(at: self.convert(bomb.position, from: monkey))
+            dropItem.name = "bomb"
+            dropItem.zPosition = ZPosition.bombs
+            let bombCircleRadius = (bomb.size.width * 0.64) / 2
+            dropItem.physicsBody = SKPhysicsBody(
+                circleOfRadius: bombCircleRadius,
+                center: CGPoint(x: bomb.size.width * 0.43 - (bomb.size.width/2),
+                                y: bomb.size.height/2 - (bomb.size.height * 0.65))
+            )
+            dropItem.physicsBody?.categoryBitMask = CollisionType.bomb.rawValue
+            dropItem.physicsBody?.density = 352
+            dropItem.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
+            dropItem.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
+            
+            monkey.bomb?.alpha = 0
+            self.addChild(dropItem)
+            self.fallingChildNodes.append(dropItem)
+        }
+        
         addChild(monkey)
         self.monkey = monkey
-        
-        run(.sequence([
-            .wait(forDuration: 2),
-            .run {
-                
-                guard let monkey = self.monkey,
-                    let bomb = monkey.bomb else { return }
-                
-                monkey.runDropAnimation()
-                
-                let dropItem = self.makeBombNode(at: self.convert(bomb.position, from: monkey))
-                dropItem.name = "bomb"
-                dropItem.zPosition = ZPosition.bombs
-                let bombCircleRadius = (bomb.size.width * 0.64) / 2
-                dropItem.physicsBody = SKPhysicsBody(
-                    circleOfRadius: bombCircleRadius,
-                    center: CGPoint(x: bomb.size.width * 0.43 - (bomb.size.width/2),
-                                    y: bomb.size.height/2 - (bomb.size.height * 0.65))
-                )
-                dropItem.physicsBody?.categoryBitMask = CollisionType.bomb.rawValue
-                dropItem.physicsBody?.density = 352
-                dropItem.physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
-                dropItem.physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.floor.rawValue
-                
-                bomb.removeFromParent()
-                monkey.bomb = nil
-                self.addChild(dropItem)
-                self.fallingChildNodes.append(dropItem)
-            }
-        ]))
     }
     
     private func addFloatingBananaNode(at point: CGPoint) {

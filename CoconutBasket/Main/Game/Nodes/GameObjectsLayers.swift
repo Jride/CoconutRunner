@@ -28,9 +28,9 @@ struct ZPosition {
         static let right: CGFloat = 30
     }
     
-    static let bombs: CGFloat = 25
-    static let explosions: CGFloat = 30
+    static let bombs: CGFloat = 35
+    static let explosions: CGFloat = 35
     
-    static let player: CGFloat = 35
+    static let player: CGFloat = 40
     
 }
