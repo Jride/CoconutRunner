@@ -10,6 +10,10 @@ import SpriteKit
 
 class Monkey: GameSpriteNode {
     
+    var gameScene: GameScene? {
+        scene as? GameScene
+    }
+    
     var scale: CGFloat {
         Env.gameState.scaleFactor
     }
@@ -37,7 +41,17 @@ class Monkey: GameSpriteNode {
             bomb?.palmTree = tree
         }
     }
-    var bomb: Bomb?
+    var bomb: Bomb!
+    var isAnimating = false
+    var didPlayerStartMoving = false
+    
+    override func update(deltaTime: TimeInterval) {
+        super.update(deltaTime: deltaTime)
+        
+        if (gameScene?.player.isMoving).isTrue {
+            didPlayerStartMoving = true
+        }
+    }
     
     private func setup() {
         
@@ -52,6 +66,11 @@ class Monkey: GameSpriteNode {
     }
     
     func dropBombAnimation(dropBomb: @escaping () -> Void) {
+        
+        guard isAnimating == false else { return }
+        
+        didPlayerStartMoving = false
+        isAnimating = true
         
         let originalPosition = position
         
@@ -84,25 +103,50 @@ class Monkey: GameSpriteNode {
             .scale(to: Self.size(), duration: 0.4)
         ])
         
+        func secondSequence() {
+            
+            if didPlayerStartMoving {
+                
+                run(.sequence([
+                    .setTexture(SKTexture(imageNamed: "monkey_head")),
+                    .scale(to: Self.size(), duration: 0),
+                    .move(to: originalPosition, duration: 0),
+                    .run {
+                        self.isAnimating = false
+                    }
+                ]))
+                
+            } else {
+                
+                run(.sequence([
+                    .setTexture(SKTexture(imageNamed: "monkey_arms_up1")),
+                    .run {
+                        self.bomb.alpha = 1
+                        self.bomb.ignite()
+                    },
+                    show,
+                    .wait(forDuration: 0.5),
+                    .run { dropBomb() },
+                    dropAction,
+                    .setTexture(SKTexture(imageNamed: "monkey_head")),
+                    .scale(to: Self.size(), duration: 0),
+                    .move(to: originalPosition, duration: 0),
+                    .run {
+                        self.isAnimating = false
+                        Env.gameLogic.resetIdleTime()
+                    }
+                ]))
+                
+            }
+            
+            didPlayerStartMoving = false
+        }
+        
         run(.sequence([
-            .wait(forDuration: 1),
             .moveBy(x: 0, y: 40 * scale, duration: 0.3),
             .wait(forDuration: 1.5),
             hide,
-            .setTexture(SKTexture(imageNamed: "monkey_arms_up1")),
-            .run {
-                self.bomb?.alpha = 1
-                self.bomb?.ignite()
-            },
-            show,
-            .wait(forDuration: 0.5),
-            .run { dropBomb() },
-            dropAction,
-            .setTexture(SKTexture(imageNamed: "monkey_head")),
-            .move(to: originalPosition, duration: 0),
-            .run {
-                self.dropBombAnimation(dropBomb: dropBomb)
-            }
+            .run { secondSequence() }
         ]))
     }
     

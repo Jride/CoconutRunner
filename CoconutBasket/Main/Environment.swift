@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FoundationExtended
 
 var Env = EnvironmentConfigurer.buildEnvironment()
 
@@ -14,5 +15,7 @@ struct Environment {
     var audioManager: AudioManager
     var applicationEventsDispatcher: ApplicationEventsDispatcher
     var collisionEventsDispatcher: CollisionEventsDispatcher
+    var date: DateClosure
+    var gameLogic: GameLogic
     var gameState: GameState
 }

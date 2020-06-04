@@ -56,6 +56,8 @@ class BackgroundManager {
         
         treePadding *= Env.gameState.scaleFactor
         treeMarginToPlayer *= Env.gameState.scaleFactor
+        
+        Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
     }
     
     // MARK: - Add Background
@@ -205,12 +207,28 @@ extension BackgroundManager {
         recycleGameObjectsIfNecessary()
     }
     
+}
+
+extension BackgroundManager: PlayerEventsDispatcherObserver {
+    
     func playerDidStartMoving() {
         trees.forEach { $0.move(by: -(treeSize.width + treePadding)) }
         backgrounds.forEach { $0.move(by: -(backgroundSize.width/10)) }
     }
     
-    func playerDidStopMoving() {
+}
+
+extension BackgroundManager: GameLogicEventsDispatcherObserver {
+    
+    func playerIdleTimeThresholdExceeded() {
         
+        let playerXPos = gameScene.player.position.x
+        guard let tree = trees.first(where: {
+            let treeXPos = gameScene.convert($0.treeNode.position, from: $0.treeNode).x
+            return treeXPos > playerXPos
+        }) else { return }
+        
+        tree.runMonkeyBombAnimation()
     }
+    
 }

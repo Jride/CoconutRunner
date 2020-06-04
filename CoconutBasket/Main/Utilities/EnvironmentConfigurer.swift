@@ -16,6 +16,8 @@ class EnvironmentConfigurer {
             audioManager: AudioManager(),
             applicationEventsDispatcher: ApplicationEventsDispatcherImpl(),
             collisionEventsDispatcher: CollisionDetectionManager(),
+            date: { Date.now },
+            gameLogic: GameLogic(),
             gameState: GameState()
         )
         

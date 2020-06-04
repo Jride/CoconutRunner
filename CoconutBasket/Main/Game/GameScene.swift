@@ -30,6 +30,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         Env.gameState.yOffset = ((size.height - 768) / 2).constrained(min: 0)
         Env.gameState.scaleFactor = size.height / 768
+        Env.gameLogic.gameScene = self
         
         floorMargin *= Env.gameState.scaleFactor
         
@@ -48,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundManager.gameSceneDidLoad()
         
         player = Player.newInstance()
+        player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
         player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
         addChild(player)
     }
@@ -62,6 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Calculate time since last update
         let dt = currentTime - lastUpdateTime
         
+        Env.gameLogic.update(deltaTime: dt)
         player.update(deltaTime: dt)
         
         if isPlayerMoving {
@@ -72,7 +75,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 accumulatedDeltaTime = 0
                 isPlayerMoving = false
-                backgroundManager.playerDidStopMoving()
             }
         }
         
@@ -94,9 +96,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             player.startAction(.jumping)
         }
-        
-        // Start moving the background
-        backgroundManager.playerDidStartMoving()
     }
     
 }

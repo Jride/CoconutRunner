@@ -8,8 +8,24 @@
 
 import SpriteKit
 
-class Player: SKSpriteNode {
+protocol PlayerEventsDispatcherObserver: class {
+    func playerDidStartMoving()
+    func playerDidStopMoving()
+}
+
+extension PlayerEventsDispatcherObserver {
+    func playerDidStartMoving() {}
+    func playerDidStopMoving() {}
+}
+
+protocol PlayerEventsDispatcher {
+    func add(observer: PlayerEventsDispatcherObserver, dispatchBehaviour: DispatchBehaviour)
+    func remove(observer: PlayerEventsDispatcherObserver)
+}
+
+class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
     
+    var observerStore = ObserverStore<PlayerEventsDispatcherObserver>()
     private static let prefix = "character_malePerson_"
     
     static func newInstance() -> Player {
@@ -57,7 +73,26 @@ class Player: SKSpriteNode {
     private var runningAction: SKAction!
     private let hitAnimationDuration: TimeInterval = 0.3
     private var jumpHeight: CGFloat { 120 * Env.gameState.scaleFactor }
-    private var isMoving: Bool = false
+    
+    private var _isMoving = false {
+        didSet {
+            if isMoving {
+                print("Start Moving")
+                observerStore.forEach { $0.playerDidStartMoving() }
+            } else {
+                print("Stop Moving")
+                observerStore.forEach { $0.playerDidStopMoving() }
+            }
+        }
+    }
+    private(set) var isMoving: Bool {
+        get { return _isMoving }
+        set {
+            if _isMoving != newValue {
+                _isMoving = newValue
+            }
+        }
+    }
     
     private var originalPosition: CGPoint!
     

@@ -38,6 +38,9 @@
 		225EC6B224854FDD00ED0DD2 /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6B124854FDD00ED0DD2 /* SoundEffect.swift */; };
 		225EC6B4248589FD00ED0DD2 /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6B3248589FD00ED0DD2 /* Monkey.swift */; };
 		225EC6B62486E03000ED0DD2 /* GameObjectsLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6B52486E03000ED0DD2 /* GameObjectsLayers.swift */; };
+		225EC6B824890EF400ED0DD2 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6B724890EF400ED0DD2 /* GameLogic.swift */; };
+		225EC6BE248913EE00ED0DD2 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6BD248913EE00ED0DD2 /* Scheduler.swift */; };
+		225EC6C02489249100ED0DD2 /* ActionTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6BF2489249100ED0DD2 /* ActionTimer.swift */; };
 		228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */; };
 		228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD32474698100982AD3 /* Kenney Future.ttf */; };
 		229C1271245733F00006F464 /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C1270245733F00006F464 /* UIColor+Color.swift */; };
@@ -102,6 +105,9 @@
 		225EC6B124854FDD00ED0DD2 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		225EC6B3248589FD00ED0DD2 /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		225EC6B52486E03000ED0DD2 /* GameObjectsLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectsLayers.swift; sourceTree = "<group>"; };
+		225EC6B724890EF400ED0DD2 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		225EC6BD248913EE00ED0DD2 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		225EC6BF2489249100ED0DD2 /* ActionTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTimer.swift; sourceTree = "<group>"; };
 		228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future Narrow.ttf"; sourceTree = "<group>"; };
 		228AFFD32474698100982AD3 /* Kenney Future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future.ttf"; sourceTree = "<group>"; };
 		229C1270245733F00006F464 /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
@@ -195,6 +201,8 @@
 				2242E074246E793D003889EA /* ApplicationEventsDispatcher.swift */,
 				2242E07E246E7A7D003889EA /* EnvironmentConfigurer.swift */,
 				2242E080246E7B8E003889EA /* CollisionEventsDispatcher.swift */,
+				225EC6BD248913EE00ED0DD2 /* Scheduler.swift */,
+				225EC6BF2489249100ED0DD2 /* ActionTimer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 				22F2CF0C243B0C1200858120 /* GameScene.swift */,
 				222EDC312454CEC400F38F79 /* BackgroundManager.swift */,
 				2242E07A246E7A0D003889EA /* GameState.swift */,
+				225EC6B724890EF400ED0DD2 /* GameLogic.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -630,6 +639,7 @@
 				225EC6B4248589FD00ED0DD2 /* Monkey.swift in Sources */,
 				2242E075246E793D003889EA /* ApplicationEventsDispatcher.swift in Sources */,
 				22F2CF0F243B0C1200858120 /* GameViewController.swift in Sources */,
+				225EC6B824890EF400ED0DD2 /* GameLogic.swift in Sources */,
 				22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */,
 				2242E07F246E7A7D003889EA /* EnvironmentConfigurer.swift in Sources */,
 				22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */,
@@ -638,11 +648,13 @@
 				224B1295243FB5B400A540E5 /* Player.swift in Sources */,
 				2242E0A524731BA4003889EA /* UIView+Autolayout.swift in Sources */,
 				22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */,
+				225EC6BE248913EE00ED0DD2 /* Scheduler.swift in Sources */,
 				2242E079246E799C003889EA /* Observable.swift in Sources */,
 				225EC6B224854FDD00ED0DD2 /* SoundEffect.swift in Sources */,
 				222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */,
 				22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */,
 				225EC6A42482F34600ED0DD2 /* AudioManager.swift in Sources */,
+				225EC6C02489249100ED0DD2 /* ActionTimer.swift in Sources */,
 				2242E07D246E7A4B003889EA /* Environment.swift in Sources */,
 				2242E07B246E7A0D003889EA /* GameState.swift in Sources */,
 				2242E03F24647623003889EA /* Banana.swift in Sources */,

@@ -22,7 +22,6 @@ class GameSpriteNode: SKSpriteNode {
     private(set) var isMoving = false
     private var amountMoved: CGFloat = 0
     private var amountToMove: CGFloat = 0
-    private var originalAccumulatedDeltaTime: TimeInterval = 0
     private var accumulatedDeltaTime: TimeInterval = 0
     
 }
@@ -33,7 +32,6 @@ extension GameSpriteNode: GameNode {
         
         if isMoving {
             
-            originalAccumulatedDeltaTime += deltaTime
             accumulatedDeltaTime += deltaTime
             
             let percent = (accumulatedDeltaTime / Env.gameState.speed).constrained(min: 0, max: 1)
@@ -55,7 +53,6 @@ extension GameSpriteNode: GameNode {
         
         isMoving = true
         
-        originalAccumulatedDeltaTime = 0
         accumulatedDeltaTime = 0
         amountMoved = 0
         amountToMove = dx
@@ -68,7 +65,6 @@ class GameWrapperNode: SKNode {
     private(set) var isMoving = false
     private var amountMoved: CGFloat = 0
     private var amountToMove: CGFloat = 0
-    private var originalAccumulatedDeltaTime: TimeInterval = 0
     private var accumulatedDeltaTime: TimeInterval = 0
     
 }
@@ -79,7 +75,6 @@ extension GameWrapperNode: GameNode {
         
         if isMoving {
             
-            originalAccumulatedDeltaTime += deltaTime
             accumulatedDeltaTime += deltaTime
             
             let percent = (accumulatedDeltaTime / Env.gameState.speed).constrained(min: 0, max: 1)
@@ -101,7 +96,6 @@ extension GameWrapperNode: GameNode {
         
         isMoving = true
         
-        originalAccumulatedDeltaTime = 0
         accumulatedDeltaTime = 0
         amountMoved = 0
         amountToMove = dx
