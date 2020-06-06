@@ -11,7 +11,7 @@ import FoundationExtended
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    let player: Player
+    var player: Player!
     var floorMargin: CGFloat = 50
     
     private var lastUpdateTime: TimeInterval = 0
@@ -26,14 +26,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override init(size: CGSize) {
-        
-        player = Player.newInstance()
-        
         super.init(size: size)
         
-        Env.gameState.yOffset = ((size.height - 768) / 2).constrained(min: 0)
         Env.gameState.scaleFactor = size.height / 768
         Env.gameLogic.gameScene = self
+        
+        player = Player.newInstance()
         
         floorMargin *= Env.gameState.scaleFactor
         
@@ -42,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         collisionDetectionManager.gameScene = self
         
         player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
+        Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,6 +58,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
+        if (view?.isPaused).isTrue {
+            lastUpdateTime = currentTime
+            return
+        }
         
         // Initialize _lastUpdateTime if it has not already been
         if lastUpdateTime == 0 {
@@ -89,7 +93,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard isPlayerMoving == false else { return }
+        guard
+            isPlayerMoving == false,
+            Env.gameState.isPlayerAlive
+            else { return }
         
         let touchLocation = touches.first!.location(in: view)
         
@@ -100,6 +107,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             player.startAction(.jumping)
         }
+    }
+    
+}
+
+extension GameScene: GameLogicEventsDispatcherObserver {
+    
+    func gameOver() {
+        
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        let textureSize = gameOver.texture!.size()
+        let ratio = textureSize.height / textureSize.width
+        let newWidth: CGFloat = size.width - 200
+        gameOver.size = CGSize(width: newWidth, height: newWidth * ratio)
+        gameOver.zPosition = ZPosition.gameOverLabel
+        
+        gameOver.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(gameOver)
+        
     }
     
 }

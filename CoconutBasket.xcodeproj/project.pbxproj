@@ -44,6 +44,8 @@
 		228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */; };
 		228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD32474698100982AD3 /* Kenney Future.ttf */; };
 		229C1271245733F00006F464 /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C1270245733F00006F464 /* UIColor+Color.swift */; };
+		22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02351248BD67F00B12A33 /* GameOverMusic.wav */; };
+		22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02353248BD6BA00B12A33 /* PlayerDied.wav */; };
 		22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D35D9D244CE7DE005E3E83 /* GameNode.swift */; };
 		22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF07A2245F13D30085ABCC /* CollisionType.swift */; };
 		22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */; };
@@ -111,6 +113,8 @@
 		228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future Narrow.ttf"; sourceTree = "<group>"; };
 		228AFFD32474698100982AD3 /* Kenney Future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future.ttf"; sourceTree = "<group>"; };
 		229C1270245733F00006F464 /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
+		22D02351248BD67F00B12A33 /* GameOverMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOverMusic.wav; sourceTree = "<group>"; };
+		22D02353248BD6BA00B12A33 /* PlayerDied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDied.wav; sourceTree = "<group>"; };
 		22D35D9D244CE7DE005E3E83 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
 		22EF07A2245F13D30085ABCC /* CollisionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionType.swift; sourceTree = "<group>"; };
 		22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionDetectionManager.swift; sourceTree = "<group>"; };
@@ -275,7 +279,9 @@
 			children = (
 				225EC6992482BE2900ED0DD2 /* GrasslandsTheme.mp3 */,
 				225EC6972482BE2900ED0DD2 /* MenuTheme.mp3 */,
+				22D02351248BD67F00B12A33 /* GameOverMusic.wav */,
 				225EC6982482BE2900ED0DD2 /* WorldmapTheme.mp3 */,
+				22D02353248BD6BA00B12A33 /* PlayerDied.wav */,
 			);
 			path = "Background Music";
 			sourceTree = "<group>";
@@ -535,6 +541,7 @@
 				228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */,
 				22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */,
 				228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */,
+				22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */,
 				22F2CF14243B0C1400858120 /* Assets.xcassets in Resources */,
 				224B129E2444F30C00A540E5 /* CoconutExplosionUp.sks in Resources */,
 				225EC6A02482CB8400ED0DD2 /* PlayerHurt.mp3 in Resources */,
@@ -546,6 +553,7 @@
 				225EC69A2482BE2900ED0DD2 /* MenuTheme.mp3 in Resources */,
 				2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */,
 				225EC69B2482BE2900ED0DD2 /* WorldmapTheme.mp3 in Resources */,
+				22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
 				224B12A22445946800A540E5 /* ImpactPlayer.mp3 in Resources */,
 			);

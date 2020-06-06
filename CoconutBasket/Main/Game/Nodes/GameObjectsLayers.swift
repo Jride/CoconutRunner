@@ -33,4 +33,5 @@ struct ZPosition {
     
     static let player: CGFloat = 40
     
+    static let gameOverLabel: CGFloat = 100
 }

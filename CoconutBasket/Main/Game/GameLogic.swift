@@ -13,12 +13,16 @@ protocol GameLogicEventsDispatcherObserver: class {
     func playerIdleTimeThresholdExceeded()
     func startLevel(withConfig config: LevelConfiguration)
     func gameOver()
+    func gamePaused()
+    func gameResumed()
 }
 
 extension GameLogicEventsDispatcherObserver {
     func playerIdleTimeThresholdExceeded() {}
     func startLevel(withConfig config: LevelConfiguration) {}
     func gameOver() {}
+    func gamePaused() {}
+    func gameResumed() {}
 }
 
 protocol GameLogicEventsDispatcher {
@@ -48,6 +52,10 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
             idleTimeThreshold: Time(seconds: 3),
             knockCoconutSpawnRate: 0.7
         )
+        
+        DispatchQueue.main.async {
+            Env.applicationEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
+        }
     }
     
     func gameSceneDidLoad() {
@@ -93,6 +101,20 @@ extension GameLogic: GameStateDispatcherObserver {
     func playerDied() {
         isPlayerDead = true
         observerStore.forEach { $0.gameOver() }
+    }
+    
+}
+
+extension GameLogic: ApplicationEventsDispatcherObserver {
+    
+    func applicationWillResignActive() {
+        gameScene.view?.isPaused = true
+        observerStore.forEach { $0.gamePaused() }
+    }
+    
+    func applicationDidBecomeActive(fromBackground: Bool) {
+        gameScene.view?.isPaused = false
+        observerStore.forEach { $0.gameResumed() }
     }
     
 }

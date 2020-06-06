@@ -20,6 +20,11 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kenney Future Narrow.ttf</string>
+		<string>Kenney Future.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -32,14 +37,10 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Kenney Future Narrow.ttf</string>
-		<string>Kenney Future.ttf</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

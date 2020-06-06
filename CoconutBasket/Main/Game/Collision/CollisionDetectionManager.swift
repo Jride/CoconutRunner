@@ -58,6 +58,7 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEv
                 let bananaCollection = SKEmitterNode(fileNamed: "BananaCollection").require("")
                 bananaCollection.position = firstNode.position
                 bananaCollection.zPosition = ZPosition.explosions
+                bananaCollection.setScale(Env.gameState.scaleFactor)
                 tree.addChild(bananaCollection)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
@@ -83,6 +84,7 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEv
                 let explosion = SKEmitterNode(fileNamed: "CoconutExplosion").require("")
                 explosion.position = firstNode.position
                 explosion.zPosition = ZPosition.explosions
+                explosion.setScale(Env.gameState.scaleFactor)
                 tree.addChild(explosion)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -96,6 +98,7 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEv
                 let explosion = SKEmitterNode(fileNamed: "Explosion").require("")
                 explosion.position = firstNode.position
                 explosion.zPosition = ZPosition.explosions
+                explosion.setScale(Env.gameState.scaleFactor)
                 tree.addChild(explosion)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -123,6 +126,7 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEv
                 let explosion = SKEmitterNode(fileNamed: "CoconutExplosionUp").require("")
                 explosion.position = firstNode.position
                 explosion.zPosition = ZPosition.explosions
+                explosion.setScale(Env.gameState.scaleFactor)
                 tree.addChild(explosion)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -136,6 +140,7 @@ class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEv
                 let explosion = SKEmitterNode(fileNamed: "ExplosionUp").require("")
                 explosion.position = firstNode.position
                 explosion.zPosition = ZPosition.explosions
+                explosion.setScale(Env.gameState.scaleFactor)
                 tree.addChild(explosion)
                 
                 let duration = TimeInterval(explosion.particleLifetime) / 2

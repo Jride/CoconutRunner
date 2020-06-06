@@ -77,10 +77,8 @@ class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
     private var _isMoving = false {
         didSet {
             if isMoving {
-                print("Start Moving")
                 observerStore.forEach { $0.playerDidStartMoving() }
             } else {
-                print("Stop Moving")
                 observerStore.forEach { $0.playerDidStopMoving() }
             }
         }

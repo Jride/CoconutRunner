@@ -12,20 +12,28 @@ import AVFoundation
 class AudioManager {
     
     private let backgroundMusic = Music(resource: "GrasslandsTheme.mp3")
+    private let gameOverMusic = Music(resource: "GameOverMusic.wav")
     private let playerHurt = SoundEffect(resource: "PlayerHurt.mp3")
+    private let playerDied = Music(resource: "PlayerDied.wav")
     private let coconutExplosion = SoundEffect(resource: "ImpactFloor.mp3")
     private let bombExplosion = SoundEffect(resource: "Explosion.mp3")
+    
+    private var mainMusic: Music?
     
     init() {
         
         backgroundMusic.loopForever()
         backgroundMusic.volume = 0.3
+        gameOverMusic.loopForever()
         coconutExplosion.volume = 0.2
         playerHurt.volume = 0.4
         bombExplosion.volume = 1.0
         
+        mainMusic = backgroundMusic
+        
         DispatchQueue.main.async {
             Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
+            Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
         }
     }
     
@@ -57,4 +65,26 @@ extension AudioManager: CollisionEventsDispatcherObserver {
         playCollisionSoundEffect(forEnemy: enemy)
     }
     
+}
+
+extension AudioManager: GameLogicEventsDispatcherObserver {
+    
+    func gamePaused() {
+        mainMusic?.pause()
+    }
+    
+    func gameResumed() {
+        mainMusic?.play()
+    }
+    
+    func gameOver() {
+        
+        mainMusic?.pause()
+        mainMusic = playerDied
+        playerDied.play()
+        playerDied.didFinishPlaying = { [unowned self] in
+            self.mainMusic = self.gameOverMusic
+            self.gameOverMusic.play()
+        }
+    }
 }

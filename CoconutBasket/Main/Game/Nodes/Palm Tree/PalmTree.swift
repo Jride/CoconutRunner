@@ -96,12 +96,17 @@ class PalmTree: GameWrapperNode {
     
     private func addFloatingBananaNode() {
         
-        let point: CGPoint
+        guard
+            let treeXPosition = gameScene?.convert(treeNode.position, from: treeNode).x,
+            let playerXPos = gameScene?.player.position.x,
+            treeXPosition > playerXPos else {
+                return
+        }
         
         let middle = CGPoint(x: 0, y: 0)
         let floor = CGPoint(x: 0, y: -160 * scale)
         
-        point = [middle, floor].randomElement()!
+        let point = [middle, floor].randomElement()!
         
         let banana = Banana.newInstance()
         banana.position = CGPoint(x: point.x + banana.size.width/2 + (10 * scale),

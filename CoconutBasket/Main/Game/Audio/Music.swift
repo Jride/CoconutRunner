@@ -9,8 +9,9 @@
 import Foundation
 import AVKit
 
-class Music {
+class Music: NSObject {
     
+    var didFinishPlaying: (() -> Void)?
     var volume: Float = 1.0 {
         didSet {
             player?.volume = volume
@@ -27,7 +28,11 @@ class Music {
         let url = URL(fileURLWithPath: path)
         
         player = try? AVAudioPlayer(contentsOf: url)
+        
+        super.init()
+        
         player?.volume = volume
+        player?.delegate = self
     }
     
     func play() {
@@ -48,5 +53,11 @@ class Music {
     
     func unmute() {
         player?.volume = volume
+    }
+}
+
+extension Music: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        didFinishPlaying?()
     }
 }

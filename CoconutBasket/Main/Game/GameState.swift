@@ -32,7 +32,6 @@ class GameState: GameStateDispatcher, Observable {
     private(set) var playerHealth: Int!
     private var playersFullHealth: Int!
     
-    var yOffset: CGFloat = 0
     var scaleFactor: CGFloat = 1
     
     var playersHealthPercent: CGFloat = 100
