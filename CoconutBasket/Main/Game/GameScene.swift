@@ -11,7 +11,7 @@ import FoundationExtended
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var player: Player!
+    let player: Player
     var floorMargin: CGFloat = 50
     
     private var lastUpdateTime: TimeInterval = 0
@@ -26,6 +26,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override init(size: CGSize) {
+        
+        player = Player.newInstance()
+        
         super.init(size: size)
         
         Env.gameState.yOffset = ((size.height - 768) / 2).constrained(min: 0)
@@ -37,6 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = UIColor(hex: 0xCFEFFC)
         backgroundManager = BackgroundManager(gameScene: self)
         collisionDetectionManager.gameScene = self
+        
+        player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,9 +52,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.contactDelegate = collisionDetectionManager
         backgroundManager.gameSceneDidLoad()
+        Env.gameLogic.gameSceneDidLoad()
         
-        player = Player.newInstance()
-        player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
         player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
         addChild(player)
     }

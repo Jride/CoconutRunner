@@ -135,7 +135,7 @@ class BackgroundManager {
             
             removedTree.position.x = lastTree.position.x + treeSize.width + treePadding
             trees.append(removedTree)
-            removedTree.reset()
+            removedTree.setupTree()
         }
         
         if let firstBg = backgrounds.first,
@@ -187,13 +187,6 @@ extension BackgroundManager {
         setupBackground()
         setupPalmTrees()
         setupFloor()
-        
-        let sequence = SKAction.sequence([
-            .wait(forDuration: 0.7),
-            .perform(#selector(knockDownCoconut), onTarget: self)
-        ])
-        
-        gameScene.run(.repeatForever(sequence), withKey: "knockCoconuts")
     }
     
     func update(deltaTime: TimeInterval) {
@@ -220,15 +213,29 @@ extension BackgroundManager: PlayerEventsDispatcherObserver {
 
 extension BackgroundManager: GameLogicEventsDispatcherObserver {
     
+    func startLevel(withConfig config: LevelConfiguration) {
+        
+        let sequence = SKAction.sequence([
+            .wait(forDuration: config.knockCoconutSpawnRate),
+            .perform(#selector(knockDownCoconut), onTarget: self)
+        ])
+        
+        gameScene.run(.repeatForever(sequence), withKey: "knockCoconuts")
+    }
+    
+    func gameOver() {
+        gameScene.removeAction(forKey: "knockCoconuts")
+    }
+    
     func playerIdleTimeThresholdExceeded() {
         
         let playerXPos = gameScene.player.position.x
-        guard let tree = trees.first(where: {
+        guard let treeInfrontOfPlayer = trees.first(where: {
             let treeXPos = gameScene.convert($0.treeNode.position, from: $0.treeNode).x
             return treeXPos > playerXPos
         }) else { return }
         
-        tree.runMonkeyBombAnimation()
+        treeInfrontOfPlayer.runMonkeyBombAnimation()
     }
     
 }

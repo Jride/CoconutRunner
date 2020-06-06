@@ -106,7 +106,8 @@ class Monkey: GameSpriteNode {
         func secondSequence() {
             
             if didPlayerStartMoving {
-                
+                // If player started moving whilst the monkey head was peeking then we can cancel
+                // the second sequence animation to drop the bomb
                 run(.sequence([
                     .setTexture(SKTexture(imageNamed: "monkey_head")),
                     .scale(to: Self.size(), duration: 0),
@@ -117,7 +118,7 @@ class Monkey: GameSpriteNode {
                 ]))
                 
             } else {
-                
+                // Player is still idle so run the rest of the bomb dropping animation
                 run(.sequence([
                     .setTexture(SKTexture(imageNamed: "monkey_arms_up1")),
                     .run {
@@ -133,7 +134,7 @@ class Monkey: GameSpriteNode {
                     .move(to: originalPosition, duration: 0),
                     .run {
                         self.isAnimating = false
-                        Env.gameLogic.resetIdleTime()
+                        Env.gameLogic.resetIdleTimer()
                     }
                 ]))
                 
@@ -144,7 +145,7 @@ class Monkey: GameSpriteNode {
         
         run(.sequence([
             .moveBy(x: 0, y: 40 * scale, duration: 0.3),
-            .wait(forDuration: 1.5),
+            .wait(forDuration: 1),
             hide,
             .run { secondSequence() }
         ]))

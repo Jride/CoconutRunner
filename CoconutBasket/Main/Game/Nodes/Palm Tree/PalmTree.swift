@@ -38,12 +38,7 @@ class PalmTree: GameWrapperNode {
         treeNode.zPosition = ZPosition.palmTree
         super.init()
         
-        addChild(treeNode)
-        
-        zPosition = ZPosition.palmTree
-        configureCoconuts()
-        addFloatingBananaNode(at: CGPoint(x: 0, y: 0))
-        addMonkeyWithBomb()
+        setupTree()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,7 +94,14 @@ class PalmTree: GameWrapperNode {
         self.monkey = newMonkey
     }
     
-    private func addFloatingBananaNode(at point: CGPoint) {
+    private func addFloatingBananaNode() {
+        
+        let point: CGPoint
+        
+        let middle = CGPoint(x: 0, y: 0)
+        let floor = CGPoint(x: 0, y: -160 * scale)
+        
+        point = [middle, floor].randomElement()!
         
         let banana = Banana.newInstance()
         banana.position = CGPoint(x: point.x + banana.size.width/2 + (10 * scale),
@@ -233,15 +235,16 @@ class PalmTree: GameWrapperNode {
         knockRandItem()
     }
     
-    func reset() {
+    func setupTree() {
         removeAllChildren()
         removeAllActions()
         
+        zPosition = ZPosition.palmTree
         fallingChildNodes = []
         addChild(treeNode)
         treeChildGroup = TreeChildGroup()
         configureCoconuts()
-        addFloatingBananaNode(at: CGPoint(x: 0, y: 0))
+        addFloatingBananaNode()
         addMonkeyWithBomb()
     }
 }

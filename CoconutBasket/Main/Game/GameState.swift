@@ -11,10 +11,12 @@ import FoundationExtended
 
 protocol GameStateDispatcherObserver: class {
     func playersHealthDidUpdate()
+    func playerDied()
 }
 
 extension GameStateDispatcherObserver {
     func playersHealthDidUpdate() {}
+    func playerDied() {}
 }
 
 protocol GameStateDispatcher {
@@ -26,19 +28,14 @@ class GameState: GameStateDispatcher, Observable {
     
     var observerStore = ObserverStore<GameStateDispatcherObserver>()
     
-    private let maxPlayerHealth: Int = 40
-    
     private(set) var speed: Double = 0.75
-    private(set) var playerHealth: Int
-    private(set) var collectedBananas = 0
+    private(set) var playerHealth: Int!
+    private var playersFullHealth: Int!
     
     var yOffset: CGFloat = 0
     var scaleFactor: CGFloat = 1
     
-    var playersHealthPercent: CGFloat {
-        let percent = CGFloat(playerHealth) / CGFloat(maxPlayerHealth)
-        return percent.constrained(min: 0, max: 1)
-    }
+    var playersHealthPercent: CGFloat = 100
     
     var isPlayerAlive: Bool {
         return playerHealth > 0
@@ -46,10 +43,13 @@ class GameState: GameStateDispatcher, Observable {
     
     init() {
         
-        playerHealth = maxPlayerHealth
-        
         DispatchQueue.main.async {
             Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
+            Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
+            
+            let levelConfig = Env.gameLogic.currentLevelConfig
+            self.playerHealth = levelConfig.playersFullHealth
+            self.playersFullHealth = levelConfig.playersFullHealth
         }
     }
     
@@ -71,8 +71,23 @@ extension GameState: CollisionEventsDispatcherObserver {
             healthReduction = 5
         }
         
-        playerHealth = (playerHealth - healthReduction).constrained(min: 0, max: maxPlayerHealth)
+        playerHealth = (playerHealth - healthReduction).constrained(min: 0, max: playersFullHealth)
+        
+        let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
+        playersHealthPercent = percent.constrained(min: 0, max: 1)
         
         observerStore.forEach { $0.playersHealthDidUpdate() }
+        
+        if isPlayerAlive == false {
+            observerStore.forEach { $0.playerDied() }
+        }
+    }
+}
+
+extension GameState: GameLogicEventsDispatcherObserver {
+    
+    func startLevel(withConfig config: LevelConfiguration) {
+        playerHealth = config.playersFullHealth
+        playersFullHealth = config.playersFullHealth
     }
 }
