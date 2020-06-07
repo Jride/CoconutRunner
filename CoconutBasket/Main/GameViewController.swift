@@ -14,6 +14,7 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     @IBOutlet private var healthBarView: HealthBarView!
+    @IBOutlet private var cons_healthBarWidth: NSLayoutConstraint!
 
     override func viewDidLoad() {
         
@@ -37,6 +38,8 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        
+        cons_healthBarWidth.constant = (200 * Env.gameState.scaleFactor).constrained(min: 150)
     }
 
     override var shouldAutorotate: Bool {

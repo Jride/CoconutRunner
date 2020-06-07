@@ -181,8 +181,6 @@ class BackgroundManager {
 extension BackgroundManager {
     
     func gameSceneDidLoad() {
-
-        Env.audioManager.playBackgroundMusic()
         
         setupBackground()
         setupPalmTrees()

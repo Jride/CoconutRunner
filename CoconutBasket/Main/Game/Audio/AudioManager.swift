@@ -29,8 +29,6 @@ class AudioManager {
         playerHurt.volume = 0.4
         bombExplosion.volume = 1.0
         
-        mainMusic = backgroundMusic
-        
         DispatchQueue.main.async {
             Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
             Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
@@ -46,10 +44,6 @@ class AudioManager {
         case .explosion:
             print("No collision sound effect for enemy")
         }
-    }
-    
-    func playBackgroundMusic() {
-        backgroundMusic.play()
     }
     
 }
@@ -68,6 +62,11 @@ extension AudioManager: CollisionEventsDispatcherObserver {
 }
 
 extension AudioManager: GameLogicEventsDispatcherObserver {
+    
+    func startLevel(withConfig config: LevelConfiguration) {
+        mainMusic = backgroundMusic
+        mainMusic?.play()
+    }
     
     func gamePaused() {
         mainMusic?.pause()

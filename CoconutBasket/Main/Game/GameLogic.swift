@@ -48,7 +48,7 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
     init() {
         // Setting up level configuration
         currentLevelConfig = LevelConfiguration(
-            playersFullHealth: 40,
+            playersFullHealth: 5,
             idleTimeThreshold: Time(seconds: 3),
             knockCoconutSpawnRate: 0.7
         )
@@ -65,6 +65,7 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
     }
     
     func startGame() {
+        isPlayerDead = false
         observerStore.forEach { $0.startLevel(withConfig: self.currentLevelConfig) }
     }
     
@@ -93,10 +94,6 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
 }
 
 extension GameLogic: GameStateDispatcherObserver {
-    
-    func playersHealthDidUpdate() {
-        
-    }
     
     func playerDied() {
         isPlayerDead = true

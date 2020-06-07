@@ -86,7 +86,13 @@ extension GameState: CollisionEventsDispatcherObserver {
 extension GameState: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
+        
         playerHealth = config.playersFullHealth
         playersFullHealth = config.playersFullHealth
+        
+        let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
+        playersHealthPercent = percent.constrained(min: 0, max: 1)
+        
+        observerStore.forEach { $0.playersHealthDidUpdate() }
     }
 }

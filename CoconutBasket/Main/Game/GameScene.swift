@@ -15,12 +15,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var floorMargin: CGFloat = 50
     
     private var lastUpdateTime: TimeInterval = 0
+    private var lastTimePaused: TimeInterval = 0
+    private var wasPaused = false
     
     private var isPlayerMoving = false
     private var accumulatedDeltaTime: TimeInterval = 0
     
     private var backgroundManager: BackgroundManager!
-    
+    private var gameOverContainer: SKNode?
     private var collisionDetectionManager: CollisionDetectionManager {
         return (Env.collisionEventsDispatcher as? CollisionDetectionManager).require("")
     }
@@ -59,18 +61,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        if (view?.isPaused).isTrue {
-            lastUpdateTime = currentTime
-            return
-        }
-        
         // Initialize _lastUpdateTime if it has not already been
         if lastUpdateTime == 0 {
           lastUpdateTime = currentTime
         }
 
         // Calculate time since last update
-        let dt = currentTime - lastUpdateTime
+        let dt: TimeInterval
+        if wasPaused {
+            dt = 0
+            wasPaused = false
+        } else {
+            dt = currentTime - lastUpdateTime
+        }
         
         Env.gameLogic.update(deltaTime: dt)
         player.update(deltaTime: dt)
@@ -93,20 +96,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        guard
-            isPlayerMoving == false,
-            Env.gameState.isPlayerAlive
-            else { return }
+        let touchLocation = touches.first!.location(in: self)
         
-        let touchLocation = touches.first!.location(in: view)
-        
-        isPlayerMoving = true
-        
-        if touchLocation.y > frame.height/2 {
-            player.startAction(.running)
+        if Env.gameState.isPlayerAlive {
+            
+            guard isPlayerMoving == false else { return }
+            
+            isPlayerMoving = true
+            
+            if touchLocation.y < frame.height/2 {
+                player.startAction(.running)
+            } else {
+                player.startAction(.jumping)
+            }
+            
         } else {
-            player.startAction(.jumping)
+            
+            if self.nodes(at: touchLocation).contains(where: { $0.name == "PlayAgain" }) {
+                // User Tapped Play Again
+                print("Play Again")
+                Env.gameLogic.startGame()
+                gameOverContainer?.removeFromParent()
+            }
+            
         }
+        
     }
     
 }
@@ -115,16 +129,34 @@ extension GameScene: GameLogicEventsDispatcherObserver {
     
     func gameOver() {
         
+        gameOverContainer = SKNode()
+        
         let gameOver = SKSpriteNode(imageNamed: "gameOver")
-        let textureSize = gameOver.texture!.size()
-        let ratio = textureSize.height / textureSize.width
-        let newWidth: CGFloat = size.width - 200
+        var textureSize = gameOver.texture!.size()
+        var ratio = textureSize.height / textureSize.width
+        var newWidth: CGFloat = 650 * Env.gameState.scaleFactor
         gameOver.size = CGSize(width: newWidth, height: newWidth * ratio)
         gameOver.zPosition = ZPosition.gameOverLabel
         
-        gameOver.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(gameOver)
+        gameOver.position = CGPoint(x: frame.midX, y: frame.midY + (100 * Env.gameState.scaleFactor))
+        gameOverContainer?.addChild(gameOver)
         
+        let playAgain = SKSpriteNode(imageNamed: "playAgain")
+        textureSize = playAgain.texture!.size()
+        ratio = textureSize.height / textureSize.width
+        newWidth = 300 * Env.gameState.scaleFactor
+        playAgain.size = CGSize(width: newWidth, height: newWidth * ratio)
+        playAgain.zPosition = ZPosition.gameOverLabel
+        playAgain.name = "PlayAgain"
+        playAgain.position = CGPoint(x: frame.midX, y: gameOver.frame.minY - (150 * Env.gameState.scaleFactor))
+        gameOverContainer?.addChild(playAgain)
+        
+        addChild(gameOverContainer!)
+    }
+    
+    func gamePaused() {
+        lastTimePaused = lastUpdateTime
+        wasPaused = true
     }
     
 }

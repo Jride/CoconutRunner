@@ -53,11 +53,8 @@
                         <constraint firstAttribute="width" secondItem="Fny-Gp-rJ4" secondAttribute="height" multiplier="83:15" id="idM-MI-L7O"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 / 100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OkT-Pu-bE0">
-                    <rect key="frame" x="157" y="73" width="127" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="OkT-Pu-bE0" secondAttribute="height" multiplier="127:27" id="072-IL-UkP"/>
-                    </constraints>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 / 100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="OkT-Pu-bE0">
+                    <rect key="frame" x="157" y="71.5" width="127" height="29.5"/>
                     <fontDescription key="fontDescription" name="Kenney-Future-Narrow" family="Kenney Future Narrow" pointSize="26"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>

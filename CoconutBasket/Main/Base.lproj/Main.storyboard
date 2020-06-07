@@ -33,6 +33,7 @@
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
                     <connections>
+                        <outlet property="cons_healthBarWidth" destination="0qH-pJ-nlM" id="UZP-Qo-NlK"/>
                         <outlet property="healthBarView" destination="fJ4-in-ibM" id="5P0-tk-wS7"/>
                     </connections>
                 </viewController>
