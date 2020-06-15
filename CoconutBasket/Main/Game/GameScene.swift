@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdateTime: TimeInterval = 0
     private var lastTimePaused: TimeInterval = 0
     private var wasPaused = false
+    private var gameStarted = false
     
     private var isPlayerMoving = false
     private var accumulatedDeltaTime: TimeInterval = 0
@@ -57,9 +58,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
         addChild(player)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+            Env.gameLogic.startGame()
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
+        guard gameStarted else { return }
         
         // Initialize _lastUpdateTime if it has not already been
         if lastUpdateTime == 0 {
@@ -127,6 +134,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 extension GameScene: GameLogicEventsDispatcherObserver {
     
+    func startLevel(withConfig config: LevelConfiguration) {
+        gameStarted = true
+    }
+    
+    func gamePaused() {
+        view?.isPaused = true
+        lastTimePaused = lastUpdateTime
+        wasPaused = true
+    }
+    
+    func gameResumed() {
+        view?.isPaused = false
+    }
+    
     func gameOver() {
         
         gameOverContainer = SKNode()
@@ -152,11 +173,6 @@ extension GameScene: GameLogicEventsDispatcherObserver {
         gameOverContainer?.addChild(playAgain)
         
         addChild(gameOverContainer!)
-    }
-    
-    func gamePaused() {
-        lastTimePaused = lastUpdateTime
-        wasPaused = true
     }
     
 }

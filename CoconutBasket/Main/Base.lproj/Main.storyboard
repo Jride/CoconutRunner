@@ -24,10 +24,20 @@
                                     <constraint firstAttribute="width" secondItem="fJ4-in-ibM" secondAttribute="height" multiplier="60:23" id="yxO-4m-GSQ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D46-my-0a6" customClass="DistanceBarView" customModule="CoconutBasket" customModuleProvider="target">
+                                <rect key="frame" x="586" y="20" width="200" height="76"/>
+                                <color key="backgroundColor" red="0.64474827239999999" green="0.93984270410000004" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="D46-my-0a6" secondAttribute="height" multiplier="50:19" id="EqD-D0-TWR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="fJ4-in-ibM" secondAttribute="trailing" constant="20" id="6Cc-gn-Grh"/>
+                            <constraint firstItem="fJ4-in-ibM" firstAttribute="leading" secondItem="D46-my-0a6" secondAttribute="trailing" constant="18" id="0rF-2V-Jri"/>
+                            <constraint firstAttribute="trailing" secondItem="fJ4-in-ibM" secondAttribute="trailing" constant="20" id="6Cc-gn-Grh"/>
+                            <constraint firstItem="D46-my-0a6" firstAttribute="top" secondItem="fJ4-in-ibM" secondAttribute="top" id="YPe-rj-VG4"/>
+                            <constraint firstItem="D46-my-0a6" firstAttribute="width" secondItem="fJ4-in-ibM" secondAttribute="width" id="qv2-k2-qPL"/>
                             <constraint firstItem="fJ4-in-ibM" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="yPo-5T-t7Q"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>

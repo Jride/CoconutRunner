@@ -43,6 +43,11 @@ class Music: NSObject {
         player?.pause()
     }
     
+    func stop() {
+        player?.pause()
+        player?.currentTime = 0
+    }
+    
     func loopForever() {
         player?.numberOfLoops = -1
     }

@@ -1,5 +1,5 @@
 //
-//  HealthBarView.swift
+//  DistanceBarView.swift
 //  CoconutBasket
 //
 //  Created by Josh Rideout on 18/05/2020.
@@ -10,18 +10,18 @@ import UIKit
 import FoundationExtended
 import TweenKit
 
-class HealthBarView: UIView {
+class DistanceBarView: UIView {
     
     private let scheduler = ActionScheduler()
     
     @IBOutlet private var contentView: UIView!
-    @IBOutlet private var healthBarContainer: UIView!
-    @IBOutlet private var healthBar: UIView!
-    @IBOutlet private var healthBarFiller: UIImageView!
-    @IBOutlet private var healthLabel: UILabel!
+    @IBOutlet private var barContainer: UIView!
+    @IBOutlet private var barView: UIView!
+    @IBOutlet private var barFillerImageView: UIImageView!
+    @IBOutlet private var subtitleLabel: UILabel!
     
-    private let healthBarWidthRatio: CGFloat = 180.0/300.0
-    private let healthBarRatio: CGFloat = 30.0/180.0
+    private let barWidthRatio: CGFloat = 166.0/300.0
+    private let barRatio: CGFloat = 15.0/83.0
     
     private var health: Int = 100
     
@@ -37,11 +37,9 @@ class HealthBarView: UIView {
     
     private func commonInit() {
         
-        Env.gameState.add(observer: self, dispatchBehaviour: .onQueue(.main))
-        
         backgroundColor = .clear
         
-        let nibView = Bundle.main.viewFromNib(withType: UIView.self, nibName: "HealthBarView", owner: self)
+        let nibView = Bundle.main.viewFromNib(withType: UIView.self, nibName: "DistanceBarView", owner: self)
         
         addSubview(nibView)
         nibView.pinToSuperviewEdges()
@@ -50,19 +48,18 @@ class HealthBarView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        healthBar.frame.origin = CGPoint(x: 0, y: 0)
+        barView.frame.origin = CGPoint(x: 0, y: 0)
         updateHudUI()
     }
     
     private func updateHudUI(animated: Bool = false) {
         
-        let fullWidth = bounds.width * healthBarWidthRatio
+        let fullWidth = bounds.width * barWidthRatio
         
         if animated {
             
             let newHealthValue = Int(Env.gameState.playersHealthPercent * 100)
             let prevHealth = health
-            let tookDamage = newHealthValue < prevHealth
             health = newHealthValue
             
             let action = InterpolationAction(
@@ -70,39 +67,32 @@ class HealthBarView: UIView {
                 to: newHealthValue,
                 duration: 0.3, easing: .linear) { [unowned self] in
                     
-                    self.healthLabel.text = "\($0) / 100"
+                    self.subtitleLabel.text = "\($0) / 100"
             }
             
+            // Run it forever
             scheduler.run(action: action)
             
             UIView.animate(withDuration: 0.3) {
-                self.healthBar.frame.size = CGSize(
+                self.barView.frame.size = CGSize(
                     width: fullWidth * Env.gameState.playersHealthPercent,
-                    height: fullWidth * self.healthBarRatio
+                    height: fullWidth * self.barRatio
                 )
             }
             
-            if tookDamage {
-                UIView.animate(withDuration: 0.15, animations: {
-                    self.healthBarFiller.alpha = 0.4
-                }, completion: { (_) in
-                    UIView.animate(withDuration: 0.15) {
-                        self.healthBarFiller.alpha = 1
-                    }
-                })
-            }
+            UIView.animate(withDuration: 0.15, animations: {
+                self.barFillerImageView.alpha = 0.4
+            }, completion: { (_) in
+                UIView.animate(withDuration: 0.15) {
+                    self.barFillerImageView.alpha = 1
+                }
+            })
             
         } else {
-            healthBar.frame.size = CGSize(
+            barView.frame.size = CGSize(
                 width: fullWidth * Env.gameState.playersHealthPercent,
-                height: fullWidth * healthBarRatio
+                height: fullWidth * barRatio
             )
         }
-    }
-}
-
-extension HealthBarView: GameStateDispatcherObserver {
-    func playersHealthDidUpdate() {
-        updateHudUI(animated: true)
     }
 }

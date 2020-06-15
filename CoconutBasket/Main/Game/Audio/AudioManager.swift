@@ -25,6 +25,7 @@ class AudioManager {
         backgroundMusic.loopForever()
         backgroundMusic.volume = 0.3
         gameOverMusic.loopForever()
+        gameOverMusic.volume = 0.4
         coconutExplosion.volume = 0.2
         playerHurt.volume = 0.4
         bombExplosion.volume = 1.0
@@ -64,6 +65,7 @@ extension AudioManager: CollisionEventsDispatcherObserver {
 extension AudioManager: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
+        mainMusic?.stop()
         mainMusic = backgroundMusic
         mainMusic?.play()
     }
@@ -78,7 +80,7 @@ extension AudioManager: GameLogicEventsDispatcherObserver {
     
     func gameOver() {
         
-        mainMusic?.pause()
+        mainMusic?.stop()
         mainMusic = playerDied
         playerDied.play()
         playerDied.didFinishPlaying = { [unowned self] in

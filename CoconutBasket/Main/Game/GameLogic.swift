@@ -61,7 +61,6 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
     func gameSceneDidLoad() {
         
         Env.gameState.add(observer: self, dispatchBehaviour: .onQueue(.main))
-        startGame()
     }
     
     func startGame() {
@@ -105,7 +104,6 @@ extension GameLogic: GameStateDispatcherObserver {
 extension GameLogic: ApplicationEventsDispatcherObserver {
     
     func applicationWillResignActive() {
-        gameScene.view?.isPaused = true
         observerStore.forEach { $0.gamePaused() }
     }
     

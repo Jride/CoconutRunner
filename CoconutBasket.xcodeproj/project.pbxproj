@@ -44,6 +44,9 @@
 		228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */; };
 		228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD32474698100982AD3 /* Kenney Future.ttf */; };
 		229C1271245733F00006F464 /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C1270245733F00006F464 /* UIColor+Color.swift */; };
+		22B3F1F82493E80200E1F4E2 /* Int+Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */; };
+		22B3F1FF24965E2E00E1F4E2 /* DistanceBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */; };
+		22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */; };
 		22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02351248BD67F00B12A33 /* GameOverMusic.wav */; };
 		22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02353248BD6BA00B12A33 /* PlayerDied.wav */; };
 		22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D35D9D244CE7DE005E3E83 /* GameNode.swift */; };
@@ -113,6 +116,9 @@
 		228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future Narrow.ttf"; sourceTree = "<group>"; };
 		228AFFD32474698100982AD3 /* Kenney Future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future.ttf"; sourceTree = "<group>"; };
 		229C1270245733F00006F464 /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
+		22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Tweenable.swift"; sourceTree = "<group>"; };
+		22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceBarView.swift; sourceTree = "<group>"; };
+		22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistanceBarView.xib; sourceTree = "<group>"; };
 		22D02351248BD67F00B12A33 /* GameOverMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOverMusic.wav; sourceTree = "<group>"; };
 		22D02353248BD6BA00B12A33 /* PlayerDied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDied.wav; sourceTree = "<group>"; };
 		22D35D9D244CE7DE005E3E83 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
@@ -222,6 +228,8 @@
 		2242E09724730493003889EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */,
+				22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */,
 				2242E098247304D6003889EA /* HealthBarView.xib */,
 				2242E09A24730554003889EA /* HealthBarView.swift */,
 			);
@@ -231,6 +239,7 @@
 		2242E09E24731A22003889EA /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F1F62493E7F200E1F4E2 /* Int */,
 				2242E09F24731A2C003889EA /* Bundle */,
 			);
 			path = Foundation;
@@ -370,17 +379,33 @@
 		229D56D7244B604B0067465D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				2242E0962473046B003889EA /* HUD */,
-				229C126F245733DD0006F464 /* Extensions */,
 				224B129C2444F28B00A540E5 /* Game */,
+				22B3F201249767D100E1F4E2 /* Menu */,
+				2242E0962473046B003889EA /* HUD */,
 				2242E072246E789D003889EA /* Protocols */,
 				2242E073246E791B003889EA /* Utilities */,
+				229C126F245733DD0006F464 /* Extensions */,
 				22F2CF0E243B0C1200858120 /* GameViewController.swift */,
 				22F2CF10243B0C1200858120 /* Main.storyboard */,
 				22F2CF15243B0C1400858120 /* LaunchScreen.storyboard */,
 				2242E07C246E7A4B003889EA /* Environment.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		22B3F1F62493E7F200E1F4E2 /* Int */ = {
+			isa = PBXGroup;
+			children = (
+				22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */,
+			);
+			path = Int;
+			sourceTree = "<group>";
+		};
+		22B3F201249767D100E1F4E2 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		22EF07A1245F13BC0085ABCC /* Collision */ = {
@@ -552,6 +577,7 @@
 				224B12A42445958C00A540E5 /* ImpactFloor.mp3 in Resources */,
 				225EC69A2482BE2900ED0DD2 /* MenuTheme.mp3 in Resources */,
 				2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */,
+				22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */,
 				225EC69B2482BE2900ED0DD2 /* WorldmapTheme.mp3 in Resources */,
 				22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
@@ -646,6 +672,7 @@
 				224B129B2444EF8600A540E5 /* Background.swift in Sources */,
 				225EC6B4248589FD00ED0DD2 /* Monkey.swift in Sources */,
 				2242E075246E793D003889EA /* ApplicationEventsDispatcher.swift in Sources */,
+				22B3F1FF24965E2E00E1F4E2 /* DistanceBarView.swift in Sources */,
 				22F2CF0F243B0C1200858120 /* GameViewController.swift in Sources */,
 				225EC6B824890EF400ED0DD2 /* GameLogic.swift in Sources */,
 				22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */,
@@ -665,6 +692,7 @@
 				225EC6C02489249100ED0DD2 /* ActionTimer.swift in Sources */,
 				2242E07D246E7A4B003889EA /* Environment.swift in Sources */,
 				2242E07B246E7A0D003889EA /* GameState.swift in Sources */,
+				22B3F1F82493E80200E1F4E2 /* Int+Tweenable.swift in Sources */,
 				2242E03F24647623003889EA /* Banana.swift in Sources */,
 				224B12992444CE3F00A540E5 /* Coconut.swift in Sources */,
 				2242E09B24730554003889EA /* HealthBarView.swift in Sources */,
