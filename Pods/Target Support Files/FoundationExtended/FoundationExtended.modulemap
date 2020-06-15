@@ -1,6 +1,0 @@
-module FoundationExtended {
-  umbrella header "FoundationExtended-umbrella.h"
-
-  export *
-  module * { export * }
-}

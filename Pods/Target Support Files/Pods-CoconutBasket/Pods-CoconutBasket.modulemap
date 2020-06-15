@@ -1,6 +1,0 @@
-module Pods_CoconutBasket {
-  umbrella header "Pods-CoconutBasket-umbrella.h"
-
-  export *
-  module * { export * }
-}

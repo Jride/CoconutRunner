@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C16DD261F69EECE3C6EAF7E /* libPods-CoconutBasket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0519750EDA499779D52524E7 /* libPods-CoconutBasket.a */; };
 		222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC312454CEC400F38F79 /* BackgroundManager.swift */; };
 		22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22301E08245E082E00FF0AD0 /* Bomb.swift */; };
 		2242E03F24647623003889EA /* Banana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E03E24647623003889EA /* Banana.swift */; };
@@ -47,6 +46,8 @@
 		22B3F1F82493E80200E1F4E2 /* Int+Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */; };
 		22B3F1FF24965E2E00E1F4E2 /* DistanceBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */; };
 		22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */; };
+		22B3F20624976FA500E1F4E2 /* FoundationExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */; };
+		22B3F20724976FA500E1F4E2 /* TweenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B3F20524976FA500E1F4E2 /* TweenKit.framework */; };
 		22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02351248BD67F00B12A33 /* GameOverMusic.wav */; };
 		22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02353248BD6BA00B12A33 /* PlayerDied.wav */; };
 		22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D35D9D244CE7DE005E3E83 /* GameNode.swift */; };
@@ -63,7 +64,6 @@
 		22F2CF22243B0C1400858120 /* CoconutBasketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF21243B0C1400858120 /* CoconutBasketTests.swift */; };
 		22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 22F2CF62243B9F4A00858120 /* CoconutExplosion.sks */; };
 		22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF66243BDDE500858120 /* PalmTree.swift */; };
-		AB50AFE1A08FC4CEA32E448A /* libPods-CoconutBasketTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA0943DB68CA009EB2CF20F /* libPods-CoconutBasketTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +77,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0519750EDA499779D52524E7 /* libPods-CoconutBasket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoconutBasket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BA0943DB68CA009EB2CF20F /* libPods-CoconutBasketTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoconutBasketTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		222EDC312454CEC400F38F79 /* BackgroundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		22301E08245E082E00FF0AD0 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		2242E03E24647623003889EA /* Banana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banana.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 		2242E0A024731A43003889EA /* Bundle+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+LoadFromNib.swift"; sourceTree = "<group>"; };
 		2242E0A424731BA4003889EA /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
 		224B1294243FB5B400A540E5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		224B129624425D4800A540E5 /* FoundationExtended.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FoundationExtended.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		224B12982444CE3F00A540E5 /* Coconut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coconut.swift; sourceTree = "<group>"; };
 		224B129A2444EF8600A540E5 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		224B129D2444F30C00A540E5 /* CoconutExplosionUp.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoconutExplosionUp.sks; sourceTree = "<group>"; };
@@ -119,6 +116,8 @@
 		22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Tweenable.swift"; sourceTree = "<group>"; };
 		22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceBarView.swift; sourceTree = "<group>"; };
 		22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistanceBarView.xib; sourceTree = "<group>"; };
+		22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationExtended.framework; path = Carthage/Build/iOS/FoundationExtended.framework; sourceTree = "<group>"; };
+		22B3F20524976FA500E1F4E2 /* TweenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TweenKit.framework; path = Carthage/Build/iOS/TweenKit.framework; sourceTree = "<group>"; };
 		22D02351248BD67F00B12A33 /* GameOverMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOverMusic.wav; sourceTree = "<group>"; };
 		22D02353248BD6BA00B12A33 /* PlayerDied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDied.wav; sourceTree = "<group>"; };
 		22D35D9D244CE7DE005E3E83 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
@@ -139,10 +138,6 @@
 		22F2CF23243B0C1400858120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F2CF62243B9F4A00858120 /* CoconutExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoconutExplosion.sks; sourceTree = "<group>"; };
 		22F2CF66243BDDE500858120 /* PalmTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmTree.swift; sourceTree = "<group>"; };
-		69F0ACA17DD2354C720FF625 /* Pods-CoconutBasketTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoconutBasketTests.release.xcconfig"; path = "Target Support Files/Pods-CoconutBasketTests/Pods-CoconutBasketTests.release.xcconfig"; sourceTree = "<group>"; };
-		BB321BBFEDF90C1BC0E85AAD /* Pods-CoconutBasket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoconutBasket.debug.xcconfig"; path = "Target Support Files/Pods-CoconutBasket/Pods-CoconutBasket.debug.xcconfig"; sourceTree = "<group>"; };
-		C254F9D0B50A9A655068A7C8 /* Pods-CoconutBasketTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoconutBasketTests.debug.xcconfig"; path = "Target Support Files/Pods-CoconutBasketTests/Pods-CoconutBasketTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C5DA8F72302E77D597D60165 /* Pods-CoconutBasket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoconutBasket.release.xcconfig"; path = "Target Support Files/Pods-CoconutBasket/Pods-CoconutBasket.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C16DD261F69EECE3C6EAF7E /* libPods-CoconutBasket.a in Frameworks */,
+				22B3F20624976FA500E1F4E2 /* FoundationExtended.framework in Frameworks */,
+				22B3F20724976FA500E1F4E2 /* TweenKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB50AFE1A08FC4CEA32E448A /* libPods-CoconutBasketTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +418,6 @@
 				22F2CF05243B0C1200858120 /* CoconutBasket */,
 				22F2CF20243B0C1400858120 /* CoconutBasketTests */,
 				22F2CF04243B0C1200858120 /* Products */,
-				EF51510B5A7E81044E88403D /* Pods */,
 				7C7CA8B34E45830304D81A4D /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -459,22 +453,10 @@
 		7C7CA8B34E45830304D81A4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				224B129624425D4800A540E5 /* FoundationExtended.framework */,
-				0519750EDA499779D52524E7 /* libPods-CoconutBasket.a */,
-				0BA0943DB68CA009EB2CF20F /* libPods-CoconutBasketTests.a */,
+				22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */,
+				22B3F20524976FA500E1F4E2 /* TweenKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EF51510B5A7E81044E88403D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BB321BBFEDF90C1BC0E85AAD /* Pods-CoconutBasket.debug.xcconfig */,
-				C5DA8F72302E77D597D60165 /* Pods-CoconutBasket.release.xcconfig */,
-				C254F9D0B50A9A655068A7C8 /* Pods-CoconutBasketTests.debug.xcconfig */,
-				69F0ACA17DD2354C720FF625 /* Pods-CoconutBasketTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,11 +466,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22F2CF26243B0C1400858120 /* Build configuration list for PBXNativeTarget "CoconutBasket" */;
 			buildPhases = (
-				1B48BFA5CEF569F5F247C374 /* [CP] Check Pods Manifest.lock */,
 				22F2CEFF243B0C1200858120 /* Sources */,
 				229D56D2244B5F3F0067465D /* Swiftlint */,
 				22F2CF00243B0C1200858120 /* Frameworks */,
 				22F2CF01243B0C1200858120 /* Resources */,
+				22B3F20824976FD000E1F4E2 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -595,28 +577,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B48BFA5CEF569F5F247C374 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CoconutBasket-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		229D56D2244B5F3F0067465D /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -634,6 +594,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#swift run swiftlint\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		22B3F20824976FD000E1F4E2 /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/FoundationExtended.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TweenKit.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FoundationExtended.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TweenKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		31E3F1070107B8AF58E9EDE7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -854,12 +836,15 @@
 		};
 		22F2CF27243B0C1400858120 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB321BBFEDF90C1BC0E85AAD /* Pods-CoconutBasket.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CoconutBasket/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -876,12 +861,15 @@
 		};
 		22F2CF28243B0C1400858120 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5DA8F72302E77D597D60165 /* Pods-CoconutBasket.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CoconutBasket/Supporting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -898,7 +886,6 @@
 		};
 		22F2CF2A243B0C1400858120 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C254F9D0B50A9A655068A7C8 /* Pods-CoconutBasketTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -921,7 +908,6 @@
 		};
 		22F2CF2B243B0C1400858120 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69F0ACA17DD2354C720FF625 /* Pods-CoconutBasketTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

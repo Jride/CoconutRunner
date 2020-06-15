@@ -1,6 +1,0 @@
-module TweenKit {
-  umbrella header "TweenKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
