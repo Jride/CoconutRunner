@@ -26,7 +26,7 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
     }
     
     // Menu's
-//    private let mainMenu = MainMenuView()
+    private let mainMenu = MainMenuView()
     private let pauseMenu = PauseMenuView()
     private var promptMenu = PromptView()
     
@@ -40,9 +40,13 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
         
         pauseMenu.delegate = self
         view.addSubview(pauseMenu)
+        
         promptMenu.alpha = 0
         view.addSubview(promptMenu)
-//        view.addSubview(mainMenu)
+        
+        mainMenu.alpha = 0
+        mainMenu.isHidden = true
+        view.addSubview(mainMenu)
     }
     
     required init?(coder: NSCoder) {
@@ -54,7 +58,14 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
         
         observerStore.forEach { $0.menuPresented() }
         
-        setupAndShowPauseMenu()
+        currentMenu = pauseMenu
+        let menuWidth = pauseMenu.width(forHeight: menuHeight)
+        pauseMenu.frame = CGRect(x: view.frame.midX - (menuWidth/2),
+                                 y: -screenHeight,
+                                 width: menuWidth,
+                                 height: menuHeight)
+        
+        animateMenuSwipe(pauseMenu, display: true, completion: nil)
     }
     
     private func closeMenu() {
@@ -114,8 +125,23 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
 
 extension MenuViewController {
     
-    private func setupMainMenu() {
-//        mainMenu.isHidden = true
+    private func presentMainMenu() {
+        
+        guard let currentMenu = currentMenu else { return }
+        
+        mainMenu.frame = view.frame
+        mainMenu.alpha = 0
+        mainMenu.isHidden = false
+        
+        animateMenuSwipe(currentMenu, display: false) { [weak self] in
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self?.mainMenu.alpha = 1
+            }, completion: { _ in
+                
+            })
+            
+        }
     }
     
 }
@@ -124,61 +150,78 @@ extension MenuViewController {
 
 extension MenuViewController: PauseMenuDelegate {
     
-    private func setupAndShowPauseMenu() {
-        currentMenu = pauseMenu
-        
-        let menuWidth = pauseMenu.width(forHeight: menuHeight)
-        pauseMenu.frame = CGRect(x: view.frame.midX - (menuWidth/2),
-                                 y: -screenHeight,
-                                 width: menuWidth,
-                                 height: menuHeight)
-        
-        // Animate pause in
-        let action = InterpolationAction(
-            from: pauseMenu.frame.origin.y,
-            to: view.frame.midY - (menuHeight/2),
-            duration: 1.0, easing: .exponentialOut
-        ) { [unowned self] in
-            self.pauseMenu.frame.origin.y = $0
-        }
-        
-        scheduler.run(action: action)
-    }
-    
     func resumePressed() {
         
         // Animate pause menu out
-        let action = InterpolationAction(
-            from: pauseMenu.frame.origin.y,
-            to: -screenHeight,
-            duration: 0.5, easing: .backIn
-        ) { [unowned self] in
-            self.pauseMenu.frame.origin.y = $0
+        animateMenuSwipe(pauseMenu, display: false) { [weak self] in
+            self?.closeMenu()
         }
-        
-        let completion = RunBlockAction(handler: {
-            [unowned self] in
-            self.closeMenu()
-        })
-        
-        let sequence = ActionSequence(actions: action, completion)
-        
-        scheduler.run(action: sequence)
         
     }
     
     func menuPressed() {
         
         let message = "Are you sure?\n\nYour current progress will be lost."
-        showPromptWithConfirmResponse(message: message) {
-            
+        showPromptWithConfirmResponse(message: message) { [unowned self] in
+            self.presentMainMenu()
         }
         
     }
     
     func restartPressed() {
         
+        let message = "Are you sure?\n\nYour current progress will be lost."
+        showPromptWithConfirmResponse(message: message) { [unowned self] in
+            
+        }
+        
     }
+}
+
+// MARK: - Animations
+
+extension MenuViewController {
+    
+    private func animateMenuSwipe(_ menu: UIView, display: Bool, completion: (() -> Void)?) {
+        
+        if display {
+            
+            let action = InterpolationAction(
+                from: menu.frame.origin.y,
+                to: view.frame.midY - (menu.frame.size.height/2),
+                duration: 1.0, easing: .exponentialOut
+            ) {
+                menu.frame.origin.y = $0
+            }
+            
+            let sequence = ActionSequence(actions: action,
+                                          RunBlockAction(handler: {
+                completion?()
+            }))
+            
+            scheduler.run(action: sequence)
+            
+        } else {
+            
+            let action = InterpolationAction(
+                from: menu.frame.origin.y,
+                to: -screenHeight,
+                duration: 0.5, easing: .backIn
+            ) {
+                menu.frame.origin.y = $0
+            }
+            
+            let sequence = ActionSequence(actions: action,
+                                          RunBlockAction(handler: {
+                completion?()
+            }))
+            
+            scheduler.run(action: sequence)
+            
+        }
+        
+    }
+    
 }
 
 // MARK: - Menu Dispather

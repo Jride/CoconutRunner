@@ -11,7 +11,7 @@ import UIKit
 class MainMenuView: UIView {
     
     @IBOutlet private var buttonWidthConstraints: [NSLayoutConstraint]!
-    @IBOutlet private var playButton: UIButton!
+    @IBOutlet private var cons_playButtonWidth: NSLayoutConstraint!
 
     convenience init() {
         self.init(frame: .zero)
@@ -32,15 +32,13 @@ class MainMenuView: UIView {
         backgroundColor = .clear
         
         let nibView = Bundle.main.viewFromNib(withType: UIView.self, nibName: "MainMenuView", owner: self)
-        
+        nibView.backgroundColor = .clear
         addSubview(nibView)
         nibView.pinToSuperviewEdges()
         
         let buttonWidth = Layout.Button.regular()
-        buttonWidthConstraints.forEach {
-            $0.constant = buttonWidth
-        }
-        playButton.pinWidth(Layout.Button.large())
+        buttonWidthConstraints.forEach { $0.constant = buttonWidth }
+        cons_playButtonWidth.constant = Layout.Button.large()
     }
 
 }

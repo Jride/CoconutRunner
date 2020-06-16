@@ -9,13 +9,12 @@
 import AVKit
 import UIKit
 import SpriteKit
-import GameplayKit
 
 struct Layout {
     
     struct Button {
         static func regular() -> CGFloat { return (Env.gameState.scaleFactor * 70).constrained(min: 40, max: 80) }
-        static func large() -> CGFloat { return (Env.gameState.scaleFactor * 100).constrained(min: 70, max: 110) }
+        static func large() -> CGFloat { return (Env.gameState.scaleFactor * 150).constrained(min: 110, max: 170) }
     }
     
 }
