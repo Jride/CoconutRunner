@@ -48,6 +48,15 @@
 		22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */; };
 		22B3F20624976FA500E1F4E2 /* FoundationExtended.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */; };
 		22B3F20724976FA500E1F4E2 /* TweenKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B3F20524976FA500E1F4E2 /* TweenKit.framework */; };
+		22B3F20B249772BA00E1F4E2 /* UIViewController+ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F20A249772BA00E1F4E2 /* UIViewController+ChildViewController.swift */; };
+		22B3F20E249772E900E1F4E2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F20C249772E900E1F4E2 /* MenuViewController.swift */; };
+		22B3F2122497ACD800E1F4E2 /* Device+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F2112497ACD800E1F4E2 /* Device+Extensions.swift */; };
+		22B3F2142497AD0500E1F4E2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B3F2132497AD0500E1F4E2 /* AVFoundation.framework */; };
+		22B3F2162497C22A00E1F4E2 /* MainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F2152497C22A00E1F4E2 /* MainMenuView.xib */; };
+		22B3F2182497C26A00E1F4E2 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F2172497C26A00E1F4E2 /* MainMenuView.swift */; };
+		22B3F21B2497CAEC00E1F4E2 /* PauseMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F21A2497CAEC00E1F4E2 /* PauseMenuView.xib */; };
+		22B3F21D2497CAF900E1F4E2 /* PauseMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F21C2497CAF900E1F4E2 /* PauseMenuView.swift */; };
+		22B3F21F2497CE6A00E1F4E2 /* soupofjustice.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22B3F21E2497CE5300E1F4E2 /* soupofjustice.ttf */; };
 		22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02351248BD67F00B12A33 /* GameOverMusic.wav */; };
 		22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02353248BD6BA00B12A33 /* PlayerDied.wav */; };
 		22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D35D9D244CE7DE005E3E83 /* GameNode.swift */; };
@@ -118,6 +127,15 @@
 		22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistanceBarView.xib; sourceTree = "<group>"; };
 		22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationExtended.framework; path = Carthage/Build/iOS/FoundationExtended.framework; sourceTree = "<group>"; };
 		22B3F20524976FA500E1F4E2 /* TweenKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TweenKit.framework; path = Carthage/Build/iOS/TweenKit.framework; sourceTree = "<group>"; };
+		22B3F20A249772BA00E1F4E2 /* UIViewController+ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ChildViewController.swift"; sourceTree = "<group>"; };
+		22B3F20C249772E900E1F4E2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		22B3F2112497ACD800E1F4E2 /* Device+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Extensions.swift"; sourceTree = "<group>"; };
+		22B3F2132497AD0500E1F4E2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		22B3F2152497C22A00E1F4E2 /* MainMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenuView.xib; sourceTree = "<group>"; };
+		22B3F2172497C26A00E1F4E2 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		22B3F21A2497CAEC00E1F4E2 /* PauseMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PauseMenuView.xib; sourceTree = "<group>"; };
+		22B3F21C2497CAF900E1F4E2 /* PauseMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenuView.swift; sourceTree = "<group>"; };
+		22B3F21E2497CE5300E1F4E2 /* soupofjustice.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = soupofjustice.ttf; sourceTree = "<group>"; };
 		22D02351248BD67F00B12A33 /* GameOverMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOverMusic.wav; sourceTree = "<group>"; };
 		22D02353248BD6BA00B12A33 /* PlayerDied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDied.wav; sourceTree = "<group>"; };
 		22D35D9D244CE7DE005E3E83 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
@@ -147,6 +165,7 @@
 			files = (
 				22B3F20624976FA500E1F4E2 /* FoundationExtended.framework in Frameworks */,
 				22B3F20724976FA500E1F4E2 /* TweenKit.framework in Frameworks */,
+				22B3F2142497AD0500E1F4E2 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,8 +244,8 @@
 			children = (
 				22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */,
 				22B3F1FE24965E2D00E1F4E2 /* DistanceBarView.xib */,
-				2242E098247304D6003889EA /* HealthBarView.xib */,
 				2242E09A24730554003889EA /* HealthBarView.swift */,
+				2242E098247304D6003889EA /* HealthBarView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,6 +270,7 @@
 		2242E0A224731B85003889EA /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F2092497729B00E1F4E2 /* UIViewController */,
 				2242E0A324731B8E003889EA /* UIView */,
 			);
 			path = UIKit;
@@ -293,6 +313,7 @@
 		225EC6A62485374200ED0DD2 /* AVKit */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F2102497ACC800E1F4E2 /* Device */,
 			);
 			path = AVKit;
 			sourceTree = "<group>";
@@ -310,6 +331,7 @@
 		228AFFD12474696D00982AD3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F21E2497CE5300E1F4E2 /* soupofjustice.ttf */,
 				228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */,
 				228AFFD32474698100982AD3 /* Kenney Future.ttf */,
 			);
@@ -399,8 +421,37 @@
 		22B3F201249767D100E1F4E2 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F2192497CAC600E1F4E2 /* MenuViews */,
+				22B3F20C249772E900E1F4E2 /* MenuViewController.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		22B3F2092497729B00E1F4E2 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				22B3F20A249772BA00E1F4E2 /* UIViewController+ChildViewController.swift */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		22B3F2102497ACC800E1F4E2 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				22B3F2112497ACD800E1F4E2 /* Device+Extensions.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		22B3F2192497CAC600E1F4E2 /* MenuViews */ = {
+			isa = PBXGroup;
+			children = (
+				22B3F2172497C26A00E1F4E2 /* MainMenuView.swift */,
+				22B3F2152497C22A00E1F4E2 /* MainMenuView.xib */,
+				22B3F21C2497CAF900E1F4E2 /* PauseMenuView.swift */,
+				22B3F21A2497CAEC00E1F4E2 /* PauseMenuView.xib */,
+			);
+			path = MenuViews;
 			sourceTree = "<group>";
 		};
 		22EF07A1245F13BC0085ABCC /* Collision */ = {
@@ -453,6 +504,7 @@
 		7C7CA8B34E45830304D81A4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22B3F2132497AD0500E1F4E2 /* AVFoundation.framework */,
 				22B3F20424976FA500E1F4E2 /* FoundationExtended.framework */,
 				22B3F20524976FA500E1F4E2 /* TweenKit.framework */,
 			);
@@ -543,12 +595,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B3F21B2497CAEC00E1F4E2 /* PauseMenuView.xib in Resources */,
 				2242E099247304D6003889EA /* HealthBarView.xib in Resources */,
 				22F2CF12243B0C1200858120 /* Main.storyboard in Resources */,
 				228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */,
 				22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */,
 				228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */,
 				22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */,
+				22B3F2162497C22A00E1F4E2 /* MainMenuView.xib in Resources */,
 				22F2CF14243B0C1400858120 /* Assets.xcassets in Resources */,
 				224B129E2444F30C00A540E5 /* CoconutExplosionUp.sks in Resources */,
 				225EC6A02482CB8400ED0DD2 /* PlayerHurt.mp3 in Resources */,
@@ -560,6 +614,7 @@
 				225EC69A2482BE2900ED0DD2 /* MenuTheme.mp3 in Resources */,
 				2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */,
 				22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */,
+				22B3F21F2497CE6A00E1F4E2 /* soupofjustice.ttf in Resources */,
 				225EC69B2482BE2900ED0DD2 /* WorldmapTheme.mp3 in Resources */,
 				22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
@@ -647,7 +702,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F2CF0D243B0C1200858120 /* GameScene.swift in Sources */,
+				22B3F2182497C26A00E1F4E2 /* MainMenuView.swift in Sources */,
 				225EC6B024854FCE00ED0DD2 /* Music.swift in Sources */,
+				22B3F20B249772BA00E1F4E2 /* UIViewController+ChildViewController.swift in Sources */,
 				22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */,
 				229C1271245733F00006F464 /* UIColor+Color.swift in Sources */,
 				2242E0A124731A43003889EA /* Bundle+LoadFromNib.swift in Sources */,
@@ -662,11 +719,13 @@
 				22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */,
 				22F2CF07243B0C1200858120 /* AppDelegate.swift in Sources */,
 				225EC6B62486E03000ED0DD2 /* GameObjectsLayers.swift in Sources */,
+				22B3F2122497ACD800E1F4E2 /* Device+Extensions.swift in Sources */,
 				224B1295243FB5B400A540E5 /* Player.swift in Sources */,
 				2242E0A524731BA4003889EA /* UIView+Autolayout.swift in Sources */,
 				22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */,
 				225EC6BE248913EE00ED0DD2 /* Scheduler.swift in Sources */,
 				2242E079246E799C003889EA /* Observable.swift in Sources */,
+				22B3F21D2497CAF900E1F4E2 /* PauseMenuView.swift in Sources */,
 				225EC6B224854FDD00ED0DD2 /* SoundEffect.swift in Sources */,
 				222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */,
 				22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */,
@@ -676,6 +735,7 @@
 				2242E07B246E7A0D003889EA /* GameState.swift in Sources */,
 				22B3F1F82493E80200E1F4E2 /* Int+Tweenable.swift in Sources */,
 				2242E03F24647623003889EA /* Banana.swift in Sources */,
+				22B3F20E249772E900E1F4E2 /* MenuViewController.swift in Sources */,
 				224B12992444CE3F00A540E5 /* Coconut.swift in Sources */,
 				2242E09B24730554003889EA /* HealthBarView.swift in Sources */,
 				2242E081246E7B8E003889EA /* CollisionEventsDispatcher.swift in Sources */,

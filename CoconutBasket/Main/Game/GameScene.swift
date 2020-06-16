@@ -13,11 +13,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player: Player!
     var floorMargin: CGFloat = 50
+    private(set) var gameStarted = false
     
     private var lastUpdateTime: TimeInterval = 0
     private var lastTimePaused: TimeInterval = 0
     private var wasPaused = false
-    private var gameStarted = false
     
     private var isPlayerMoving = false
     private var accumulatedDeltaTime: TimeInterval = 0
@@ -58,10 +58,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
         addChild(player)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-            Env.gameLogic.startGame()
-        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -105,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let touchLocation = touches.first!.location(in: self)
         
-        if Env.gameState.isPlayerAlive {
+        if gameStarted && Env.gameState.isPlayerAlive {
             
             guard isPlayerMoving == false else { return }
             

@@ -22,6 +22,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>soupofjustice.ttf</string>
 		<string>Kenney Future Narrow.ttf</string>
 		<string>Kenney Future.ttf</string>
 	</array>

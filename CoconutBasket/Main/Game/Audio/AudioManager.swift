@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class AudioManager {
     
@@ -54,6 +55,7 @@ extension AudioManager: CollisionEventsDispatcherObserver {
     func playerWasHitByEnemy(_ enemy: Enemy) {
         playerHurt.play()
         playCollisionSoundEffect(forEnemy: enemy)
+        UIDevice.vibrate()
     }
     
     func enemyCollidedWithFloor(_ enemy: Enemy) {

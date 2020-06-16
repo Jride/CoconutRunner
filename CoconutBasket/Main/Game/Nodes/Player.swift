@@ -143,6 +143,39 @@ class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
         setPlayerAction(.hit)
     }
     
+    private func setup() {
+        
+        Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
+        
+        // Setup running action
+        var runningTextures = [SKTexture]()
+        for i in 0...2 {
+            runningTextures.append(.init(imageNamed: "\(Self.prefix)run\(i)"))
+        }
+        runningAction = .animate(with: runningTextures, timePerFrame: 0.1)
+        
+        name = "player"
+        zPosition = ZPosition.player
+        
+        let centerY = Env.gameState.scaleFactor * 18
+        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width - (23 * Env.gameState.scaleFactor),
+                                                        height: size.height - (33 * Env.gameState.scaleFactor)),
+                                    center: CGPoint(x: 0, y: -centerY))
+        
+        physicsBody?.categoryBitMask = CollisionType.player.rawValue
+        
+        physicsBody?.collisionBitMask =
+            CollisionType.coconut.rawValue |
+            CollisionType.bomb.rawValue
+        
+        physicsBody?.contactTestBitMask =
+            CollisionType.coconut.rawValue |
+            CollisionType.bomb.rawValue |
+            CollisionType.explosionRadius.rawValue
+        
+        physicsBody?.isDynamic = false
+    }
+    
     func update(deltaTime: TimeInterval) {
         
         accumulatedDeltaTime += deltaTime
@@ -198,39 +231,6 @@ class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
                 }
             }
         }
-    }
-    
-    func setup() {
-        
-        Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
-        
-        // Setup running action
-        var runningTextures = [SKTexture]()
-        for i in 0...2 {
-            runningTextures.append(.init(imageNamed: "\(Self.prefix)run\(i)"))
-        }
-        runningAction = .animate(with: runningTextures, timePerFrame: 0.1)
-        
-        name = "player"
-        zPosition = ZPosition.player
-        
-        let centerY = Env.gameState.scaleFactor * 18
-        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width - (23 * Env.gameState.scaleFactor),
-                                                        height: size.height - (33 * Env.gameState.scaleFactor)),
-                                    center: CGPoint(x: 0, y: -centerY))
-        
-        physicsBody?.categoryBitMask = CollisionType.player.rawValue
-        
-        physicsBody?.collisionBitMask =
-            CollisionType.coconut.rawValue |
-            CollisionType.bomb.rawValue
-        
-        physicsBody?.contactTestBitMask =
-            CollisionType.coconut.rawValue |
-            CollisionType.bomb.rawValue |
-            CollisionType.explosionRadius.rawValue
-        
-        physicsBody?.isDynamic = false
     }
     
     func startAction(_ action: Action) {

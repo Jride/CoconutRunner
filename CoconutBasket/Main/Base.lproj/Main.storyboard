@@ -31,11 +31,24 @@
                                     <constraint firstAttribute="width" secondItem="D46-my-0a6" secondAttribute="height" multiplier="50:19" id="EqD-D0-TWR"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNm-ht-Y0w">
+                                <rect key="frame" x="20" y="20" width="40" height="40.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NNm-ht-Y0w" secondAttribute="height" multiplier="107:108" id="cM6-up-1r6"/>
+                                    <constraint firstAttribute="width" constant="40" id="u97-r6-0az"/>
+                                </constraints>
+                                <state key="normal" image="pauseButton"/>
+                                <connections>
+                                    <action selector="pauseButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="znZ-EE-mqN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fJ4-in-ibM" firstAttribute="leading" secondItem="D46-my-0a6" secondAttribute="trailing" constant="18" id="0rF-2V-Jri"/>
                             <constraint firstAttribute="trailing" secondItem="fJ4-in-ibM" secondAttribute="trailing" constant="20" id="6Cc-gn-Grh"/>
+                            <constraint firstItem="NNm-ht-Y0w" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="It5-uU-otk"/>
+                            <constraint firstItem="NNm-ht-Y0w" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="20" id="V6T-zz-AI7"/>
                             <constraint firstItem="D46-my-0a6" firstAttribute="top" secondItem="fJ4-in-ibM" secondAttribute="top" id="YPe-rj-VG4"/>
                             <constraint firstItem="D46-my-0a6" firstAttribute="width" secondItem="fJ4-in-ibM" secondAttribute="width" id="qv2-k2-qPL"/>
                             <constraint firstItem="fJ4-in-ibM" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="20" id="yPo-5T-t7Q"/>
@@ -44,7 +57,9 @@
                     </view>
                     <connections>
                         <outlet property="cons_healthBarWidth" destination="0qH-pJ-nlM" id="UZP-Qo-NlK"/>
+                        <outlet property="cons_pauseButtonWidth" destination="u97-r6-0az" id="JgU-xC-Urb"/>
                         <outlet property="healthBarView" destination="fJ4-in-ibM" id="5P0-tk-wS7"/>
+                        <outlet property="pauseButton" destination="NNm-ht-Y0w" id="qsM-ZG-MmJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -52,4 +67,7 @@
             <point key="canvasLocation" x="138.8671875" y="138.28125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pauseButton" width="107" height="107.5"/>
+    </resources>
 </document>

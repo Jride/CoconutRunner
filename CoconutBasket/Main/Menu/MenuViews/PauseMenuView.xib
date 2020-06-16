@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="soupofjustice.ttf">
+            <string>SoupofJustice</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PauseMenuView" customModule="CoconutBasket" customModuleProvider="target">
+            <connections>
+                <outlet property="messageLabel" destination="7EV-4q-FbD" id="O8W-e5-9w5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="572" height="572"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pauseBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ql4-QA-6fG">
+                    <rect key="frame" x="40" y="91.5" width="492" height="457.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ql4-QA-6fG" secondAttribute="height" multiplier="948:881" id="WWW-UP-NEt"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pauseTable" translatesAutoresizingMaskIntoConstraints="NO" id="etD-w6-CGT">
+                    <rect key="frame" x="72" y="128" width="428" height="288"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="etD-w6-CGT" secondAttribute="height" multiplier="412:277" id="Ao2-75-sfH"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pauseHeader" translatesAutoresizingMaskIntoConstraints="NO" id="kkI-pF-zx8">
+                    <rect key="frame" x="-9.5" y="15.5" width="591" height="212"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="kkI-pF-zx8" secondAttribute="height" multiplier="1103:396" id="JZe-sJ-5OF"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drink a cup of tea " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="7EV-4q-FbD">
+                    <rect key="frame" x="114.5" y="213.5" width="343" height="144"/>
+                    <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="111"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CoS-Gn-3KG">
+                    <rect key="frame" x="72" y="425.5" width="428" height="77.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-oq-750" userLabel="Resume">
+                            <rect key="frame" x="0.0" y="0.0" width="137.5" height="77.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok" translatesAutoresizingMaskIntoConstraints="NO" id="JO2-PW-Sp6">
+                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="JO2-PW-Sp6" secondAttribute="height" multiplier="72:71" id="qJK-CS-D9c"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxM-IJ-ZmT" userLabel="resume">
+                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <connections>
+                                        <action selector="resumeButtonPressed:" destination="-1" eventType="touchUpInside" id="EaT-AL-okZ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerY" secondItem="JO2-PW-Sp6" secondAttribute="centerY" id="9bx-LT-LTJ"/>
+                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="centerY" secondItem="pVu-oq-750" secondAttribute="centerY" id="S2e-Ay-lae"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerX" secondItem="JO2-PW-Sp6" secondAttribute="centerX" id="TIh-Pe-3p3"/>
+                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="centerX" secondItem="pVu-oq-750" secondAttribute="centerX" id="Tbz-Tf-Jp5"/>
+                                <constraint firstAttribute="bottom" secondItem="JO2-PW-Sp6" secondAttribute="bottom" id="VSB-yi-ig4"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="width" secondItem="JO2-PW-Sp6" secondAttribute="width" id="ZAd-Fd-a27"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="height" secondItem="JO2-PW-Sp6" secondAttribute="height" id="djS-i7-pAu"/>
+                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="top" secondItem="pVu-oq-750" secondAttribute="top" id="vML-Hv-9r6"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7j-ua-wMu" userLabel="Menu">
+                            <rect key="frame" x="145.5" y="0.0" width="137" height="77.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuButton" translatesAutoresizingMaskIntoConstraints="NO" id="abe-Mq-JqU">
+                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="abe-Mq-JqU" secondAttribute="height" multiplier="72:71" id="hKA-gz-UDU"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX5-bg-YcW" userLabel="menu">
+                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <connections>
+                                        <action selector="menuButtonPressed:" destination="-1" eventType="touchUpInside" id="7PF-oB-QFH"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="width" secondItem="abe-Mq-JqU" secondAttribute="width" id="5DM-wa-o7F"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerX" secondItem="abe-Mq-JqU" secondAttribute="centerX" id="6vW-4v-xaC"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="height" secondItem="abe-Mq-JqU" secondAttribute="height" id="OFA-Vf-sU9"/>
+                                <constraint firstItem="abe-Mq-JqU" firstAttribute="top" secondItem="R7j-ua-wMu" secondAttribute="top" id="SbT-1Z-oYO"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerY" secondItem="abe-Mq-JqU" secondAttribute="centerY" id="YdZ-Hh-be9"/>
+                                <constraint firstAttribute="bottom" secondItem="abe-Mq-JqU" secondAttribute="bottom" id="apt-lE-78K"/>
+                                <constraint firstItem="abe-Mq-JqU" firstAttribute="centerX" secondItem="R7j-ua-wMu" secondAttribute="centerX" id="cgL-KF-ZsK"/>
+                                <constraint firstItem="abe-Mq-JqU" firstAttribute="centerY" secondItem="R7j-ua-wMu" secondAttribute="centerY" id="i8z-4X-QP4"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slN-jX-aLn" userLabel="Restart">
+                            <rect key="frame" x="290.5" y="0.0" width="137.5" height="77.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restart" translatesAutoresizingMaskIntoConstraints="NO" id="QSC-87-H9J">
+                                    <rect key="frame" x="29.5" y="0.0" width="79" height="77.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="QSC-87-H9J" secondAttribute="height" multiplier="72:71" id="lAX-Gi-ewk"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtP-Et-bt4" userLabel="restart">
+                                    <rect key="frame" x="29.5" y="0.0" width="79" height="77.5"/>
+                                    <connections>
+                                        <action selector="restartButtonPressed:" destination="-1" eventType="touchUpInside" id="hmI-ll-kiB"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="QSC-87-H9J" secondAttribute="bottom" id="Fr9-nb-f5a"/>
+                                <constraint firstItem="QSC-87-H9J" firstAttribute="centerY" secondItem="slN-jX-aLn" secondAttribute="centerY" id="JhQ-DI-riN"/>
+                                <constraint firstItem="QSC-87-H9J" firstAttribute="top" secondItem="slN-jX-aLn" secondAttribute="top" id="Mb4-bJ-0oT"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerY" secondItem="QSC-87-H9J" secondAttribute="centerY" id="NzX-u6-rSF"/>
+                                <constraint firstItem="QSC-87-H9J" firstAttribute="centerX" secondItem="slN-jX-aLn" secondAttribute="centerX" id="UFU-Db-byR"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="width" secondItem="QSC-87-H9J" secondAttribute="width" id="aRP-nW-yTC"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="height" secondItem="QSC-87-H9J" secondAttribute="height" id="bNX-xk-7LL"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerX" secondItem="QSC-87-H9J" secondAttribute="centerX" id="hgh-iI-NTK"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="0.64474827239999999" green="0.93984270410000004" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="7EV-4q-FbD" firstAttribute="width" secondItem="etD-w6-CGT" secondAttribute="width" multiplier="0.8" id="5NS-Ke-HSa"/>
+                <constraint firstItem="ql4-QA-6fG" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="8Um-uz-29f"/>
+                <constraint firstItem="7EV-4q-FbD" firstAttribute="height" secondItem="etD-w6-CGT" secondAttribute="height" multiplier="0.5" id="Dzd-Ub-qQl"/>
+                <constraint firstItem="ql4-QA-6fG" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.8" id="Gb8-lX-esy"/>
+                <constraint firstItem="etD-w6-CGT" firstAttribute="centerX" secondItem="ql4-QA-6fG" secondAttribute="centerX" id="J4i-T0-yso"/>
+                <constraint firstItem="kkI-pF-zx8" firstAttribute="centerX" secondItem="ql4-QA-6fG" secondAttribute="centerX" id="PeJ-Zf-raK"/>
+                <constraint firstItem="7EV-4q-FbD" firstAttribute="centerY" secondItem="etD-w6-CGT" secondAttribute="centerY" multiplier="1.05" id="TOI-JE-uvL"/>
+                <constraint firstItem="etD-w6-CGT" firstAttribute="centerY" secondItem="ql4-QA-6fG" secondAttribute="centerY" multiplier="0.85" id="V4h-09-XB6"/>
+                <constraint firstItem="CoS-Gn-3KG" firstAttribute="centerX" secondItem="ql4-QA-6fG" secondAttribute="centerX" id="VLq-Vb-uaM"/>
+                <constraint firstItem="CoS-Gn-3KG" firstAttribute="width" secondItem="etD-w6-CGT" secondAttribute="width" id="fpr-Je-P7x"/>
+                <constraint firstItem="7EV-4q-FbD" firstAttribute="centerX" secondItem="etD-w6-CGT" secondAttribute="centerX" id="iqx-jJ-VQW"/>
+                <constraint firstItem="kkI-pF-zx8" firstAttribute="width" secondItem="ql4-QA-6fG" secondAttribute="width" multiplier="1.2" id="pph-m6-C5J"/>
+                <constraint firstItem="CoS-Gn-3KG" firstAttribute="height" secondItem="ql4-QA-6fG" secondAttribute="height" multiplier="0.17" id="ptd-Q1-yxG"/>
+                <constraint firstItem="CoS-Gn-3KG" firstAttribute="centerY" secondItem="ql4-QA-6fG" secondAttribute="centerY" multiplier="1.45" id="rJ7-an-4mO"/>
+                <constraint firstItem="kkI-pF-zx8" firstAttribute="centerY" secondItem="ql4-QA-6fG" secondAttribute="centerY" multiplier="0.38" id="rLI-ci-6JR"/>
+                <constraint firstItem="etD-w6-CGT" firstAttribute="width" secondItem="ql4-QA-6fG" secondAttribute="width" multiplier="0.87" id="t4e-gs-v31"/>
+                <constraint firstItem="ql4-QA-6fG" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" multiplier="1.1" id="zce-GI-wEO"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-214.49275362318843" y="126.5625"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="menuButton" width="107" height="107.5"/>
+        <image name="ok" width="107" height="107.5"/>
+        <image name="pauseBackground" width="474" height="440.5"/>
+        <image name="pauseHeader" width="501.5" height="198"/>
+        <image name="pauseTable" width="412" height="277"/>
+        <image name="restart" width="107" height="107.5"/>
+    </resources>
+</document>

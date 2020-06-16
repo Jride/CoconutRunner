@@ -31,6 +31,8 @@ protocol GameLogicEventsDispatcher {
 }
 
 struct LevelConfiguration {
+    var level: Int
+    var distanceToCompleteLevel: Int
     var playersFullHealth: Int
     var idleTimeThreshold: Time
     var knockCoconutSpawnRate: TimeInterval
@@ -44,10 +46,14 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
     private var idleAccumulatedTime: TimeInterval = 0
     private(set) var currentLevelConfig: LevelConfiguration
     private var isPlayerDead = false
+    private var isMenuPresented = false
+    private var gamePaused = false
        
     init() {
-        // Setting up level configuration
+        // Setting up the first level configuration
         currentLevelConfig = LevelConfiguration(
+            level: 1,
+            distanceToCompleteLevel: 50,
             playersFullHealth: 5,
             idleTimeThreshold: Time(seconds: 3),
             knockCoconutSpawnRate: 0.7
@@ -104,12 +110,39 @@ extension GameLogic: GameStateDispatcherObserver {
 extension GameLogic: ApplicationEventsDispatcherObserver {
     
     func applicationWillResignActive() {
+        guard gamePaused == false else { return }
+        
         observerStore.forEach { $0.gamePaused() }
+        gamePaused = true
     }
     
     func applicationDidBecomeActive(fromBackground: Bool) {
-        gameScene.view?.isPaused = false
+        guard isMenuPresented == false, gamePaused else { return }
+        
         observerStore.forEach { $0.gameResumed() }
+        gamePaused = false
+    }
+    
+}
+
+extension GameLogic: MenuDispatcherObserver {
+    
+    func menuPresented() {
+        isMenuPresented = true
+        
+        guard gamePaused == false else { return }
+        
+        observerStore.forEach { $0.gamePaused() }
+        gamePaused = true
+    }
+    
+    func menuDismissed() {
+        isMenuPresented = false
+        
+        guard gamePaused else { return }
+        
+        observerStore.forEach { $0.gameResumed() }
+        gamePaused = false
     }
     
 }

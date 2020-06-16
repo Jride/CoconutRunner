@@ -11,11 +11,22 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+struct Layout {
+    
+    struct Button {
+        static func regular() -> CGFloat { return (Env.gameState.scaleFactor * 70).constrained(min: 40, max: 80) }
+        static func large() -> CGFloat { return (Env.gameState.scaleFactor * 100).constrained(min: 70, max: 110) }
+    }
+    
+}
+
 class GameViewController: UIViewController {
     
     @IBOutlet private var healthBarView: HealthBarView!
+    @IBOutlet private var pauseButton: UIButton!
+    @IBOutlet private var cons_pauseButtonWidth: NSLayoutConstraint!
     @IBOutlet private var cons_healthBarWidth: NSLayoutConstraint!
-
+    
     override func viewDidLoad() {
         
         do {
@@ -28,9 +39,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view = self.view as? SKView {
-            // Load the SKScene from 'GameScene.sks'
             let scene = GameScene(size: view.frame.size)
-            // Present the scene
             view.presentScene(scene)
             
             view.ignoresSiblingOrder = true
@@ -39,7 +48,9 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
         }
         
-        cons_healthBarWidth.constant = (200 * Env.gameState.scaleFactor).constrained(min: 150)
+        Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
+        
+        setup()
     }
 
     override var shouldAutorotate: Bool {
@@ -57,4 +68,28 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    private func setup() {
+        cons_healthBarWidth.constant = (200 * Env.gameState.scaleFactor).constrained(min: 150)
+        cons_pauseButtonWidth.constant = Layout.Button.regular()
+    }
+}
+
+extension GameViewController {
+    
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+        
+        let menu = MenuViewController()
+        add(menu, frame: view.frame)
+        pauseButton.isHidden = true
+    }
+    
+}
+
+extension GameViewController: GameLogicEventsDispatcherObserver {
+    
+    func gameResumed() {
+        pauseButton.isHidden = false
+    }
+    
 }
