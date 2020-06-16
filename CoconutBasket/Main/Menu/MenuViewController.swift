@@ -17,11 +17,21 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
     @IBOutlet private var contentView: UIView!
     
     private let scheduler = ActionScheduler()
-    private let pauseMenu = PauseMenuView()
     private let screenHeight = UIScreen.main.bounds.height
     private var menuHeight: CGFloat {
-        screenHeight * 0.7
+        (screenHeight * 0.7).constrained(max: 500)
     }
+    private var promptHeight: CGFloat {
+        (screenHeight * 0.6).constrained(max: 350)
+    }
+    
+    // Menu's
+//    private let mainMenu = MainMenuView()
+    private let pauseMenu = PauseMenuView()
+    private var promptMenu = PromptView()
+    
+    private var prevMenu: UIView?
+    private var currentMenu: UIView?
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +40,9 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
         
         pauseMenu.delegate = self
         view.addSubview(pauseMenu)
+        promptMenu.alpha = 0
+        view.addSubview(promptMenu)
+//        view.addSubview(mainMenu)
     }
     
     required init?(coder: NSCoder) {
@@ -48,14 +61,72 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
         observerStore.forEach { $0.menuDismissed() }
         remove()
     }
+    
+    private func flipToMenuView(_ secondView: UIView, completion: (() -> Void)?) {
+        
+        guard let currentMenu = currentMenu else { return }
+        
+        prevMenu = currentMenu
+        
+        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight]
+        DispatchQueue.main.async {
+            UIView.transition(with: currentMenu, duration: 1.0, options: transitionOptions, animations: {
+                currentMenu.alpha = 0
+            })
+            
+            UIView.transition(with: secondView, duration: 1.0, options: transitionOptions, animations: {
+                secondView.alpha = 1
+            }, completion: { _ in
+                self.currentMenu = secondView
+                completion?()
+            })
+        }
+    }
+    
+    private func showPromptWithConfirmResponse(message: String, confirm: @escaping () -> Void) {
+        
+        promptMenu.configure(withMessage: message)
+        
+        promptMenu.result = { [weak self] response in
+            guard let self = self, let prevMenu = self.prevMenu else { return }
+            
+            if response == false {
+                // Flip back to the previous menu
+                self.flipToMenuView(prevMenu, completion: nil)
+            } else {
+                confirm()
+            }
+        }
+        
+        let promptWidth = promptMenu.width(forHeight: promptHeight)
+        promptMenu.frame = CGRect(x: view.frame.midX - (promptWidth/2),
+                                   y: view.frame.midY - (promptHeight/2),
+                                   width: promptWidth,
+                                   height: promptHeight)
+        
+        // Show the prompt
+        flipToMenuView(promptMenu, completion: nil)
+    }
 
 }
 
-// MARK: - Pause Menu Delegate
+// MARK: - Main Menu
+
+extension MenuViewController {
+    
+    private func setupMainMenu() {
+//        mainMenu.isHidden = true
+    }
+    
+}
+
+// MARK: - Pause Menu
 
 extension MenuViewController: PauseMenuDelegate {
     
     private func setupAndShowPauseMenu() {
+        currentMenu = pauseMenu
+        
         let menuWidth = pauseMenu.width(forHeight: menuHeight)
         pauseMenu.frame = CGRect(x: view.frame.midX - (menuWidth/2),
                                  y: -screenHeight,
@@ -97,6 +168,11 @@ extension MenuViewController: PauseMenuDelegate {
     }
     
     func menuPressed() {
+        
+        let message = "Are you sure?\n\nYour current progress will be lost."
+        showPromptWithConfirmResponse(message: message) {
+            
+        }
         
     }
     

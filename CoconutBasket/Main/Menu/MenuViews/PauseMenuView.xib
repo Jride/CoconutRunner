@@ -54,82 +54,64 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-oq-750" userLabel="Resume">
                             <rect key="frame" x="0.0" y="0.0" width="137.5" height="77.5"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok" translatesAutoresizingMaskIntoConstraints="NO" id="JO2-PW-Sp6">
-                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxM-IJ-ZmT" userLabel="resume">
+                                    <rect key="frame" x="28.5" y="0.0" width="80" height="77.5"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="JO2-PW-Sp6" secondAttribute="height" multiplier="72:71" id="qJK-CS-D9c"/>
+                                        <constraint firstAttribute="width" secondItem="kxM-IJ-ZmT" secondAttribute="height" multiplier="79:77" id="JTS-c3-glV"/>
                                     </constraints>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxM-IJ-ZmT" userLabel="resume">
-                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <state key="normal" image="ok"/>
                                     <connections>
                                         <action selector="resumeButtonPressed:" destination="-1" eventType="touchUpInside" id="EaT-AL-okZ"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerY" secondItem="JO2-PW-Sp6" secondAttribute="centerY" id="9bx-LT-LTJ"/>
-                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="centerY" secondItem="pVu-oq-750" secondAttribute="centerY" id="S2e-Ay-lae"/>
-                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerX" secondItem="JO2-PW-Sp6" secondAttribute="centerX" id="TIh-Pe-3p3"/>
-                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="centerX" secondItem="pVu-oq-750" secondAttribute="centerX" id="Tbz-Tf-Jp5"/>
-                                <constraint firstAttribute="bottom" secondItem="JO2-PW-Sp6" secondAttribute="bottom" id="VSB-yi-ig4"/>
-                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="width" secondItem="JO2-PW-Sp6" secondAttribute="width" id="ZAd-Fd-a27"/>
-                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="height" secondItem="JO2-PW-Sp6" secondAttribute="height" id="djS-i7-pAu"/>
-                                <constraint firstItem="JO2-PW-Sp6" firstAttribute="top" secondItem="pVu-oq-750" secondAttribute="top" id="vML-Hv-9r6"/>
+                                <constraint firstAttribute="bottom" secondItem="kxM-IJ-ZmT" secondAttribute="bottom" id="1VM-lb-M8K"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerX" secondItem="pVu-oq-750" secondAttribute="centerX" id="EZZ-hn-rWk"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="centerY" secondItem="pVu-oq-750" secondAttribute="centerY" id="LuF-ae-TOe"/>
+                                <constraint firstItem="kxM-IJ-ZmT" firstAttribute="top" secondItem="pVu-oq-750" secondAttribute="top" id="brn-O8-sb2"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7j-ua-wMu" userLabel="Menu">
                             <rect key="frame" x="145.5" y="0.0" width="137" height="77.5"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuButton" translatesAutoresizingMaskIntoConstraints="NO" id="abe-Mq-JqU">
-                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX5-bg-YcW" userLabel="menu">
+                                    <rect key="frame" x="28.5" y="0.0" width="80" height="77.5"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="abe-Mq-JqU" secondAttribute="height" multiplier="72:71" id="hKA-gz-UDU"/>
+                                        <constraint firstAttribute="width" secondItem="iX5-bg-YcW" secondAttribute="height" multiplier="79:77" id="iJE-Y6-fX4"/>
                                     </constraints>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iX5-bg-YcW" userLabel="menu">
-                                    <rect key="frame" x="29" y="0.0" width="79" height="77.5"/>
+                                    <state key="normal" image="menuButton"/>
                                     <connections>
                                         <action selector="menuButtonPressed:" destination="-1" eventType="touchUpInside" id="7PF-oB-QFH"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="iX5-bg-YcW" firstAttribute="width" secondItem="abe-Mq-JqU" secondAttribute="width" id="5DM-wa-o7F"/>
-                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerX" secondItem="abe-Mq-JqU" secondAttribute="centerX" id="6vW-4v-xaC"/>
-                                <constraint firstItem="iX5-bg-YcW" firstAttribute="height" secondItem="abe-Mq-JqU" secondAttribute="height" id="OFA-Vf-sU9"/>
-                                <constraint firstItem="abe-Mq-JqU" firstAttribute="top" secondItem="R7j-ua-wMu" secondAttribute="top" id="SbT-1Z-oYO"/>
-                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerY" secondItem="abe-Mq-JqU" secondAttribute="centerY" id="YdZ-Hh-be9"/>
-                                <constraint firstAttribute="bottom" secondItem="abe-Mq-JqU" secondAttribute="bottom" id="apt-lE-78K"/>
-                                <constraint firstItem="abe-Mq-JqU" firstAttribute="centerX" secondItem="R7j-ua-wMu" secondAttribute="centerX" id="cgL-KF-ZsK"/>
-                                <constraint firstItem="abe-Mq-JqU" firstAttribute="centerY" secondItem="R7j-ua-wMu" secondAttribute="centerY" id="i8z-4X-QP4"/>
+                                <constraint firstAttribute="bottom" secondItem="iX5-bg-YcW" secondAttribute="bottom" id="928-8d-5F2"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="top" secondItem="R7j-ua-wMu" secondAttribute="top" id="GMA-kj-wdR"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerX" secondItem="R7j-ua-wMu" secondAttribute="centerX" id="PeP-0x-c6Q"/>
+                                <constraint firstItem="iX5-bg-YcW" firstAttribute="centerY" secondItem="R7j-ua-wMu" secondAttribute="centerY" id="wl5-i8-Xkd"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slN-jX-aLn" userLabel="Restart">
                             <rect key="frame" x="290.5" y="0.0" width="137.5" height="77.5"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restart" translatesAutoresizingMaskIntoConstraints="NO" id="QSC-87-H9J">
-                                    <rect key="frame" x="29.5" y="0.0" width="79" height="77.5"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtP-Et-bt4" userLabel="restart">
+                                    <rect key="frame" x="29" y="0.0" width="80" height="77.5"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="QSC-87-H9J" secondAttribute="height" multiplier="72:71" id="lAX-Gi-ewk"/>
+                                        <constraint firstAttribute="width" secondItem="WtP-Et-bt4" secondAttribute="height" multiplier="79:77" id="g3c-zK-n2l"/>
                                     </constraints>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtP-Et-bt4" userLabel="restart">
-                                    <rect key="frame" x="29.5" y="0.0" width="79" height="77.5"/>
+                                    <state key="normal" image="restart"/>
                                     <connections>
                                         <action selector="restartButtonPressed:" destination="-1" eventType="touchUpInside" id="hmI-ll-kiB"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="QSC-87-H9J" secondAttribute="bottom" id="Fr9-nb-f5a"/>
-                                <constraint firstItem="QSC-87-H9J" firstAttribute="centerY" secondItem="slN-jX-aLn" secondAttribute="centerY" id="JhQ-DI-riN"/>
-                                <constraint firstItem="QSC-87-H9J" firstAttribute="top" secondItem="slN-jX-aLn" secondAttribute="top" id="Mb4-bJ-0oT"/>
-                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerY" secondItem="QSC-87-H9J" secondAttribute="centerY" id="NzX-u6-rSF"/>
-                                <constraint firstItem="QSC-87-H9J" firstAttribute="centerX" secondItem="slN-jX-aLn" secondAttribute="centerX" id="UFU-Db-byR"/>
-                                <constraint firstItem="WtP-Et-bt4" firstAttribute="width" secondItem="QSC-87-H9J" secondAttribute="width" id="aRP-nW-yTC"/>
-                                <constraint firstItem="WtP-Et-bt4" firstAttribute="height" secondItem="QSC-87-H9J" secondAttribute="height" id="bNX-xk-7LL"/>
-                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerX" secondItem="QSC-87-H9J" secondAttribute="centerX" id="hgh-iI-NTK"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="top" secondItem="slN-jX-aLn" secondAttribute="top" id="8b0-yg-254"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerY" secondItem="slN-jX-aLn" secondAttribute="centerY" id="Gq9-db-wLG"/>
+                                <constraint firstAttribute="bottom" secondItem="WtP-Et-bt4" secondAttribute="bottom" id="JKu-tv-An6"/>
+                                <constraint firstItem="WtP-Et-bt4" firstAttribute="centerX" secondItem="slN-jX-aLn" secondAttribute="centerX" id="MOc-k6-RTR"/>
                             </constraints>
                         </view>
                     </subviews>

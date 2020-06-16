@@ -43,6 +43,7 @@ class PauseMenuView: UIView {
         nibView.pinToSuperviewEdges()
         nibView.backgroundColor = .clear
         
+        messageLabel.textColor = .black
         messageLabel.text = randomMessage()
     }
 

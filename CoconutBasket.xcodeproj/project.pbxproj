@@ -42,6 +42,8 @@
 		225EC6C02489249100ED0DD2 /* ActionTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EC6BF2489249100ED0DD2 /* ActionTimer.swift */; };
 		228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */; };
 		228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 228AFFD32474698100982AD3 /* Kenney Future.ttf */; };
+		22942C862498E7BC00A4D136 /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22942C852498E7BC00A4D136 /* PromptView.xib */; };
+		22942C882498E7CF00A4D136 /* PromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22942C872498E7CF00A4D136 /* PromptView.swift */; };
 		229C1271245733F00006F464 /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229C1270245733F00006F464 /* UIColor+Color.swift */; };
 		22B3F1F82493E80200E1F4E2 /* Int+Tweenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */; };
 		22B3F1FF24965E2E00E1F4E2 /* DistanceBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */; };
@@ -121,6 +123,8 @@
 		225EC6BF2489249100ED0DD2 /* ActionTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTimer.swift; sourceTree = "<group>"; };
 		228AFFD22474698100982AD3 /* Kenney Future Narrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future Narrow.ttf"; sourceTree = "<group>"; };
 		228AFFD32474698100982AD3 /* Kenney Future.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kenney Future.ttf"; sourceTree = "<group>"; };
+		22942C852498E7BC00A4D136 /* PromptView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromptView.xib; sourceTree = "<group>"; };
+		22942C872498E7CF00A4D136 /* PromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptView.swift; sourceTree = "<group>"; };
 		229C1270245733F00006F464 /* UIColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Color.swift"; sourceTree = "<group>"; };
 		22B3F1F72493E80200E1F4E2 /* Int+Tweenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Tweenable.swift"; sourceTree = "<group>"; };
 		22B3F1FD24965E2D00E1F4E2 /* DistanceBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceBarView.swift; sourceTree = "<group>"; };
@@ -450,6 +454,8 @@
 				22B3F2152497C22A00E1F4E2 /* MainMenuView.xib */,
 				22B3F21C2497CAF900E1F4E2 /* PauseMenuView.swift */,
 				22B3F21A2497CAEC00E1F4E2 /* PauseMenuView.xib */,
+				22942C872498E7CF00A4D136 /* PromptView.swift */,
+				22942C852498E7BC00A4D136 /* PromptView.xib */,
 			);
 			path = MenuViews;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 				2242E099247304D6003889EA /* HealthBarView.xib in Resources */,
 				22F2CF12243B0C1200858120 /* Main.storyboard in Resources */,
 				228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */,
+				22942C862498E7BC00A4D136 /* PromptView.xib in Resources */,
 				22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */,
 				228AFFD52474698100982AD3 /* Kenney Future.ttf in Resources */,
 				22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */,
@@ -738,6 +745,7 @@
 				22B3F20E249772E900E1F4E2 /* MenuViewController.swift in Sources */,
 				224B12992444CE3F00A540E5 /* Coconut.swift in Sources */,
 				2242E09B24730554003889EA /* HealthBarView.swift in Sources */,
+				22942C882498E7CF00A4D136 /* PromptView.swift in Sources */,
 				2242E081246E7B8E003889EA /* CollisionEventsDispatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

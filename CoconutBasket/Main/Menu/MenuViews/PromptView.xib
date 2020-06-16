@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="soupofjustice.ttf">
+            <string>SoupofJustice</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PromptView" customModule="CoconutBasket" customModuleProvider="target">
+            <connections>
+                <outlet property="messageLabel" destination="K24-Fj-keQ" id="dWM-I5-QlD"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="412" height="380"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="DnP-Yb-Kz6">
+                    <rect key="frame" x="0.0" y="0.0" width="412" height="380"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="promptTable" translatesAutoresizingMaskIntoConstraints="NO" id="ORj-vp-eWO">
+                    <rect key="frame" x="20.5" y="23" width="371" height="247"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure?  You will lose your current progress." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="K24-Fj-keQ">
+                    <rect key="frame" x="52" y="52.5" width="308" height="173"/>
+                    <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="111"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="g1g-gY-bgt">
+                    <rect key="frame" x="82.5" y="275.5" width="247" height="68.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FTC-LN-8eM" userLabel="Yes">
+                            <rect key="frame" x="0.0" y="0.0" width="68.5" height="68.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="FTC-LN-8eM" secondAttribute="height" multiplier="1:1" id="FU9-e0-jR8"/>
+                            </constraints>
+                            <state key="normal" image="ok"/>
+                            <connections>
+                                <action selector="yesButtonPressed:" destination="-1" eventType="touchUpInside" id="IxI-wR-zEO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tly-cn-vgd" userLabel="No">
+                            <rect key="frame" x="178.5" y="0.0" width="68.5" height="68.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Tly-cn-vgd" secondAttribute="height" multiplier="1:1" id="aDw-FJ-i9U"/>
+                            </constraints>
+                            <state key="normal" image="close"/>
+                            <connections>
+                                <action selector="noButtonPressed:" destination="-1" eventType="touchUpInside" id="iqg-Fl-Vzh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="0.64474827239999999" green="0.93984270410000004" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="0T0-4p-yyw"/>
+                <constraint firstItem="g1g-gY-bgt" firstAttribute="height" secondItem="DnP-Yb-Kz6" secondAttribute="height" multiplier="0.18" id="2U5-XT-jQG"/>
+                <constraint firstItem="g1g-gY-bgt" firstAttribute="centerY" secondItem="DnP-Yb-Kz6" secondAttribute="centerY" multiplier="1.63" id="6vb-Lt-6Ub"/>
+                <constraint firstItem="K24-Fj-keQ" firstAttribute="width" secondItem="ORj-vp-eWO" secondAttribute="width" multiplier="0.83" id="DXH-7n-owy"/>
+                <constraint firstItem="ORj-vp-eWO" firstAttribute="height" secondItem="DnP-Yb-Kz6" secondAttribute="height" multiplier="0.65" id="EZl-Ro-jPX"/>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FOh-nE-9LQ"/>
+                <constraint firstItem="K24-Fj-keQ" firstAttribute="centerY" secondItem="ORj-vp-eWO" secondAttribute="centerY" multiplier="0.95" id="FmD-ce-ZyI"/>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="H0j-9F-Aib"/>
+                <constraint firstItem="ORj-vp-eWO" firstAttribute="centerY" secondItem="DnP-Yb-Kz6" secondAttribute="centerY" multiplier="0.77" id="HtF-sW-5AU"/>
+                <constraint firstItem="ORj-vp-eWO" firstAttribute="centerX" secondItem="DnP-Yb-Kz6" secondAttribute="centerX" id="KlD-Jp-zbS"/>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Npd-j0-6yF"/>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yup-zd-DWp"/>
+                <constraint firstItem="DnP-Yb-Kz6" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="b53-sW-Zwg"/>
+                <constraint firstAttribute="trailing" secondItem="DnP-Yb-Kz6" secondAttribute="trailing" id="bCk-eV-qvC"/>
+                <constraint firstItem="K24-Fj-keQ" firstAttribute="centerX" secondItem="ORj-vp-eWO" secondAttribute="centerX" id="hs1-BV-eN2"/>
+                <constraint firstItem="K24-Fj-keQ" firstAttribute="height" secondItem="ORj-vp-eWO" secondAttribute="height" multiplier="0.7" id="nw0-zt-mb2"/>
+                <constraint firstItem="g1g-gY-bgt" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" id="sTc-P0-ZpC"/>
+                <constraint firstItem="ORj-vp-eWO" firstAttribute="width" secondItem="DnP-Yb-Kz6" secondAttribute="width" multiplier="0.9" id="txR-eb-wo2"/>
+                <constraint firstItem="g1g-gY-bgt" firstAttribute="centerX" secondItem="DnP-Yb-Kz6" secondAttribute="centerX" id="w7u-vI-k1P"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="136.23188405797103" y="220.98214285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close" width="107" height="107.5"/>
+        <image name="menuBackground" width="649" height="476"/>
+        <image name="ok" width="107" height="107.5"/>
+        <image name="promptTable" width="412" height="277"/>
+    </resources>
+</document>
