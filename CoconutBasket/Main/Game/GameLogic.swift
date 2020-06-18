@@ -13,7 +13,6 @@ protocol GameLogicEventsDispatcherObserver: class {
     func playerIdleTimeThresholdExceeded()
     func startLevel(withConfig config: LevelConfiguration)
     func gameOver()
-    func gamePaused()
     func gameResumed()
 }
 
@@ -21,7 +20,6 @@ extension GameLogicEventsDispatcherObserver {
     func playerIdleTimeThresholdExceeded() {}
     func startLevel(withConfig config: LevelConfiguration) {}
     func gameOver() {}
-    func gamePaused() {}
     func gameResumed() {}
 }
 
@@ -36,6 +34,14 @@ struct LevelConfiguration {
     var playersFullHealth: Int
     var idleTimeThreshold: Time
     var knockCoconutSpawnRate: TimeInterval
+    
+    static let levelOne = LevelConfiguration(
+        level: 1,
+        distanceToCompleteLevel: 50,
+        playersFullHealth: 5,
+        idleTimeThreshold: Time(seconds: 2),
+        knockCoconutSpawnRate: 0.7
+    )
 }
 
 class GameLogic: GameLogicEventsDispatcher, Observable {
@@ -46,32 +52,28 @@ class GameLogic: GameLogicEventsDispatcher, Observable {
     private var idleAccumulatedTime: TimeInterval = 0
     private(set) var currentLevelConfig: LevelConfiguration
     private var isPlayerDead = false
-    private var isMenuPresented = false
-    private var gamePaused = false
        
     init() {
         // Setting up the first level configuration
-        currentLevelConfig = LevelConfiguration(
-            level: 1,
-            distanceToCompleteLevel: 50,
-            playersFullHealth: 5,
-            idleTimeThreshold: Time(seconds: 3),
-            knockCoconutSpawnRate: 0.7
-        )
-        
-        DispatchQueue.main.async {
-            Env.applicationEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
-        }
+        currentLevelConfig = LevelConfiguration.levelOne
     }
     
     func gameSceneDidLoad() {
-        
         Env.gameState.add(observer: self, dispatchBehaviour: .onQueue(.main))
     }
     
     func startGame() {
         isPlayerDead = false
         observerStore.forEach { $0.startLevel(withConfig: self.currentLevelConfig) }
+    }
+    
+    func restartGame() {
+        currentLevelConfig = LevelConfiguration.levelOne
+        startGame()
+    }
+    
+    func resumeGame() {
+        observerStore.forEach { $0.gameResumed() }
     }
     
     func update(deltaTime: TimeInterval) {
@@ -107,42 +109,10 @@ extension GameLogic: GameStateDispatcherObserver {
     
 }
 
-extension GameLogic: ApplicationEventsDispatcherObserver {
-    
-    func applicationWillResignActive() {
-        guard gamePaused == false else { return }
-        
-        observerStore.forEach { $0.gamePaused() }
-        gamePaused = true
-    }
-    
-    func applicationDidBecomeActive(fromBackground: Bool) {
-        guard isMenuPresented == false, gamePaused else { return }
-        
-        observerStore.forEach { $0.gameResumed() }
-        gamePaused = false
-    }
-    
-}
-
 extension GameLogic: MenuDispatcherObserver {
     
-    func menuPresented() {
-        isMenuPresented = true
+    func pauseMenuDismissed() {
         
-        guard gamePaused == false else { return }
-        
-        observerStore.forEach { $0.gamePaused() }
-        gamePaused = true
-    }
-    
-    func menuDismissed() {
-        isMenuPresented = false
-        
-        guard gamePaused else { return }
-        
-        observerStore.forEach { $0.gameResumed() }
-        gamePaused = false
     }
     
 }

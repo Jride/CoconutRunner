@@ -18,8 +18,9 @@ class AudioManager {
     private let playerDied = Music(resource: "PlayerDied.wav")
     private let coconutExplosion = SoundEffect(resource: "ImpactFloor.mp3")
     private let bombExplosion = SoundEffect(resource: "Explosion.mp3")
+    private let menuMusic = Music(resource: "GameOverMusic.wav")
     
-    private var mainMusic: Music?
+    private var gameMusic: Music?
     
     init() {
         
@@ -27,6 +28,8 @@ class AudioManager {
         backgroundMusic.volume = 0.3
         gameOverMusic.loopForever()
         gameOverMusic.volume = 0.4
+        menuMusic.loopForever()
+        menuMusic.volume = 0.4
         coconutExplosion.volume = 0.2
         playerHurt.volume = 0.4
         bombExplosion.volume = 1.0
@@ -50,6 +53,13 @@ class AudioManager {
     
 }
 
+// MARK: - Public
+
+extension AudioManager {
+    
+}
+
+// MARK: - CollisionEventsDispatcherObserver
 extension AudioManager: CollisionEventsDispatcherObserver {
     
     func playerWasHitByEnemy(_ enemy: Enemy) {
@@ -64,30 +74,44 @@ extension AudioManager: CollisionEventsDispatcherObserver {
     
 }
 
+// MARK: - GameLogicEventsDispatcherObserver
 extension AudioManager: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
-        mainMusic?.stop()
-        mainMusic = backgroundMusic
-        mainMusic?.play()
-    }
-    
-    func gamePaused() {
-        mainMusic?.pause()
+        menuMusic.stop()
+        gameMusic?.stop()
+        gameMusic = backgroundMusic
+        gameMusic?.play()
     }
     
     func gameResumed() {
-        mainMusic?.play()
+        menuMusic.pause()
+        gameMusic?.play()
     }
     
     func gameOver() {
         
-        mainMusic?.stop()
-        mainMusic = playerDied
+        gameMusic?.stop()
+        gameMusic = playerDied
         playerDied.play()
         playerDied.didFinishPlaying = { [unowned self] in
-            self.mainMusic = self.gameOverMusic
+            self.gameMusic = self.gameOverMusic
             self.gameOverMusic.play()
         }
     }
+}
+
+extension AudioManager: MenuDispatcherObserver {
+    
+    func mainMenuPresented() {
+        gameMusic?.stop()
+        gameMusic = nil
+        menuMusic.play()
+    }
+    
+    func pauseMenuPresented() {
+        gameMusic?.pause()
+        menuMusic.play()
+    }
+    
 }

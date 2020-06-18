@@ -126,7 +126,7 @@ class Monkey: GameSpriteNode {
                         self.bomb.ignite()
                     },
                     show,
-                    .wait(forDuration: 0.5),
+                    .wait(forDuration: 1.5),
                     .run { dropBomb() },
                     dropAction,
                     .setTexture(SKTexture(imageNamed: "monkey_head")),
@@ -144,9 +144,10 @@ class Monkey: GameSpriteNode {
         }
         
         run(.sequence([
-            .moveBy(x: 0, y: 40 * scale, duration: 0.3),
+            .moveBy(x: -3 * scale, y: 37 * scale, duration: 0.3),
             .wait(forDuration: 1),
             hide,
+            .wait(forDuration: 0.3),
             .run { secondSequence() }
         ]))
     }

@@ -10,9 +10,16 @@ import UIKit
 import TweenKit
 import FoundationExtended
 
+enum DisplayContext {
+    case mainMenu
+    case pause
+}
+
 class MenuViewController: UIViewController, MenuDispatcher, Observable {
     
     var observerStore = ObserverStore<MenuDispatcherObserver>()
+    
+    var didClose: (() -> Void)?
     
     @IBOutlet private var contentView: UIView!
     
@@ -33,19 +40,20 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
     private var prevMenu: UIView?
     private var currentMenu: UIView?
     
-    init() {
+    private let displayContext: DisplayContext
+    
+    init(displayContext: DisplayContext) {
+        self.displayContext = displayContext
         super.init(nibName: nil, bundle: nil)
         
         add(observer: Env.gameLogic, dispatchBehaviour: .onQueue(.main))
+        add(observer: Env.audioManager, dispatchBehaviour: .onQueue(.main))
         
         pauseMenu.delegate = self
+        mainMenu.delegate = self
+        
         view.addSubview(pauseMenu)
-        
-        promptMenu.alpha = 0
         view.addSubview(promptMenu)
-        
-        mainMenu.alpha = 0
-        mainMenu.isHidden = true
         view.addSubview(mainMenu)
     }
     
@@ -56,27 +64,52 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        observerStore.forEach { $0.menuPresented() }
+        mainMenu.frame = view.frame
+        mainMenu.isHidden = true
         
-        currentMenu = pauseMenu
         let menuWidth = pauseMenu.width(forHeight: menuHeight)
         pauseMenu.frame = CGRect(x: view.frame.midX - (menuWidth/2),
                                  y: -screenHeight,
                                  width: menuWidth,
                                  height: menuHeight)
+        pauseMenu.isHidden = true
         
-        animateMenuSwipe(pauseMenu, display: true, completion: nil)
+        let promptWidth = promptMenu.width(forHeight: promptHeight)
+        promptMenu.frame = CGRect(x: view.frame.midX - (promptWidth/2),
+                                   y: view.frame.midY - (promptHeight/2),
+                                   width: promptWidth,
+                                   height: promptHeight)
+        promptMenu.isHidden = true
+        promptMenu.alpha = 0
+        
+        switch displayContext {
+        case .mainMenu:
+            observerStore.forEach { $0.mainMenuPresented() }
+            currentMenu = mainMenu
+            mainMenu.isHidden = false
+            
+        case .pause:
+            observerStore.forEach { $0.pauseMenuPresented() }
+            currentMenu = pauseMenu
+            animateMenuSwipe(pauseMenu, display: true, completion: nil)
+        }
     }
     
     private func closeMenu() {
-        observerStore.forEach { $0.menuDismissed() }
+        
+        if displayContext == .pause {
+            Env.gameLogic.resumeGame()
+        }
+        
         remove()
+        didClose?()
     }
     
     private func flipToMenuView(_ secondView: UIView, completion: (() -> Void)?) {
         
         guard let currentMenu = currentMenu else { return }
         
+        secondView.isHidden = false
         prevMenu = currentMenu
         
         let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight]
@@ -109,12 +142,6 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
             }
         }
         
-        let promptWidth = promptMenu.width(forHeight: promptHeight)
-        promptMenu.frame = CGRect(x: view.frame.midX - (promptWidth/2),
-                                   y: view.frame.midY - (promptHeight/2),
-                                   width: promptWidth,
-                                   height: promptHeight)
-        
         // Show the prompt
         flipToMenuView(promptMenu, completion: nil)
     }
@@ -123,7 +150,7 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
 
 // MARK: - Main Menu
 
-extension MenuViewController {
+extension MenuViewController: MainMenuDelegate {
     
     private func presentMainMenu() {
         
@@ -144,6 +171,11 @@ extension MenuViewController {
         }
     }
     
+    func playButtonPressed() {
+        closeMenu()
+        Env.gameLogic.startGame()
+    }
+    
 }
 
 // MARK: - Pause Menu
@@ -161,18 +193,27 @@ extension MenuViewController: PauseMenuDelegate {
     
     func menuPressed() {
         
-        let message = "Are you sure?\n\nYour current progress will be lost."
+        let message = "Are you sure you want to return to the main menu?\n\nYour current progress will be lost."
         showPromptWithConfirmResponse(message: message) { [unowned self] in
             self.presentMainMenu()
+            self.observerStore.forEach { $0.mainMenuPresented() }
         }
         
     }
     
     func restartPressed() {
         
-        let message = "Are you sure?\n\nYour current progress will be lost."
-        showPromptWithConfirmResponse(message: message) { [unowned self] in
-            
+        func removeMenu() {
+            swipeAwayCurrentMenu { [weak self] in
+                self?.remove()
+                Env.gameLogic.restartGame()
+                self?.didClose?()
+            }
+        }
+        
+        let message = "Are you sure you want to restart?\n\nYour current progress will be lost."
+        showPromptWithConfirmResponse(message: message) {
+            removeMenu()
         }
         
     }
@@ -182,10 +223,21 @@ extension MenuViewController: PauseMenuDelegate {
 
 extension MenuViewController {
     
+    private func swipeAwayCurrentMenu(completion: @escaping () -> Void) {
+        guard let currentMenu = currentMenu else {
+            completion()
+            return
+        }
+        
+        animateMenuSwipe(currentMenu, display: false) {
+            completion()
+        }
+    }
+    
     private func animateMenuSwipe(_ menu: UIView, display: Bool, completion: (() -> Void)?) {
         
         if display {
-            
+            menu.isHidden = false
             let action = InterpolationAction(
                 from: menu.frame.origin.y,
                 to: view.frame.midY - (menu.frame.size.height/2),
@@ -211,9 +263,11 @@ extension MenuViewController {
                 menu.frame.origin.y = $0
             }
             
-            let sequence = ActionSequence(actions: action,
-                                          RunBlockAction(handler: {
-                completion?()
+            let sequence = ActionSequence(
+                actions: action,
+                RunBlockAction(handler: {
+                    completion?()
+                    menu.isHidden = true
             }))
             
             scheduler.run(action: sequence)
@@ -227,13 +281,15 @@ extension MenuViewController {
 // MARK: - Menu Dispather
 
 protocol MenuDispatcherObserver: class {
-    func menuPresented()
-    func menuDismissed()
+    func pauseMenuPresented()
+    func mainMenuPresentedFromPauseState()
+    func mainMenuPresented()
 }
 
 extension MenuDispatcherObserver {
-    func menuPresented() {}
-    func menuDismissed() {}
+    func pauseMenuPresented() {}
+    func mainMenuPresentedFromPauseState() {}
+    func mainMenuPresented() {}
 }
 
 protocol MenuDispatcher {

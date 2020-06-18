@@ -18,7 +18,6 @@ class BackgroundManager {
     
     private var treePadding: CGFloat = 10
     private var treeMarginToPlayer: CGFloat = 80
-    private var accumulatedDeltaTime: TimeInterval = 0
     private var timeToAddCloud: TimeInterval = 0
     
     private var gameNodes: [GameNode] {
@@ -63,6 +62,14 @@ class BackgroundManager {
     // MARK: - Add Background
     private func setupBackground() {
         
+        backgrounds.forEach { $0.removeFromParent() }
+        backgroundCloudsFront.forEach { $0.removeFromParent() }
+        backgroundCloudsBack.forEach { $0.removeFromParent() }
+        
+        backgrounds.removeAll()
+        backgroundCloudsFront.removeAll()
+        backgroundCloudsBack.removeAll()
+        
         var currentX: CGFloat = backgroundSize.width / 2
         
         let numBackgroundsNeeded = Int((frame.width / backgroundSize.width).rounded(.up)) + 1
@@ -92,6 +99,9 @@ class BackgroundManager {
     
     // MARK: - Add Palm Trees
     private func setupPalmTrees() {
+        
+        trees.forEach { $0.removeFromParent() }
+        trees.removeAll()
         
         let offset = (treeSize.width / 2) + 22 + treePadding
         var currentX: CGFloat = frame.width/2 - offset - treeSize.width - treePadding
@@ -135,7 +145,7 @@ class BackgroundManager {
             
             removedTree.position.x = lastTree.position.x + treeSize.width + treePadding
             trees.append(removedTree)
-            removedTree.setupTree()
+            removedTree.setupTree(isVisibleInScene: false)
         }
         
         if let firstBg = backgrounds.first,
@@ -166,36 +176,40 @@ class BackgroundManager {
         }
     }
     
-    @objc private func knockDownCoconut() {
-        let visibleTrees = trees.filter { gameScene.intersects($0.treeNode) }
-        let start = Int(visibleTrees.count/2)
-        let randomIndex: Int = Int.random(in: start..<visibleTrees.count)
-        if let tree = visibleTrees[maybe: randomIndex] {
-            tree.knockRandChild()
-        }
-    }
-    
 }
 
 // MARK: - Public
 extension BackgroundManager {
     
-    func gameSceneDidLoad() {
-        
+    func configure() {
         setupBackground()
         setupPalmTrees()
         setupFloor()
     }
     
+    func resetScene() {
+        trees.forEach {
+            let isVisible = gameScene.intersects($0.treeNode)
+            $0.setupTree(isVisibleInScene: isVisible)
+        }
+    }
+    
     func update(deltaTime: TimeInterval) {
-        
-        accumulatedDeltaTime += deltaTime
         
         gameNodes.forEach { $0.update(deltaTime: deltaTime) }
         backgroundCloudsFront.forEach { $0.update(deltaTime: deltaTime) }
         backgroundCloudsBack.forEach { $0.update(deltaTime: deltaTime) }
         
         recycleGameObjectsIfNecessary()
+    }
+    
+    func knockDownRandomCoconut() {
+        let visibleTrees = trees.filter { gameScene.intersects($0.treeNode) }
+        let start = Int(visibleTrees.count/2)
+        let randomIndex: Int = Int.random(in: start..<visibleTrees.count)
+        if let tree = visibleTrees[maybe: randomIndex] {
+            tree.knockRandChild()
+        }
     }
     
 }
@@ -210,16 +224,6 @@ extension BackgroundManager: PlayerEventsDispatcherObserver {
 }
 
 extension BackgroundManager: GameLogicEventsDispatcherObserver {
-    
-    func startLevel(withConfig config: LevelConfiguration) {
-        
-        let sequence = SKAction.sequence([
-            .wait(forDuration: config.knockCoconutSpawnRate),
-            .perform(#selector(knockDownCoconut), onTarget: self)
-        ])
-        
-        gameScene.run(.repeatForever(sequence), withKey: "knockCoconuts")
-    }
     
     func gameOver() {
         gameScene.removeAction(forKey: "knockCoconuts")

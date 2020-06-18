@@ -34,15 +34,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Env.gameState.scaleFactor = size.height / 768
         Env.gameLogic.gameScene = self
         
-        player = Player.newInstance()
-        
         floorMargin *= Env.gameState.scaleFactor
         
         backgroundColor = UIColor(hex: 0xCFEFFC)
         backgroundManager = BackgroundManager(gameScene: self)
         collisionDetectionManager.gameScene = self
-        
-        player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
         Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
     }
     
@@ -53,11 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         physicsWorld.contactDelegate = collisionDetectionManager
-        backgroundManager.gameSceneDidLoad()
         Env.gameLogic.gameSceneDidLoad()
         
-        player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
-        addChild(player)
+        setupGame()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -126,18 +120,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func setupGame() {
+        player = Player.newInstance()
+        player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
+        
+        backgroundManager.configure()
+        
+        player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
+        addChild(player)
+    }
+    
+    func pauseGameScene() {
+        view?.isPaused = true
+        lastTimePaused = lastUpdateTime
+        wasPaused = true
+    }
+    
 }
 
 extension GameScene: GameLogicEventsDispatcherObserver {
     
-    func startLevel(withConfig config: LevelConfiguration) {
-        gameStarted = true
+    @objc private func runFallingCoconutAction() {
+        backgroundManager.knockDownRandomCoconut()
     }
     
-    func gamePaused() {
-        view?.isPaused = true
-        lastTimePaused = lastUpdateTime
-        wasPaused = true
+    func startLevel(withConfig config: LevelConfiguration) {
+        view?.isPaused = false
+        removeAllActions()
+        backgroundManager.resetScene()
+        
+        let sequence = SKAction.sequence([
+            .wait(forDuration: config.knockCoconutSpawnRate),
+            .perform(#selector(runFallingCoconutAction), onTarget: self)
+        ])
+
+        run(.repeatForever(sequence), withKey: "knockCoconuts")
+        
+        gameStarted = true
     }
     
     func gameResumed() {
@@ -169,6 +188,17 @@ extension GameScene: GameLogicEventsDispatcherObserver {
         gameOverContainer?.addChild(playAgain)
         
         addChild(gameOverContainer!)
+    }
+    
+}
+
+extension GameScene: MenuDispatcherObserver {
+    
+    func mainMenuPresentedFromPauseState() {
+        view?.isPaused = false
+        removeAllActions()
+        backgroundManager.resetScene()
+        gameStarted = false
     }
     
 }

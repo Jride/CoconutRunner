@@ -26,6 +26,10 @@ class GameViewController: UIViewController {
     @IBOutlet private var cons_pauseButtonWidth: NSLayoutConstraint!
     @IBOutlet private var cons_healthBarWidth: NSLayoutConstraint!
     
+    var scene: GameScene!
+    
+    private var isDisplayingMenu = false
+    
     override func viewDidLoad() {
         
         do {
@@ -45,11 +49,21 @@ class GameViewController: UIViewController {
 //            view.showsPhysics = true
             view.showsFPS = true
             view.showsNodeCount = true
+            
+            self.scene = scene
         }
         
         Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
+        Env.applicationEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
         
         setup()
+        
+        let menu = MenuViewController(displayContext: .mainMenu)
+        menu.didClose = { [unowned self] in
+            self.isDisplayingMenu = false
+        }
+        add(menu, frame: view.frame)
+        isDisplayingMenu = true
     }
 
     override var shouldAutorotate: Bool {
@@ -76,19 +90,48 @@ class GameViewController: UIViewController {
 
 extension GameViewController {
     
-    @IBAction func pauseButtonPressed(_ sender: Any) {
+    private func presentPauseMenuIfRequired() {
         
-        let menu = MenuViewController()
+        guard isDisplayingMenu == false else { return }
+        
+        isDisplayingMenu = true
+        let menu = MenuViewController(displayContext: .pause)
+        menu.didClose = { [unowned self] in
+            self.isDisplayingMenu = false
+        }
         add(menu, frame: view.frame)
         pauseButton.isHidden = true
+        scene.pauseGameScene()
+    }
+    
+    @IBAction func pauseButtonPressed(_ sender: Any) {
+        presentPauseMenuIfRequired()
     }
     
 }
 
 extension GameViewController: GameLogicEventsDispatcherObserver {
     
+    func startLevel(withConfig config: LevelConfiguration) {
+        pauseButton.isHidden = false
+    }
+    
     func gameResumed() {
         pauseButton.isHidden = false
+    }
+    
+}
+
+extension GameViewController: ApplicationEventsDispatcherObserver {
+    
+    func applicationWillResignActive() {
+        presentPauseMenuIfRequired()
+    }
+    
+    func applicationDidBecomeActive(fromBackground: Bool) {
+        if isDisplayingMenu {
+            scene.view?.isPaused = true
+        }
     }
     
 }
