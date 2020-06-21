@@ -37,8 +37,8 @@ struct LevelConfiguration {
     
     static let levelOne = LevelConfiguration(
         level: 1,
-        distanceToCompleteLevel: 50,
-        playersFullHealth: 5,
+        distanceToCompleteLevel: 100,
+        playersFullHealth: 30,
         idleTimeThreshold: Time(seconds: 2),
         knockCoconutSpawnRate: 0.7
     )
@@ -105,14 +105,6 @@ extension GameLogic: GameStateDispatcherObserver {
     func playerDied() {
         isPlayerDead = true
         observerStore.forEach { $0.gameOver() }
-    }
-    
-}
-
-extension GameLogic: MenuDispatcherObserver {
-    
-    func pauseMenuDismissed() {
-        
     }
     
 }

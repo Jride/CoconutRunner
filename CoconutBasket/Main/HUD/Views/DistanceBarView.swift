@@ -17,13 +17,18 @@ class DistanceBarView: UIView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var barContainer: UIView!
     @IBOutlet private var barView: UIView!
-    @IBOutlet private var barFillerImageView: UIImageView!
     @IBOutlet private var subtitleLabel: UILabel!
     
-    private let barWidthRatio: CGFloat = 166.0/300.0
+    private let barWidthRatio: CGFloat = 180.0/300.0
     private let barRatio: CGFloat = 15.0/83.0
     
-    private var health: Int = 100
+    private var progress: Int = 0
+    private var distanceProgress: CGFloat {
+        Env.gameState.playersDistanceStats.levelsDistanceProgress
+    }
+    private var overallDistance: Int {
+        Env.gameState.playersDistanceStats.overallDistance
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +41,8 @@ class DistanceBarView: UIView {
     }
     
     private func commonInit() {
+        
+        Env.gameState.add(observer: self, dispatchBehaviour: .onQueue(.main))
         
         backgroundColor = .clear
         
@@ -58,41 +65,39 @@ class DistanceBarView: UIView {
         
         if animated {
             
-            let newHealthValue = Int(Env.gameState.playersHealthPercent * 100)
-            let prevHealth = health
-            health = newHealthValue
+            let prevProgress = progress
+            progress = overallDistance
             
             let action = InterpolationAction(
-                from: prevHealth,
-                to: newHealthValue,
+                from: prevProgress,
+                to: progress,
                 duration: 0.3, easing: .linear) { [unowned self] in
                     
-                    self.subtitleLabel.text = "\($0) / 100"
+                    self.subtitleLabel.text = "\($0) M"
             }
             
-            // Run it forever
             scheduler.run(action: action)
             
             UIView.animate(withDuration: 0.3) {
                 self.barView.frame.size = CGSize(
-                    width: fullWidth * Env.gameState.playersHealthPercent,
+                    width: fullWidth * self.distanceProgress,
                     height: fullWidth * self.barRatio
                 )
             }
             
-            UIView.animate(withDuration: 0.15, animations: {
-                self.barFillerImageView.alpha = 0.4
-            }, completion: { (_) in
-                UIView.animate(withDuration: 0.15) {
-                    self.barFillerImageView.alpha = 1
-                }
-            })
-            
         } else {
             barView.frame.size = CGSize(
-                width: fullWidth * Env.gameState.playersHealthPercent,
+                width: fullWidth * distanceProgress,
                 height: fullWidth * barRatio
             )
         }
     }
+}
+
+extension DistanceBarView: GameStateDispatcherObserver {
+    
+    func playersDistanceStatsDidUpdate() {
+        updateHudUI(animated: true)
+    }
+    
 }

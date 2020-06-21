@@ -10,16 +10,24 @@ import UIKit
 import TweenKit
 import FoundationExtended
 
-enum DisplayContext {
-    case mainMenu
-    case pause
-}
-
 class MenuViewController: UIViewController, MenuDispatcher, Observable {
+    
+    enum DisplayContext {
+        case mainMenu
+        case pause
+    }
+    
+    enum ClosingContext {
+        case startNewGame
+        case resumePausedGame
+        case restartGame
+    }
     
     var observerStore = ObserverStore<MenuDispatcherObserver>()
     
-    var didClose: (() -> Void)?
+    var closingContext: ClosingContext = .resumePausedGame
+    var didClose: ((_ context: ClosingContext) -> Void)?
+    var mainMenuPresentedFromPauseState: (() -> Void)?
     
     @IBOutlet private var contentView: UIView!
     
@@ -46,7 +54,6 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
         self.displayContext = displayContext
         super.init(nibName: nil, bundle: nil)
         
-        add(observer: Env.gameLogic, dispatchBehaviour: .onQueue(.main))
         add(observer: Env.audioManager, dispatchBehaviour: .onQueue(.main))
         
         pauseMenu.delegate = self
@@ -96,13 +103,8 @@ class MenuViewController: UIViewController, MenuDispatcher, Observable {
     }
     
     private func closeMenu() {
-        
-        if displayContext == .pause {
-            Env.gameLogic.resumeGame()
-        }
-        
         remove()
-        didClose?()
+        didClose?(closingContext)
     }
     
     private func flipToMenuView(_ secondView: UIView, completion: (() -> Void)?) {
@@ -172,8 +174,8 @@ extension MenuViewController: MainMenuDelegate {
     }
     
     func playButtonPressed() {
+        closingContext = .startNewGame
         closeMenu()
-        Env.gameLogic.startGame()
     }
     
 }
@@ -184,6 +186,7 @@ extension MenuViewController: PauseMenuDelegate {
     
     func resumePressed() {
         
+        closingContext = .resumePausedGame
         // Animate pause menu out
         animateMenuSwipe(pauseMenu, display: false) { [weak self] in
             self?.closeMenu()
@@ -196,7 +199,7 @@ extension MenuViewController: PauseMenuDelegate {
         let message = "Are you sure you want to return to the main menu?\n\nYour current progress will be lost."
         showPromptWithConfirmResponse(message: message) { [unowned self] in
             self.presentMainMenu()
-            self.observerStore.forEach { $0.mainMenuPresented() }
+            self.mainMenuPresentedFromPauseState?()
         }
         
     }
@@ -205,9 +208,9 @@ extension MenuViewController: PauseMenuDelegate {
         
         func removeMenu() {
             swipeAwayCurrentMenu { [weak self] in
-                self?.remove()
-                Env.gameLogic.restartGame()
-                self?.didClose?()
+                guard let self = self else { return }
+                self.remove()
+                self.didClose?(.restartGame)
             }
         }
         
@@ -282,13 +285,11 @@ extension MenuViewController {
 
 protocol MenuDispatcherObserver: class {
     func pauseMenuPresented()
-    func mainMenuPresentedFromPauseState()
     func mainMenuPresented()
 }
 
 extension MenuDispatcherObserver {
     func pauseMenuPresented() {}
-    func mainMenuPresentedFromPauseState() {}
     func mainMenuPresented() {}
 }
 

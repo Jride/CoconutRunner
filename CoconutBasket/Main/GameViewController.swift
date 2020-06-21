@@ -22,6 +22,7 @@ struct Layout {
 class GameViewController: UIViewController {
     
     @IBOutlet private var healthBarView: HealthBarView!
+    @IBOutlet private var distanceBarView: DistanceBarView!
     @IBOutlet private var pauseButton: UIButton!
     @IBOutlet private var cons_pauseButtonWidth: NSLayoutConstraint!
     @IBOutlet private var cons_healthBarWidth: NSLayoutConstraint!
@@ -59,8 +60,8 @@ class GameViewController: UIViewController {
         setup()
         
         let menu = MenuViewController(displayContext: .mainMenu)
-        menu.didClose = { [unowned self] in
-            self.isDisplayingMenu = false
+        menu.didClose = { [unowned self] (context) in
+            self.menuDidClose(context)
         }
         add(menu, frame: view.frame)
         isDisplayingMenu = true
@@ -86,6 +87,20 @@ class GameViewController: UIViewController {
         cons_healthBarWidth.constant = (200 * Env.gameState.scaleFactor).constrained(min: 150)
         cons_pauseButtonWidth.constant = Layout.Button.regular()
     }
+    
+    private func menuDidClose(_ context: MenuViewController.ClosingContext) {
+        
+        self.isDisplayingMenu = false
+        
+        switch context {
+        case .startNewGame:
+            Env.gameLogic.startGame()
+        case .restartGame:
+            Env.gameLogic.restartGame()
+        case .resumePausedGame:
+            Env.gameLogic.resumeGame()
+        }
+    }
 }
 
 extension GameViewController {
@@ -96,8 +111,11 @@ extension GameViewController {
         
         isDisplayingMenu = true
         let menu = MenuViewController(displayContext: .pause)
-        menu.didClose = { [unowned self] in
-            self.isDisplayingMenu = false
+        menu.didClose = { [unowned self] (context) in
+            self.menuDidClose(context)
+        }
+        menu.mainMenuPresentedFromPauseState = { [unowned self] in
+            self.scene.mainMenuWasPresentedFromPauseState()
         }
         add(menu, frame: view.frame)
         pauseButton.isHidden = true

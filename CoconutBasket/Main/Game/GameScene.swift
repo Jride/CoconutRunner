@@ -95,7 +95,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let touchLocation = touches.first!.location(in: self)
         
-        if gameStarted && Env.gameState.isPlayerAlive {
+        if view?.isPaused == false
+            && gameStarted
+            && Env.gameState.isPlayerAlive {
             
             guard isPlayerMoving == false else { return }
             
@@ -123,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupGame() {
         player = Player.newInstance()
         player.add(observer: backgroundManager, dispatchBehaviour: .onQueue(.main))
-        
+        player.add(observer: Env.gameState, dispatchBehaviour: .onQueue(.main))
         backgroundManager.configure()
         
         player.position = CGPoint(x: frame.width/2, y: floorMargin + (player.size.height/2))
@@ -134,6 +136,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view?.isPaused = true
         lastTimePaused = lastUpdateTime
         wasPaused = true
+    }
+    
+    func mainMenuWasPresentedFromPauseState() {
+        view?.isPaused = false
+        removeAllActions()
+        backgroundManager.resetScene()
+        gameStarted = false
     }
     
 }
@@ -188,17 +197,6 @@ extension GameScene: GameLogicEventsDispatcherObserver {
         gameOverContainer?.addChild(playAgain)
         
         addChild(gameOverContainer!)
-    }
-    
-}
-
-extension GameScene: MenuDispatcherObserver {
-    
-    func mainMenuPresentedFromPauseState() {
-        view?.isPaused = false
-        removeAllActions()
-        backgroundManager.resetScene()
-        gameStarted = false
     }
     
 }

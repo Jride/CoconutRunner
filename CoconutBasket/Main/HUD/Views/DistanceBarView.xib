@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -16,7 +16,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DistanceBarView" customModule="CoconutBasket" customModuleProvider="target">
             <connections>
                 <outlet property="barContainer" destination="b6y-w9-FGE" id="K56-nj-tot"/>
-                <outlet property="barFillerImageView" destination="zCA-lg-e0E" id="k4l-Bh-ApV"/>
                 <outlet property="barView" destination="UxC-qV-mCn" id="Ve4-SF-evP"/>
                 <outlet property="contentView" destination="SGo-am-Wnp" id="JUq-2Q-BTN"/>
                 <outlet property="subtitleLabel" destination="oCf-0f-WZl" id="3M8-GE-8HA"/>
@@ -33,8 +32,8 @@
                         <constraint firstAttribute="width" secondItem="Jd0-Je-OWe" secondAttribute="height" multiplier="60:23" id="OwJ-rT-Vkq"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEVEL 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="fnk-rT-Ltn">
-                    <rect key="frame" x="76" y="13.5" width="108" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEVEL 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="fnk-rT-Ltn">
+                    <rect key="frame" x="76" y="13.5" width="108" height="20"/>
                     <fontDescription key="fontDescription" name="Kenney-Future-Narrow" family="Kenney Future Narrow" pointSize="26"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -66,7 +65,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="oCf-0f-WZl">
-                    <rect key="frame" x="103.5" y="47.5" width="87" height="16.5"/>
+                    <rect key="frame" x="103.5" y="47.5" width="87" height="16"/>
                     <fontDescription key="fontDescription" name="Kenney-Future-Narrow" family="Kenney Future Narrow" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -88,7 +87,7 @@
                 <constraint firstItem="oCf-0f-WZl" firstAttribute="width" secondItem="Jd0-Je-OWe" secondAttribute="width" multiplier="0.433333" id="8rx-Dr-5A7"/>
                 <constraint firstItem="oCf-0f-WZl" firstAttribute="centerY" secondItem="Jd0-Je-OWe" secondAttribute="centerY" multiplier="1.45" id="BUY-mA-MX8"/>
                 <constraint firstItem="fnk-rT-Ltn" firstAttribute="trailing" secondItem="b6y-w9-FGE" secondAttribute="trailing" id="FwU-Sa-5cf"/>
-                <constraint firstItem="fnk-rT-Ltn" firstAttribute="height" secondItem="b6y-w9-FGE" secondAttribute="height" multiplier="0.983333" id="J6r-3l-8WC"/>
+                <constraint firstItem="fnk-rT-Ltn" firstAttribute="height" secondItem="b6y-w9-FGE" secondAttribute="height" id="J6r-3l-8WC"/>
                 <constraint firstItem="f7u-jx-9m1" firstAttribute="centerY" secondItem="r9O-0a-9s5" secondAttribute="centerY" id="MU5-H1-VaQ"/>
                 <constraint firstAttribute="bottom" secondItem="Jd0-Je-OWe" secondAttribute="bottom" priority="750" id="P0b-e5-0J6"/>
                 <constraint firstItem="oCf-0f-WZl" firstAttribute="centerX" secondItem="Jd0-Je-OWe" secondAttribute="centerX" multiplier="1.47" id="Pds-oa-fgo"/>
@@ -108,7 +107,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="JhJ-P9-atz"/>
-            <point key="canvasLocation" x="200.00000000000003" y="128.90625"/>
+            <point key="canvasLocation" x="199.55357142857142" y="128.2608695652174"/>
         </view>
     </objects>
     <resources>

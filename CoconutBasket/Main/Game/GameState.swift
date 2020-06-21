@@ -12,11 +12,13 @@ import FoundationExtended
 
 protocol GameStateDispatcherObserver: class {
     func playersHealthDidUpdate()
+    func playersDistanceStatsDidUpdate()
     func playerDied()
 }
 
 extension GameStateDispatcherObserver {
     func playersHealthDidUpdate() {}
+    func playersDistanceStatsDidUpdate() {}
     func playerDied() {}
 }
 
@@ -27,15 +29,33 @@ protocol GameStateDispatcher {
 
 class GameState: GameStateDispatcher, Observable {
     
+    struct PlayersDistanceStats {
+        var overallDistance: Int = 0
+        var currentLevelDistance: Int = 0
+        var distanceToCompleteLevel: Int = 0
+        
+        var levelsDistanceProgress: CGFloat {
+            guard distanceToCompleteLevel > 0 else { return 0 }
+            
+            let percent = CGFloat(currentLevelDistance) / CGFloat(distanceToCompleteLevel)
+            return percent.constrained(min: 0, max: 1)
+        }
+        
+        mutating func bumpDistance(runningDistance: Int) {
+            self.currentLevelDistance += runningDistance
+            self.overallDistance += runningDistance
+        }
+    }
+    
     var observerStore = ObserverStore<GameStateDispatcherObserver>()
     
     private(set) var speed: Double = 0.75
     private(set) var playerHealth: Int!
     private var playersFullHealth: Int!
+    private(set) var playersHealthPercent: CGFloat = 1
+    private(set) var playersDistanceStats = PlayersDistanceStats()
     
     var scaleFactor: CGFloat = 1
-    
-    var playersHealthPercent: CGFloat = 100
     
     var isPlayerAlive: Bool {
         return playerHealth > 0
@@ -50,7 +70,14 @@ class GameState: GameStateDispatcher, Observable {
             let levelConfig = Env.gameLogic.currentLevelConfig
             self.playerHealth = levelConfig.playersFullHealth
             self.playersFullHealth = levelConfig.playersFullHealth
+            
+            self.playersDistanceStats = .init(
+                overallDistance: 0,
+                currentLevelDistance: 0,
+                distanceToCompleteLevel: levelConfig.distanceToCompleteLevel
+            )
         }
+        
     }
     
 }
@@ -88,12 +115,40 @@ extension GameState: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
         
+        playersDistanceStats.currentLevelDistance = 0
+        if config.level == 1 {
+            playersDistanceStats.overallDistance = 0
+        }
+        if config.level > 1 {
+            playersDistanceStats.distanceToCompleteLevel = config.distanceToCompleteLevel
+        }
+        
         playerHealth = config.playersFullHealth
         playersFullHealth = config.playersFullHealth
         
         let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
         playersHealthPercent = percent.constrained(min: 0, max: 1)
         
-        observerStore.forEach { $0.playersHealthDidUpdate() }
+        observerStore.forEach {
+            $0.playersHealthDidUpdate()
+            $0.playersDistanceStatsDidUpdate()
+        }
     }
+}
+
+extension GameState: PlayerEventsDispatcherObserver {
+    
+    func playerDidStopMoving() {
+        
+        guard isPlayerAlive else { return }
+        
+        playersDistanceStats.bumpDistance(runningDistance: 5)
+        if playersDistanceStats.levelsDistanceProgress == 1 {
+            // TODO: Implement level complete
+            // Level Complete
+        }
+        
+        observerStore.forEach { $0.playersDistanceStatsDidUpdate() }
+    }
+    
 }

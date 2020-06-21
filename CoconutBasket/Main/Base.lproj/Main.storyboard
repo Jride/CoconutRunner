@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="cons_healthBarWidth" destination="0qH-pJ-nlM" id="UZP-Qo-NlK"/>
                         <outlet property="cons_pauseButtonWidth" destination="u97-r6-0az" id="JgU-xC-Urb"/>
+                        <outlet property="distanceBarView" destination="D46-my-0a6" id="NmR-I5-aId"/>
                         <outlet property="healthBarView" destination="fJ4-in-ibM" id="5P0-tk-wS7"/>
                         <outlet property="pauseButton" destination="NNm-ht-Y0w" id="qsM-ZG-MmJ"/>
                     </connections>
