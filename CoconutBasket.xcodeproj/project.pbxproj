@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2221D6F0249FF11D0096B63E /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221D6EF249FF11D0096B63E /* CountdownView.swift */; };
 		222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC312454CEC400F38F79 /* BackgroundManager.swift */; };
 		22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22301E08245E082E00FF0AD0 /* Bomb.swift */; };
 		2242E03F24647623003889EA /* Banana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E03E24647623003889EA /* Banana.swift */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2221D6EF249FF11D0096B63E /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		222EDC312454CEC400F38F79 /* BackgroundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		22301E08245E082E00FF0AD0 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		2242E03E24647623003889EA /* Banana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banana.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 			children = (
 				22B3F2192497CAC600E1F4E2 /* MenuViews */,
 				22B3F20C249772E900E1F4E2 /* MenuViewController.swift */,
+				2221D6EF249FF11D0096B63E /* CountdownView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -727,6 +730,7 @@
 				22F2CF07243B0C1200858120 /* AppDelegate.swift in Sources */,
 				225EC6B62486E03000ED0DD2 /* GameObjectsLayers.swift in Sources */,
 				22B3F2122497ACD800E1F4E2 /* Device+Extensions.swift in Sources */,
+				2221D6F0249FF11D0096B63E /* CountdownView.swift in Sources */,
 				224B1295243FB5B400A540E5 /* Player.swift in Sources */,
 				2242E0A524731BA4003889EA /* UIView+Autolayout.swift in Sources */,
 				22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */,

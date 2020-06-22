@@ -92,13 +92,21 @@ class GameViewController: UIViewController {
         
         self.isDisplayingMenu = false
         
-        switch context {
-        case .startNewGame:
-            Env.gameLogic.startGame()
-        case .restartGame:
-            Env.gameLogic.restartGame()
-        case .resumePausedGame:
+        if context == .resumePausedGame {
             Env.gameLogic.resumeGame()
+        } else {
+            let countdown = CountdownView(frame: view.frame) {
+                // Countdown finished
+                switch context {
+                case .startNewGame:
+                    Env.gameLogic.startGame()
+                case .restartGame:
+                    Env.gameLogic.restartGame()
+                case .resumePausedGame:
+                    break
+                }
+            }
+            view.addSubview(countdown)
         }
     }
 }
