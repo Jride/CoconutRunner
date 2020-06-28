@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundManager = BackgroundManager(gameScene: self)
         collisionDetectionManager.gameScene = self
         Env.gameLogic.add(observer: self, dispatchBehaviour: .onQueue(.main))
+        Env.gameState.add(observer: self, dispatchBehaviour: .onQueue(.main))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,12 +65,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         // Calculate time since last update
-        let dt: TimeInterval
+        var dt: TimeInterval
         if wasPaused {
             dt = 0
             wasPaused = false
         } else {
             dt = currentTime - lastUpdateTime
+            dt = dt.constrained(max: 0.02)
         }
         
         Env.gameLogic.update(deltaTime: dt)
@@ -138,13 +140,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wasPaused = true
     }
     
-    func mainMenuWasPresentedFromPauseState() {
-        view?.isPaused = false
-        removeAllActions()
-        backgroundManager.resetScene()
-        gameStarted = false
-    }
-    
 }
 
 extension GameScene: GameLogicEventsDispatcherObserver {
@@ -155,8 +150,8 @@ extension GameScene: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
         view?.isPaused = false
-        removeAllActions()
-        backgroundManager.resetScene()
+        
+        removeAction(forKey: "knockCoconuts")
         
         let sequence = SKAction.sequence([
             .wait(forDuration: config.knockCoconutSpawnRate),
@@ -197,6 +192,17 @@ extension GameScene: GameLogicEventsDispatcherObserver {
         gameOverContainer?.addChild(playAgain)
         
         addChild(gameOverContainer!)
+    }
+    
+}
+
+extension GameScene: GameStateDispatcherObserver {
+    
+    func resetGameState() {
+        view?.isPaused = false
+        removeAllActions()
+        backgroundManager.resetScene()
+        gameStarted = false
     }
     
 }

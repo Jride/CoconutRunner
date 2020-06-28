@@ -102,7 +102,13 @@ class HealthBarView: UIView {
 }
 
 extension HealthBarView: GameStateDispatcherObserver {
+    
     func playersHealthDidUpdate() {
         updateHudUI(animated: true)
     }
+    
+    func resetGameState() {
+        updateHudUI(animated: true)
+    }
+    
 }

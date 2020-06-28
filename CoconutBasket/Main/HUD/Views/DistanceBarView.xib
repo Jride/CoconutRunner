@@ -18,6 +18,7 @@
                 <outlet property="barContainer" destination="b6y-w9-FGE" id="K56-nj-tot"/>
                 <outlet property="barView" destination="UxC-qV-mCn" id="Ve4-SF-evP"/>
                 <outlet property="contentView" destination="SGo-am-Wnp" id="JUq-2Q-BTN"/>
+                <outlet property="levelLabel" destination="fnk-rT-Ltn" id="OUF-Ui-WRb"/>
                 <outlet property="subtitleLabel" destination="oCf-0f-WZl" id="3M8-GE-8HA"/>
             </connections>
         </placeholder>

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Background: GameSpriteNode {
+class Background: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "background").size()
     

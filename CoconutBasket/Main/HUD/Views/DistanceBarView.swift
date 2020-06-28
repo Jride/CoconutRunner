@@ -18,6 +18,7 @@ class DistanceBarView: UIView {
     @IBOutlet private var barContainer: UIView!
     @IBOutlet private var barView: UIView!
     @IBOutlet private var subtitleLabel: UILabel!
+    @IBOutlet private var levelLabel: UILabel!
     
     private let barWidthRatio: CGFloat = 180.0/300.0
     private let barRatio: CGFloat = 15.0/83.0
@@ -28,6 +29,9 @@ class DistanceBarView: UIView {
     }
     private var overallDistance: Int {
         Env.gameState.playersDistanceStats.overallDistance
+    }
+    private var currentLevel: Int {
+        Env.gameLogic.currentLevelConfig.level
     }
     
     override init(frame: CGRect) {
@@ -50,6 +54,8 @@ class DistanceBarView: UIView {
         
         addSubview(nibView)
         nibView.pinToSuperviewEdges()
+        
+        subtitleLabel.text = "0 M"
     }
     
     override func layoutSubviews() {
@@ -91,12 +97,18 @@ class DistanceBarView: UIView {
                 height: fullWidth * barRatio
             )
         }
+        
+        levelLabel.text = "LEVEL \(currentLevel)"
     }
 }
 
 extension DistanceBarView: GameStateDispatcherObserver {
     
     func playersDistanceStatsDidUpdate() {
+        updateHudUI(animated: true)
+    }
+    
+    func resetGameState() {
         updateHudUI(animated: true)
     }
     

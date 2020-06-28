@@ -14,12 +14,14 @@ protocol GameStateDispatcherObserver: class {
     func playersHealthDidUpdate()
     func playersDistanceStatsDidUpdate()
     func playerDied()
+    func resetGameState()
 }
 
 extension GameStateDispatcherObserver {
     func playersHealthDidUpdate() {}
     func playersDistanceStatsDidUpdate() {}
     func playerDied() {}
+    func resetGameState() {}
 }
 
 protocol GameStateDispatcher {
@@ -80,6 +82,28 @@ class GameState: GameStateDispatcher, Observable {
         
     }
     
+    private func configure(withLevelConfig config: LevelConfiguration) {
+        playersDistanceStats.currentLevelDistance = 0
+        if config.level == 1 {
+            playersDistanceStats.overallDistance = 0
+        }
+        if config.level > 1 {
+            playersDistanceStats.distanceToCompleteLevel = config.distanceToCompleteLevel
+        }
+        
+        playerHealth = config.playersFullHealth
+        playersFullHealth = config.playersFullHealth
+        
+        let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
+        playersHealthPercent = percent.constrained(min: 0, max: 1)
+    }
+    
+    func shouldReset() {
+        Env.gameLogic.resetToFirstLevel()
+        configure(withLevelConfig: Env.gameLogic.currentLevelConfig)
+        observerStore.forEach { $0.resetGameState() }
+    }
+    
 }
 
 extension GameState: CollisionEventsDispatcherObserver {
@@ -115,19 +139,7 @@ extension GameState: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
         
-        playersDistanceStats.currentLevelDistance = 0
-        if config.level == 1 {
-            playersDistanceStats.overallDistance = 0
-        }
-        if config.level > 1 {
-            playersDistanceStats.distanceToCompleteLevel = config.distanceToCompleteLevel
-        }
-        
-        playerHealth = config.playersFullHealth
-        playersFullHealth = config.playersFullHealth
-        
-        let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
-        playersHealthPercent = percent.constrained(min: 0, max: 1)
+        configure(withLevelConfig: config)
         
         observerStore.forEach {
             $0.playersHealthDidUpdate()
@@ -143,9 +155,11 @@ extension GameState: PlayerEventsDispatcherObserver {
         guard isPlayerAlive else { return }
         
         playersDistanceStats.bumpDistance(runningDistance: 5)
+        
         if playersDistanceStats.levelsDistanceProgress == 1 {
             // TODO: Implement level complete
             // Level Complete
+            Env.gameLogic.nextLevel()
         }
         
         observerStore.forEach { $0.playersDistanceStatsDidUpdate() }

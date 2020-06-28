@@ -11,21 +11,21 @@ import Foundation
 
 class BackgroundManager {
     
+    private var treesContainer: GameWrapperNode?
     private var trees = [PalmTree]()
+    
+    private var backgroundsContainer: GameWrapperNode?
     private var backgrounds = [Background]()
+    
+    private var backgroundCloudsFrontContainer: GameWrapperNode?
     private var backgroundCloudsFront = [BackgroundCloudFront]()
+    
+    private var backgroundCloudsBackContainer: GameWrapperNode?
     private var backgroundCloudsBack = [BackgroundCloudBack]()
     
     private var treePadding: CGFloat = 10
     private var treeMarginToPlayer: CGFloat = 80
     private var timeToAddCloud: TimeInterval = 0
-    
-    private var gameNodes: [GameNode] {
-        return [
-            trees.map { $0 as GameNode },
-            backgrounds.map { $0 as GameNode }
-        ].reduce([], +)
-    }
     
     private var floorMargin: CGFloat { gameScene.floorMargin }
     private var frame: CGRect { gameScene.frame }
@@ -62,12 +62,16 @@ class BackgroundManager {
     // MARK: - Add Background
     private func setupBackground() {
         
-        backgrounds.forEach { $0.removeFromParent() }
-        backgroundCloudsFront.forEach { $0.removeFromParent() }
-        backgroundCloudsBack.forEach { $0.removeFromParent() }
-        
+        let bgContainer = GameWrapperNode()
+        backgroundsContainer?.removeFromParent()
         backgrounds.removeAll()
+        
+        let bgCloudsFrontContainer = GameWrapperNode()
+        backgroundCloudsFrontContainer?.removeFromParent()
         backgroundCloudsFront.removeAll()
+        
+        let bgCloudsBackContainer = GameWrapperNode()
+        backgroundCloudsBackContainer?.removeFromParent()
         backgroundCloudsBack.removeAll()
         
         var currentX: CGFloat = backgroundSize.width / 2
@@ -87,21 +91,31 @@ class BackgroundManager {
             bgCloudBack.isAnimating = true
             
             currentX += backgroundSize.width
-            gameScene.addChild(bg)
-            gameScene.addChild(bgCloudFront)
-            gameScene.addChild(bgCloudBack)
+            bgContainer.addChild(bg)
+            bgCloudsFrontContainer.addChild(bgCloudFront)
+            bgCloudsBackContainer.addChild(bgCloudBack)
             
             backgrounds.append(bg)
             backgroundCloudsFront.append(bgCloudFront)
             backgroundCloudsBack.append(bgCloudBack)
         }
+        
+        backgroundsContainer = bgContainer
+        backgroundCloudsFrontContainer = bgCloudsFrontContainer
+        backgroundCloudsBackContainer = bgCloudsBackContainer
+        
+        gameScene.addChild(bgContainer)
+        gameScene.addChild(bgCloudsFrontContainer)
+        gameScene.addChild(bgCloudsBackContainer)
     }
     
     // MARK: - Add Palm Trees
     private func setupPalmTrees() {
         
-        trees.forEach { $0.removeFromParent() }
+        treesContainer?.removeFromParent()
         trees.removeAll()
+        
+        let container = GameWrapperNode()
         
         let offset = (treeSize.width / 2) + 22 + treePadding
         var currentX: CGFloat = frame.width/2 - offset - treeSize.width - treePadding
@@ -112,10 +126,14 @@ class BackgroundManager {
             tree.position = CGPoint(x: currentX, y: frame.height/2 - treeMarginToPlayer)
             tree.zPosition = ZPosition.palmTree
             currentX += tree.size.width + treePadding
-            gameScene.addChild(tree)
+            
+            container.addChild(tree)
             
             trees.append(tree)
         }
+        
+        treesContainer = container
+        gameScene.addChild(container)
     }
     
     // MARK: - Add Floor
@@ -196,7 +214,9 @@ extension BackgroundManager {
     
     func update(deltaTime: TimeInterval) {
         
-        gameNodes.forEach { $0.update(deltaTime: deltaTime) }
+        treesContainer?.update(deltaTime: deltaTime)
+        trees.forEach { $0.update(deltaTime: deltaTime) }
+        
         backgroundCloudsFront.forEach { $0.update(deltaTime: deltaTime) }
         backgroundCloudsBack.forEach { $0.update(deltaTime: deltaTime) }
         
@@ -217,8 +237,8 @@ extension BackgroundManager {
 extension BackgroundManager: PlayerEventsDispatcherObserver {
     
     func playerDidStartMoving() {
-        trees.forEach { $0.move(by: -(treeSize.width + treePadding)) }
-        backgrounds.forEach { $0.move(by: -(backgroundSize.width/10)) }
+        treesContainer?.move(by: -(treeSize.width + treePadding))
+        backgroundsContainer?.move(by: -(backgroundSize.width/10))
     }
     
 }

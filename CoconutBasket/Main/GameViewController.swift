@@ -95,6 +95,7 @@ class GameViewController: UIViewController {
         if context == .resumePausedGame {
             Env.gameLogic.resumeGame()
         } else {
+            Env.gameState.shouldReset()
             let countdown = CountdownView(frame: view.frame) {
                 // Countdown finished
                 switch context {
@@ -102,7 +103,7 @@ class GameViewController: UIViewController {
                     Env.gameLogic.startGame()
                 case .restartGame:
                     Env.gameLogic.restartGame()
-                case .resumePausedGame:
+                default:
                     break
                 }
             }
@@ -122,8 +123,8 @@ extension GameViewController {
         menu.didClose = { [unowned self] (context) in
             self.menuDidClose(context)
         }
-        menu.mainMenuPresentedFromPauseState = { [unowned self] in
-            self.scene.mainMenuWasPresentedFromPauseState()
+        menu.mainMenuPresentedFromPauseState = {
+            Env.gameState.shouldReset()
         }
         add(menu, frame: view.frame)
         pauseButton.isHidden = true

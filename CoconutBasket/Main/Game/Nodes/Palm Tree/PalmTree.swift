@@ -9,7 +9,7 @@
 import SpriteKit
 import Foundation
 
-class PalmTree: GameWrapperNode {
+class PalmTree: SKNode {
     
     static let originalSize = SKTexture(imageNamed: "palmTree").size()
     
@@ -129,9 +129,7 @@ class PalmTree: GameWrapperNode {
         banana.run(.repeatForever(resize))
     }
     
-    override func update(deltaTime: TimeInterval) {
-        super.update(deltaTime: deltaTime)
-        
+    func update(deltaTime: TimeInterval) {
         guard let parent = self.parent else { return }
         
         monkey?.update(deltaTime: deltaTime)
