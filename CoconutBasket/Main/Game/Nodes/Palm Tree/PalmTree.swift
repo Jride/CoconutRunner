@@ -130,13 +130,13 @@ class PalmTree: SKNode {
     }
     
     func update(deltaTime: TimeInterval) {
-        guard let parent = self.parent else { return }
+        guard let gameScene = gameScene else { return }
         
         monkey?.update(deltaTime: deltaTime)
         
         // Remove all the coconuts that are out of frame
         fallingChildNodes.removeAll {
-            if parent.intersects($0) == false {
+            if gameScene.intersects($0) == false {
                 $0.removeFromParent()
                 return true
             } else {

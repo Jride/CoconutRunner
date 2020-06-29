@@ -17,10 +17,10 @@ class BackgroundManager {
     private var backgroundsContainer: GameWrapperNode?
     private var backgrounds = [Background]()
     
-    private var backgroundCloudsFrontContainer: GameWrapperNode?
+    private var backgroundCloudsFrontContainer: ContinuousMovingNode?
     private var backgroundCloudsFront = [BackgroundCloudFront]()
     
-    private var backgroundCloudsBackContainer: GameWrapperNode?
+    private var backgroundCloudsBackContainer: ContinuousMovingNode?
     private var backgroundCloudsBack = [BackgroundCloudBack]()
     
     private var treePadding: CGFloat = 10
@@ -66,11 +66,11 @@ class BackgroundManager {
         backgroundsContainer?.removeFromParent()
         backgrounds.removeAll()
         
-        let bgCloudsFrontContainer = GameWrapperNode()
+        let bgCloudsFrontContainer = ContinuousMovingNode(movementSpeed: 30)
         backgroundCloudsFrontContainer?.removeFromParent()
         backgroundCloudsFront.removeAll()
         
-        let bgCloudsBackContainer = GameWrapperNode()
+        let bgCloudsBackContainer = ContinuousMovingNode(movementSpeed: 10)
         backgroundCloudsBackContainer?.removeFromParent()
         backgroundCloudsBack.removeAll()
         
@@ -84,11 +84,9 @@ class BackgroundManager {
             
             let bgCloudFront = BackgroundCloudFront(size: backgroundSize)
             bgCloudFront.position = CGPoint(x: currentX, y: frame.height/2 + 80)
-            bgCloudFront.isAnimating = true
             
             let bgCloudBack = BackgroundCloudBack(size: backgroundSize)
             bgCloudBack.position = CGPoint(x: currentX, y: frame.height/2 + 100)
-            bgCloudBack.isAnimating = true
             
             currentX += backgroundSize.width
             bgContainer.addChild(bg)
@@ -217,8 +215,9 @@ extension BackgroundManager {
         treesContainer?.update(deltaTime: deltaTime)
         trees.forEach { $0.update(deltaTime: deltaTime) }
         
-        backgroundCloudsFront.forEach { $0.update(deltaTime: deltaTime) }
-        backgroundCloudsBack.forEach { $0.update(deltaTime: deltaTime) }
+        backgroundsContainer?.update(deltaTime: deltaTime)
+        backgroundCloudsFrontContainer?.update(deltaTime: deltaTime)
+        backgroundCloudsBackContainer?.update(deltaTime: deltaTime)
         
         recycleGameObjectsIfNecessary()
     }

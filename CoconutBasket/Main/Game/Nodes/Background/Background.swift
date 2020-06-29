@@ -25,11 +25,29 @@ class Background: SKSpriteNode {
     }
 }
 
+class ContinuousMovingNode: SKNode {
+    
+    private let movementSpeed: TimeInterval
+    
+    init(movementSpeed: TimeInterval) {
+        self.movementSpeed = movementSpeed
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func update(deltaTime: TimeInterval) {
+        let amountToMove = deltaTime * movementSpeed
+        position.x -= CGFloat(amountToMove)
+    }
+    
+}
+
 class BackgroundCloudFront: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "BackgroundCloudLayerA").size()
-    private let cloudSpeed: TimeInterval = 30
-    var isAnimating = false
     
     init(size: CGSize) {
         
@@ -42,21 +60,11 @@ class BackgroundCloudFront: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func update(deltaTime: TimeInterval) {
-        
-        guard isAnimating else { return }
-        
-        let amountToMove = deltaTime * cloudSpeed
-        position.x -= CGFloat(amountToMove)
-    }
 }
 
 class BackgroundCloudBack: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "BackgroundCloudLayerB").size()
-    private let cloudSpeed: TimeInterval = 10
-    var isAnimating = false
     
     init(size: CGSize) {
         
@@ -68,13 +76,5 @@ class BackgroundCloudBack: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func update(deltaTime: TimeInterval) {
-        
-        guard isAnimating else { return }
-        
-        let amountToMove = deltaTime * cloudSpeed
-        position.x -= CGFloat(amountToMove)
     }
 }
