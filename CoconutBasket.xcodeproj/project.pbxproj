@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22100EB924B84DB60019F0CA /* UIVIew+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22100EB824B84DB60019F0CA /* UIVIew+Animations.swift */; };
+		22100EBC24B852280019F0CA /* GameStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22100EBA24B852280019F0CA /* GameStatsViewController.swift */; };
 		2221D6F0249FF11D0096B63E /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221D6EF249FF11D0096B63E /* CountdownView.swift */; };
+		2224AF5224BCFE3200D0490A /* DequeuableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224AF5124BCFE3200D0490A /* DequeuableTableViewCell.swift */; };
+		2224AF5524BD8CF000D0490A /* StatsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224AF5324BD8CF000D0490A /* StatsItemView.swift */; };
+		2224AF5624BD8CF000D0490A /* StatsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2224AF5424BD8CF000D0490A /* StatsItemView.xib */; };
+		2224B7DC24BF96FC00D0490A /* StatsHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224B7DA24BF96FC00D0490A /* StatsHeaderFooterView.swift */; };
+		2224B7DD24BF96FC00D0490A /* StatsHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2224B7DB24BF96FC00D0490A /* StatsHeaderFooterView.xib */; };
 		222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC312454CEC400F38F79 /* BackgroundManager.swift */; };
 		22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22301E08245E082E00FF0AD0 /* Bomb.swift */; };
 		2242E03F24647623003889EA /* Banana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E03E24647623003889EA /* Banana.swift */; };
@@ -67,6 +74,7 @@
 		22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */; };
 		22EF07A8245F2C4F0085ABCC /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 22EF07A6245F2C4F0085ABCC /* Explosion.sks */; };
 		22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */ = {isa = PBXBuildFile; fileRef = 22EF07AA245F2D460085ABCC /* ExplosionUp.sks */; };
+		22F27A0E24B1CDD100EF455D /* GameStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F27A0D24B1CDD100EF455D /* GameStatsViewController.xib */; };
 		22F2CF07243B0C1200858120 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF06243B0C1200858120 /* AppDelegate.swift */; };
 		22F2CF0D243B0C1200858120 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF0C243B0C1200858120 /* GameScene.swift */; };
 		22F2CF0F243B0C1200858120 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF0E243B0C1200858120 /* GameViewController.swift */; };
@@ -89,7 +97,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22100EB824B84DB60019F0CA /* UIVIew+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Animations.swift"; sourceTree = "<group>"; };
+		22100EBA24B852280019F0CA /* GameStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatsViewController.swift; sourceTree = "<group>"; };
 		2221D6EF249FF11D0096B63E /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		2224AF5124BCFE3200D0490A /* DequeuableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DequeuableTableViewCell.swift; sourceTree = "<group>"; };
+		2224AF5324BD8CF000D0490A /* StatsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsItemView.swift; sourceTree = "<group>"; };
+		2224AF5424BD8CF000D0490A /* StatsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsItemView.xib; sourceTree = "<group>"; };
+		2224B7DA24BF96FC00D0490A /* StatsHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHeaderFooterView.swift; sourceTree = "<group>"; };
+		2224B7DB24BF96FC00D0490A /* StatsHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsHeaderFooterView.xib; sourceTree = "<group>"; };
 		222EDC312454CEC400F38F79 /* BackgroundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		22301E08245E082E00FF0AD0 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		2242E03E24647623003889EA /* Banana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banana.swift; sourceTree = "<group>"; };
@@ -149,6 +164,7 @@
 		22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionDetectionManager.swift; sourceTree = "<group>"; };
 		22EF07A6245F2C4F0085ABCC /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		22EF07AA245F2D460085ABCC /* ExplosionUp.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplosionUp.sks; sourceTree = "<group>"; };
+		22F27A0D24B1CDD100EF455D /* GameStatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameStatsViewController.xib; sourceTree = "<group>"; };
 		22F2CF03243B0C1200858120 /* CoconutBasket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoconutBasket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F2CF06243B0C1200858120 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F2CF0C243B0C1200858120 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -221,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				2242E078246E799C003889EA /* Observable.swift */,
+				2224AF5124BCFE3200D0490A /* DequeuableTableViewCell.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -286,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				2242E0A424731BA4003889EA /* UIView+Autolayout.swift */,
+				22100EB824B84DB60019F0CA /* UIVIew+Animations.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -427,6 +445,7 @@
 		22B3F201249767D100E1F4E2 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				22F27A0A24B1C73700EF455D /* Game Stats */,
 				22B3F2192497CAC600E1F4E2 /* MenuViews */,
 				22B3F20C249772E900E1F4E2 /* MenuViewController.swift */,
 				2221D6EF249FF11D0096B63E /* CountdownView.swift */,
@@ -470,6 +489,19 @@
 				22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */,
 			);
 			path = Collision;
+			sourceTree = "<group>";
+		};
+		22F27A0A24B1C73700EF455D /* Game Stats */ = {
+			isa = PBXGroup;
+			children = (
+				22F27A0D24B1CDD100EF455D /* GameStatsViewController.xib */,
+				22100EBA24B852280019F0CA /* GameStatsViewController.swift */,
+				2224AF5324BD8CF000D0490A /* StatsItemView.swift */,
+				2224AF5424BD8CF000D0490A /* StatsItemView.xib */,
+				2224B7DA24BF96FC00D0490A /* StatsHeaderFooterView.swift */,
+				2224B7DB24BF96FC00D0490A /* StatsHeaderFooterView.xib */,
+			);
+			path = "Game Stats";
 			sourceTree = "<group>";
 		};
 		22F2CEFA243B0C1200858120 = {
@@ -532,6 +564,7 @@
 				22F2CF00243B0C1200858120 /* Frameworks */,
 				22F2CF01243B0C1200858120 /* Resources */,
 				22B3F20824976FD000E1F4E2 /* Carthage Copy Frameworks */,
+				222FB98F24C4C2FD009EE84B /* Set Build Number */,
 			);
 			buildRules = (
 			);
@@ -604,9 +637,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2224B7DD24BF96FC00D0490A /* StatsHeaderFooterView.xib in Resources */,
 				22B3F21B2497CAEC00E1F4E2 /* PauseMenuView.xib in Resources */,
 				2242E099247304D6003889EA /* HealthBarView.xib in Resources */,
 				22F2CF12243B0C1200858120 /* Main.storyboard in Resources */,
+				22F27A0E24B1CDD100EF455D /* GameStatsViewController.xib in Resources */,
 				228AFFD42474698100982AD3 /* Kenney Future Narrow.ttf in Resources */,
 				22942C862498E7BC00A4D136 /* PromptView.xib in Resources */,
 				22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */,
@@ -628,6 +663,7 @@
 				225EC69B2482BE2900ED0DD2 /* WorldmapTheme.mp3 in Resources */,
 				22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
+				2224AF5624BD8CF000D0490A /* StatsItemView.xib in Resources */,
 				224B12A22445946800A540E5 /* ImpactPlayer.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -642,6 +678,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		222FB98F24C4C2FD009EE84B /* Set Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Generate the build number using current date and time\nbuildNumber=$(date \"+%Y%m.%d.%H%M\")\n\n# Set the build number in plist file\n/usr/libexec/PlistBuddy -c \"Print\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n/usr/libexec/PlistBuddy -c \"Print\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
+		};
 		229D56D2244B5F3F0067465D /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -711,11 +765,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22100EBC24B852280019F0CA /* GameStatsViewController.swift in Sources */,
 				22F2CF0D243B0C1200858120 /* GameScene.swift in Sources */,
 				22B3F2182497C26A00E1F4E2 /* MainMenuView.swift in Sources */,
 				225EC6B024854FCE00ED0DD2 /* Music.swift in Sources */,
 				22B3F20B249772BA00E1F4E2 /* UIViewController+ChildViewController.swift in Sources */,
 				22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */,
+				2224AF5524BD8CF000D0490A /* StatsItemView.swift in Sources */,
 				229C1271245733F00006F464 /* UIColor+Color.swift in Sources */,
 				2242E0A124731A43003889EA /* Bundle+LoadFromNib.swift in Sources */,
 				224B129B2444EF8600A540E5 /* Background.swift in Sources */,
@@ -728,12 +784,15 @@
 				2242E07F246E7A7D003889EA /* EnvironmentConfigurer.swift in Sources */,
 				22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */,
 				22F2CF07243B0C1200858120 /* AppDelegate.swift in Sources */,
+				2224AF5224BCFE3200D0490A /* DequeuableTableViewCell.swift in Sources */,
+				2224B7DC24BF96FC00D0490A /* StatsHeaderFooterView.swift in Sources */,
 				225EC6B62486E03000ED0DD2 /* GameObjectsLayers.swift in Sources */,
 				22B3F2122497ACD800E1F4E2 /* Device+Extensions.swift in Sources */,
 				2221D6F0249FF11D0096B63E /* CountdownView.swift in Sources */,
 				224B1295243FB5B400A540E5 /* Player.swift in Sources */,
 				2242E0A524731BA4003889EA /* UIView+Autolayout.swift in Sources */,
 				22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */,
+				22100EB924B84DB60019F0CA /* UIVIew+Animations.swift in Sources */,
 				225EC6BE248913EE00ED0DD2 /* Scheduler.swift in Sources */,
 				2242E079246E799C003889EA /* Observable.swift in Sources */,
 				22B3F21D2497CAF900E1F4E2 /* PauseMenuView.swift in Sources */,
@@ -912,6 +971,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = "Set at build time";
 				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -923,7 +983,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.itv.development.CoconutBasket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rideout.TropicalRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "ITV Development Wildcard Profile";
 				SWIFT_VERSION = 5.0;
@@ -937,6 +997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = "Set at build time";
 				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -948,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.itv.development.CoconutBasket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rideout.TropicalRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "ITV Development Wildcard Profile";
 				SWIFT_VERSION = 5.0;

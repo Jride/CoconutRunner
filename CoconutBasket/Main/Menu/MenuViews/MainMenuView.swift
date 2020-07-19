@@ -10,7 +10,8 @@ import UIKit
 import TweenKit
 
 protocol MainMenuDelegate: class {
-    func playButtonPressed()
+    func mainMenuPlayTapped()
+    func mainMenuInfoTapped()
 }
 
 class MainMenuView: UIView {
@@ -104,8 +105,12 @@ extension MainMenuView {
     
     @IBAction private func playButtonPressed(_ sender: Any) {
         animateToGameView { [weak self] in
-            self?.delegate?.playButtonPressed()
+            self?.delegate?.mainMenuPlayTapped()
         }
+    }
+    
+    @IBAction private func infoButtonPressed(_ sender: Any) {
+        delegate?.mainMenuInfoTapped()
     }
     
 }

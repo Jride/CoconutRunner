@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameStatsViewController" customModule="CoconutBasket" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="qqO-rD-VVB" id="hsm-JG-dNP"/>
+                <outlet property="containerView" destination="Zt7-zJ-36J" id="kWG-TW-DKw"/>
+                <outlet property="scrollview" destination="IEY-s8-4fg" id="uF2-0O-LFo"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Rcy-2O-tSp"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="720" height="720"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt7-zJ-36J" userLabel="Container">
+                    <rect key="frame" x="0.0" y="5" width="720" height="720"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="uhz-MK-lFI">
+                            <rect key="frame" x="23.5" y="75" width="673" height="612"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="uhz-MK-lFI" secondAttribute="height" multiplier="1.1" id="ZHD-t6-ObG"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="statsTable" translatesAutoresizingMaskIntoConstraints="NO" id="OaH-6v-XCm">
+                            <rect key="frame" x="57" y="98" width="606" height="551"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="OaH-6v-XCm" secondAttribute="height" multiplier="1.1" id="7fW-wS-eWF"/>
+                            </constraints>
+                        </imageView>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEY-s8-4fg">
+                            <rect key="frame" x="103.5" y="142" width="513" height="463"/>
+                        </scrollView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gameOverHeader" translatesAutoresizingMaskIntoConstraints="NO" id="eC0-ed-ha2">
+                            <rect key="frame" x="134" y="-1" width="437.5" height="175"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="eC0-ed-ha2" secondAttribute="height" multiplier="5:2" id="rjH-U7-Nlk"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqO-rD-VVB">
+                            <rect key="frame" x="624.5" y="41.5" width="93" height="90.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="qqO-rD-VVB" secondAttribute="height" multiplier="93:91" id="7az-pK-ol4"/>
+                            </constraints>
+                            <state key="normal" image="close_2"/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="RUf-Y3-6q2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="720" placeholder="YES" id="00y-wD-R2O"/>
+                        <constraint firstItem="eC0-ed-ha2" firstAttribute="centerX" secondItem="uhz-MK-lFI" secondAttribute="centerX" multiplier="0.98" id="3XZ-4n-mCD"/>
+                        <constraint firstItem="IEY-s8-4fg" firstAttribute="width" secondItem="OaH-6v-XCm" secondAttribute="width" multiplier="0.846535" id="BpH-qO-gd0"/>
+                        <constraint firstItem="uhz-MK-lFI" firstAttribute="centerX" secondItem="Zt7-zJ-36J" secondAttribute="centerX" id="CbX-p5-OrF"/>
+                        <constraint firstItem="qqO-rD-VVB" firstAttribute="trailing" secondItem="uhz-MK-lFI" secondAttribute="trailing" multiplier="1.03" id="F8K-Pz-R8V"/>
+                        <constraint firstItem="qqO-rD-VVB" firstAttribute="width" secondItem="uhz-MK-lFI" secondAttribute="width" multiplier="0.137868" id="He0-L1-g7N"/>
+                        <constraint firstItem="IEY-s8-4fg" firstAttribute="centerY" secondItem="OaH-6v-XCm" secondAttribute="centerY" id="MMm-hG-k38"/>
+                        <constraint firstItem="IEY-s8-4fg" firstAttribute="height" secondItem="OaH-6v-XCm" secondAttribute="height" multiplier="0.84029" id="Q6T-mF-pQd"/>
+                        <constraint firstItem="qqO-rD-VVB" firstAttribute="top" secondItem="uhz-MK-lFI" secondAttribute="top" multiplier="0.55" id="W4u-XQ-ujN"/>
+                        <constraint firstItem="OaH-6v-XCm" firstAttribute="centerY" secondItem="uhz-MK-lFI" secondAttribute="centerY" multiplier="0.98" id="WZ9-Tc-MP1"/>
+                        <constraint firstItem="IEY-s8-4fg" firstAttribute="centerX" secondItem="OaH-6v-XCm" secondAttribute="centerX" id="eTW-PF-4ZP"/>
+                        <constraint firstItem="OaH-6v-XCm" firstAttribute="width" secondItem="uhz-MK-lFI" secondAttribute="width" multiplier="0.9" id="hJf-8m-0iz"/>
+                        <constraint firstItem="eC0-ed-ha2" firstAttribute="width" secondItem="uhz-MK-lFI" secondAttribute="width" multiplier="0.65" id="hvH-zP-Ga4"/>
+                        <constraint firstAttribute="height" constant="720" placeholder="YES" id="kwr-OS-9qG"/>
+                        <constraint firstItem="uhz-MK-lFI" firstAttribute="height" secondItem="Zt7-zJ-36J" secondAttribute="height" multiplier="0.85" id="prF-HB-jNW"/>
+                        <constraint firstItem="OaH-6v-XCm" firstAttribute="centerX" secondItem="uhz-MK-lFI" secondAttribute="centerX" id="qxn-P4-1WT"/>
+                        <constraint firstItem="eC0-ed-ha2" firstAttribute="centerY" secondItem="qqO-rD-VVB" secondAttribute="centerY" id="wfd-kP-m11"/>
+                        <constraint firstItem="uhz-MK-lFI" firstAttribute="centerY" secondItem="Zt7-zJ-36J" secondAttribute="centerY" multiplier="1.05" constant="3" id="wm5-D1-rsc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.64474827239999999" green="0.93984270410000004" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Zt7-zJ-36J" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" placeholder="YES" id="cIR-LC-q2i"/>
+                <constraint firstItem="Zt7-zJ-36J" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" placeholder="YES" id="umm-Ce-DP9"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-136.23188405797103" y="1.3392857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_2" width="75" height="73.5"/>
+        <image name="gameOverHeader" width="576.5" height="227.5"/>
+        <image name="statsBackground" width="653.5" height="728.5"/>
+        <image name="statsTable" width="551" height="644"/>
+    </resources>
+</document>

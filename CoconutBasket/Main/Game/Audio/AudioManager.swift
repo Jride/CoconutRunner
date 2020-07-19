@@ -101,7 +101,8 @@ extension AudioManager: GameLogicEventsDispatcherObserver {
     }
 }
 
-extension AudioManager: MenuDispatcherObserver {
+// MARK: - Presenting Menu
+extension AudioManager {
     
     func mainMenuPresented() {
         gameMusic?.stop()
