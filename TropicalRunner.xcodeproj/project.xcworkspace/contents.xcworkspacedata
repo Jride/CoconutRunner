@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CoconutBasket.xcodeproj">
+      location = "self:/Users/joshrideout/Documents/Projects/CoconutRunner/TropicalRunner.xcodeproj">
    </FileRef>
 </Workspace>

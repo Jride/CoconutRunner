@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22F2CF02243B0C1200858120"
-               BuildableName = "CoconutBasket.app"
-               BlueprintName = "CoconutBasket"
-               ReferencedContainer = "container:CoconutBasket.xcodeproj">
+               BuildableName = "TropicalRunner.app"
+               BlueprintName = "TropicalRunner"
+               ReferencedContainer = "container:TropicalRunner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22F2CF1C243B0C1400858120"
-               BuildableName = "CoconutBasketTests.xctest"
-               BlueprintName = "CoconutBasketTests"
-               ReferencedContainer = "container:CoconutBasket.xcodeproj">
+               BuildableName = "TropicalRunnerTests.xctest"
+               BlueprintName = "TropicalRunnerTests"
+               ReferencedContainer = "container:TropicalRunner.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22F2CF02243B0C1200858120"
-            BuildableName = "CoconutBasket.app"
-            BlueprintName = "CoconutBasket"
-            ReferencedContainer = "container:CoconutBasket.xcodeproj">
+            BuildableName = "TropicalRunner.app"
+            BlueprintName = "TropicalRunner"
+            ReferencedContainer = "container:TropicalRunner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22F2CF02243B0C1200858120"
-            BuildableName = "CoconutBasket.app"
-            BlueprintName = "CoconutBasket"
-            ReferencedContainer = "container:CoconutBasket.xcodeproj">
+            BuildableName = "TropicalRunner.app"
+            BlueprintName = "TropicalRunner"
+            ReferencedContainer = "container:TropicalRunner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
