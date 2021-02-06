@@ -12,6 +12,11 @@ import QuartzCore
 @objc public class ActionScheduler : NSObject {
     
     // MARK: - Public
+        
+    public init(automaticallyAdvanceTime: Bool = true) {
+        self.automaticallyAdvanceTime = automaticallyAdvanceTime
+        super.init()
+    }
     
     /**
     Run an action
@@ -31,7 +36,10 @@ import QuartzCore
     public func add(animation: Animation) {
         animations.append(animation)
         animation.willStart()
-        startLoop()
+        
+        if automaticallyAdvanceTime {
+            startLoop()
+        }
     }
     
     /**
@@ -77,7 +85,7 @@ import QuartzCore
     private var animationsToRemove = [Animation]()
 
     private var displayLink: DisplayLink?
-    private var lastTimeStamp: CFTimeInterval?
+    private let automaticallyAdvanceTime: Bool
     
     // MARK: - Deinit
     
@@ -92,11 +100,9 @@ import QuartzCore
         if displayLink != nil {
             return
         }
-        
-        lastTimeStamp = nil
-        
-        displayLink = DisplayLink(handler: {[unowned self] (displayLink) in
-             self.displayLinkCallback(displaylink: displayLink)
+                
+        displayLink = DisplayLink(handler: {[unowned self] (dt) in
+            self.displayLinkCallback(dt: dt)
         })
     }
     
@@ -106,23 +112,14 @@ import QuartzCore
         displayLink = nil
     }
     
-    @objc private func displayLinkCallback(displaylink: CADisplayLink) {
-        
-        // We need a previous time stamp to check against. Save if we don't already have one
-        guard let last = lastTimeStamp else{
-            lastTimeStamp = displaylink.timestamp
-            return
-        }
+    @objc private func displayLinkCallback(dt: Double) {
         
         // Update Animations
-        let dt = displaylink.timestamp - last
         step(dt: dt)
-        
-        // Save the current time
-        lastTimeStamp = displaylink.timestamp
     }
     
-    func step(dt: Double) {
+    /// Advance the scheduler's time by amount dt
+    public func step(dt: Double) {
         
         for animation in animations {
             
@@ -157,33 +154,5 @@ import QuartzCore
         }
         animationsToRemove.removeAll()
 
-    }
-}
-
-@objc class DisplayLink : NSObject {
-    
-    var caDisplayLink: CADisplayLink? = nil
-    let handler: (CADisplayLink) -> ()
-    
-    init(handler: @escaping (CADisplayLink) -> ()) {
-        
-        self.handler = handler
-        
-        super.init()
-        
-        caDisplayLink = CADisplayLink(target: self,
-                                      selector: #selector(displayLinkCallback(displaylink:)))
-        
-        caDisplayLink?.add(to: .current,
-                           forMode: .common)
-        
-    }
-    
-    @objc private func displayLinkCallback(displaylink: CADisplayLink) {
-        self.handler(displaylink)
-    }
-    
-    func invalidate() {
-        caDisplayLink?.invalidate()
     }
 }

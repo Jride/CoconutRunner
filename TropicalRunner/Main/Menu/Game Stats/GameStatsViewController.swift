@@ -50,6 +50,14 @@ enum Stat: CaseIterable {
         case .banana: return "BANANAS COLLECTED"
         }
     }
+    
+    var value: Int {
+        switch self {
+        case .health: return 80
+        case .distance: return 500
+        case .banana: return 190
+        }
+    }
 }
 
 class StatsCoordinator {
@@ -62,6 +70,8 @@ class StatsCoordinator {
             distance + damage + banana
         }
     }
+    
+    var footerView: StatsHeaderFooterView?
     
     private var score = Score()
     private var animatingObjects = [Animating]()
@@ -95,22 +105,22 @@ extension StatsCoordinator {
         runAnimation(atIndex: 0)
     }
     
-    func score(for stat: Stat) -> (value: Int, score: Int) {
+    func score(for stat: Stat) -> Int {
         switch stat {
         case .banana:
-            let val = 50
-            score.banana = Int(Double(val) * 1.4)
-            return (value: val, score: score.banana)
+            score.banana = Int(Double(stat.value) * 1.4)
+            return score.banana
         case .distance:
-//            let val = Env.gameState.playersDistanceStats.overallDistance
-            let val = 500
-            score.distance = Int(Double(val) * 1.2)
-            return (value: val, score: score.distance)
+            score.distance = Int(Double(stat.value) * 1.2)
+            return score.distance
         case .health:
-            let val = 80
-            score.damage = -(Int(Double(val) * 1.2))
-            return (value: val, score: score.damage)
+            score.damage = -(Int(Double(stat.value) * 1.2))
+            return score.damage
         }
+    }
+    
+    var totalScore: Int {
+        score.total
     }
 }
 
@@ -190,7 +200,7 @@ class GameStatsViewController: UIViewController {
     }
     
     init() {
-        let widthToHeightRatio: CGFloat = 720.0/720.0
+        let widthToHeightRatio: CGFloat = 700/500
         let height = screenHeight * 0.9
         
         self.menuHeight = height
@@ -204,7 +214,7 @@ class GameStatsViewController: UIViewController {
             .stat(.distance),
             .stat(.health),
             .stat(.banana),
-            .footer(.init(lhsText: "TOTAL:", rhsText: "2323124"))
+            .footer(.init(lhsText: "TOTAL:", rhsText: "0"))
         ]
     }
     
@@ -242,6 +252,7 @@ class GameStatsViewController: UIViewController {
             footerView.pinWidthToSameAsView(scrollview)
             footerView.lhsText = config.lhsText
             footerView.rhsText = config.rhsText
+            statsCoordinator.footerView = footerView
         }
         
     }

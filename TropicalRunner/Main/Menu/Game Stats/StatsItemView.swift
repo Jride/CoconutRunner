@@ -52,7 +52,7 @@ class StatsItemView: UIView {
         stat = config.stat
         iconImage.image = stat.icon
         titleLabel.text = "\(stat.title):"
-        valueLabel.text = "0"
+        valueLabel.text = "\(stat.value)"
         valueLabel.textColor = stat.textColor
         scoreLabel.text =  "0"
     }
@@ -63,21 +63,16 @@ extension StatsItemView: Animating {
     
     func runAnimation(with scheduler: ActionScheduler, completion: @escaping () -> Void) {
         
-        guard let coordinator = statsCoordinator else {
+        guard let coordinator = statsCoordinator,
+            let totalScoreView = coordinator.footerView else {
             completion()
             return
         }
         
-        let (value, score) = coordinator.score(for: stat)
+        let score = coordinator.score(for: stat)
         
         let duration: TimeInterval = 1
-        
-        let valueAction = InterpolationAction(
-            from: 0,
-            to: value,
-            duration: duration, easing: .linear) { [weak self] in
-                self?.valueLabel.text = "\($0)"
-        }
+        var actions = [FiniteTimeAction]()
         
         var plusMinus = score.isPositive ? "+" : "-"
         plusMinus = score == 0 ? "" : plusMinus
@@ -89,13 +84,23 @@ extension StatsItemView: Animating {
                 self?.scoreLabel.text = "\(plusMinus)\($0)"
         }
         
-        let group = ActionGroup(actions: [
-            valueAction,
-            scoreAction
-        ])
+        actions.append(scoreAction)
+        
+        if let currentTotal = Int(totalScoreView.rhsText) {
+            
+            let totalScoreAction = InterpolationAction(
+                from: currentTotal,
+                to: coordinator.totalScore,
+                duration: duration, easing: .linear) {
+                    totalScoreView.rhsText = "\($0)"
+            }
+            
+            actions.append(totalScoreAction)
+        }
         
         let sequence = ActionSequence(actions: [
-            group,
+            ActionGroup(actions: actions),
+            DelayAction(duration: 0.3),
             RunBlockAction(handler: {
                 completion()
             })

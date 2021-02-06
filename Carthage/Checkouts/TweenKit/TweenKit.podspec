@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TweenKit'
-  s.version          = '0.6'
-  s.summary          = 'Animation library for iOS and tvOS'
+  s.version          = '1.0.3'
+  s.summary          = 'Animation library for iOS, tvOS and macOS'
 
   s.description      = <<-DESC
 TweenKit makes it easy to animate anything!
@@ -23,9 +23,11 @@ TweenKit makes it easy to animate anything!
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
+  s.osx.deployment_target = '10.14'
   s.swift_version = '5.0'
 
   s.source_files = 'TweenKit/TweenKit/*.swift'
-  s.frameworks = 'UIKit'
+  s.ios.framework  = 'UIKit'
+  s.osx.framework  = 'CoreGraphics'
 
 end
