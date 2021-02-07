@@ -16,9 +16,10 @@ final class StatsItemView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var valueLabel: UILabel!
     @IBOutlet private var scoreLabel: UILabel!
+    @IBOutlet private var cons_iconWidth: NSLayoutConstraint!
     
     var statsCoordinator: StatsCoordinator?
-    var stat: Stat = .health
+    var stat: Stat = .damage
     
     struct Config {
         let statsCoordinator: StatsCoordinator
@@ -44,6 +45,15 @@ final class StatsItemView: UIView {
         
         backgroundColor = .clear
         nibView.backgroundColor = .clear
+        
+        cons_iconWidth.constant = Env.gameState.scaleFactor * 50
+        
+        var fontSize: CGFloat = Env.device.isPad ? 25 : 20
+        fontSize = fontSize * Fonts.fontCoefficient
+        
+        [scoreLabel,
+         titleLabel,
+         valueLabel].forEach { $0.font = Fonts.soupOfJustice(size: fontSize) }
     }
     
     func configure(with config: Config) {
@@ -52,9 +62,10 @@ final class StatsItemView: UIView {
         stat = config.stat
         iconImage.image = stat.icon
         titleLabel.text = "\(stat.title):"
-        valueLabel.text = "\(stat.value)"
+        valueLabel.text = stat.readableValue
         valueLabel.textColor = stat.textColor
         scoreLabel.text =  "0"
+        scoreLabel.textColor = stat.textColor
     }
     
 }

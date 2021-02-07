@@ -50,6 +50,12 @@ final class StatsHeaderFooterView: UIView {
         backgroundColor = .clear
         nibView.backgroundColor = .clear
         
+        var fontSize: CGFloat = Env.device.isPad ? 30 : 25
+        fontSize = fontSize * Fonts.fontCoefficient
+        
+        [rhsLabel,
+         lhsLabel].forEach { $0.font = Fonts.soupOfJustice(size: fontSize) }
+        
     }
     
 }

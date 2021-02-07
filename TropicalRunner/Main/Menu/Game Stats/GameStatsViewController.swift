@@ -15,13 +15,13 @@ protocol Animating: class {
 }
 
 enum Stat: CaseIterable {
-    case health
+    case damage
     case distance
     case banana
     
     var reuseId: String {
         switch self {
-        case .health: return "HealthStatsItem"
+        case .damage: return "HealthStatsItem"
         case .distance: return "DistanceStatsItem"
         case .banana: return "BananaStatsItem"
         }
@@ -29,7 +29,7 @@ enum Stat: CaseIterable {
     
     var icon: UIImage? {
         switch self {
-        case .health: return UIImage(named: "healthIcon")
+        case .damage: return UIImage(named: "healthIcon")
         case .distance: return UIImage(named: "stamina")
         case .banana: return UIImage(named: "banana")
         }
@@ -37,15 +37,15 @@ enum Stat: CaseIterable {
     
     var textColor: UIColor {
         switch self {
-        case .health: return .red
-        case .distance: return .orange
-        case .banana: return .yellow
+        case .damage: return UIColor(hex: 0xDA2222)
+        case .distance: return UIColor(hex: 0xFF6600)
+        case .banana: return UIColor(hex: 0xEBAD12)
         }
     }
     
     var title: String {
         switch self {
-        case .health: return "DAMAGE TAKEN"
+        case .damage: return "DAMAGE TAKEN"
         case .distance: return "DISTANCE"
         case .banana: return "BANANAS COLLECTED"
         }
@@ -53,9 +53,16 @@ enum Stat: CaseIterable {
     
     var value: Int {
         switch self {
-        case .health: return 80
+        case .damage: return 80
         case .distance: return 500
         case .banana: return 190
+        }
+    }
+    
+    var readableValue: String {
+        switch self {
+        case .distance: return "\(value) Meters"
+        case .banana, .damage: return "\(value)"
         }
     }
 }
@@ -113,7 +120,7 @@ extension StatsCoordinator {
         case .distance:
             score.distance = Int(Double(stat.value) * 1.2)
             return score.distance
-        case .health:
+        case .damage:
             score.damage = -(Int(Double(stat.value) * 1.2))
             return score.damage
         }
@@ -177,10 +184,9 @@ final class GameStatsViewController: UIViewController {
         containerStackView.alignment = .fill
         containerStackView.distribution = .fill
         containerStackView.axis = .vertical
+        containerStackView.spacing = Env.device.isPad ? 20 : 5
         scrollview.addSubview(containerStackView)
         containerStackView.pinToSuperviewEdges()
-        
-        scrollview.alwaysBounceVertical = true
         scrollview.contentInset = .init(top: 30, left: 0, bottom: 0, right: 0)
         
         items.forEach(setupView(forItem:))
@@ -212,7 +218,7 @@ final class GameStatsViewController: UIViewController {
         items = [
             .header(.init(lhsText: "LEVEL: 1", rhsText: "SCORE")),
             .stat(.distance),
-            .stat(.health),
+            .stat(.damage),
             .stat(.banana),
             .footer(.init(lhsText: "TOTAL:", rhsText: "0"))
         ]

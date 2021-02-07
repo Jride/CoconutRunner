@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -13,8 +14,9 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatsItemView" customModule="CoconutBasket" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatsItemView" customModule="TropicalRunner" customModuleProvider="target">
             <connections>
+                <outlet property="cons_iconWidth" destination="KLe-oC-GKg" id="deQ-b4-Chk"/>
                 <outlet property="iconImage" destination="E5J-bY-Maa" id="1xZ-wO-Ny7"/>
                 <outlet property="scoreLabel" destination="wTd-g9-3oA" id="0zq-gT-N8L"/>
                 <outlet property="titleLabel" destination="bbN-S9-kDQ" id="Wnt-xr-psj"/>
@@ -37,32 +39,33 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Z6U-15-o0B">
-                            <rect key="frame" x="64" y="0.0" width="137.5" height="77"/>
+                            <rect key="frame" x="64" y="8.5" width="130" height="60"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-S9-kDQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="137.5" height="38.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                     <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="30"/>
                                     <color key="textColor" red="0.1764349341" green="0.18050929900000001" blue="0.17254814509999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345 MI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST7-rZ-wF8">
-                                    <rect key="frame" x="0.0" y="38.5" width="137.5" height="38.5"/>
-                                    <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="35"/>
+                                    <rect key="frame" x="0.0" y="30" width="130" height="30"/>
+                                    <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="30"/>
                                     <color key="textColor" red="0.95957903334263961" green="0.44337258809006747" blue="0.0043910544776863585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTd-g9-3oA">
-                            <rect key="frame" x="215.5" y="18" width="118.5" height="41"/>
-                            <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="35"/>
+                            <rect key="frame" x="208" y="23.5" width="126" height="30"/>
+                            <fontDescription key="fontDescription" name="SoupofJustice" family="Soup of Justice" pointSize="30"/>
                             <color key="textColor" red="0.2254043818" green="0.4533457756" blue="0.53726869820000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="j6p-XQ-W2C"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="j6p-XQ-W2C" firstAttribute="bottom" secondItem="26D-yO-fIl" secondAttribute="bottom" id="Cz8-at-5OC"/>
                 <constraint firstItem="26D-yO-fIl" firstAttribute="top" secondItem="j6p-XQ-W2C" secondAttribute="top" id="Eu6-fJ-YtM"/>
@@ -72,11 +75,13 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="j6p-XQ-W2C"/>
             <point key="canvasLocation" x="346" y="159"/>
         </view>
     </objects>
     <resources>
         <image name="stamina" width="160.5" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
