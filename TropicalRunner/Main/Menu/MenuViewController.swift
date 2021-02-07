@@ -23,7 +23,6 @@ final class MenuViewController: UIViewController {
         case restartGame
     }
     
-    var closingContext: ClosingContext = .resumePausedGame
     var didClose: ((_ context: ClosingContext) -> Void)?
     var mainMenuPresentedFromPauseState: (() -> Void)?
     
@@ -100,9 +99,9 @@ final class MenuViewController: UIViewController {
         }
     }
     
-    private func closeMenu() {
+    private func closeMenu(_ context: ClosingContext) {
         remove()
-        didClose?(closingContext)
+        didClose?(context)
     }
     
     private func flipToMenuView(_ secondView: UIView, completion: (() -> Void)?) {
@@ -170,12 +169,11 @@ extension MenuViewController: MainMenuDelegate {
     }
     
     func mainMenuPlayTapped() {
-        closingContext = .startNewGame
-        closeMenu()
+        closeMenu(.startNewGame)
     }
     
     func mainMenuInfoTapped() {
-        GameStatsViewController.present(on: self)
+        
     }
     
 }
@@ -186,10 +184,9 @@ extension MenuViewController: PauseMenuDelegate {
     
     func resumePressed() {
         
-        closingContext = .resumePausedGame
         // Animate pause menu out
         pauseMenu.slideOutToTop(scheduler: scheduler) { [weak self] in
-            self?.closeMenu()
+            self?.closeMenu(.resumePausedGame)
         }
         
     }

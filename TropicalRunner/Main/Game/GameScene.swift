@@ -167,33 +167,6 @@ extension GameScene: GameLogicEventsDispatcherObserver {
         view?.isPaused = false
     }
     
-    func gameOver() {
-        
-        gameOverContainer = SKNode()
-        
-        let gameOver = SKSpriteNode(imageNamed: "gameOver")
-        var textureSize = gameOver.texture!.size()
-        var ratio = textureSize.height / textureSize.width
-        var newWidth: CGFloat = 650 * Env.gameState.scaleFactor
-        gameOver.size = CGSize(width: newWidth, height: newWidth * ratio)
-        gameOver.zPosition = ZPosition.gameOverLabel
-        
-        gameOver.position = CGPoint(x: frame.midX, y: frame.midY + (100 * Env.gameState.scaleFactor))
-        gameOverContainer?.addChild(gameOver)
-        
-        let playAgain = SKSpriteNode(imageNamed: "playAgain")
-        textureSize = playAgain.texture!.size()
-        ratio = textureSize.height / textureSize.width
-        newWidth = 300 * Env.gameState.scaleFactor
-        playAgain.size = CGSize(width: newWidth, height: newWidth * ratio)
-        playAgain.zPosition = ZPosition.gameOverLabel
-        playAgain.name = "PlayAgain"
-        playAgain.position = CGPoint(x: frame.midX, y: gameOver.frame.minY - (150 * Env.gameState.scaleFactor))
-        gameOverContainer?.addChild(playAgain)
-        
-        addChild(gameOverContainer!)
-    }
-    
 }
 
 extension GameScene: GameStateDispatcherObserver {

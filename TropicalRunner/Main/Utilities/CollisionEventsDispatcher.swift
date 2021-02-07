@@ -15,13 +15,19 @@ enum Enemy {
     case explosion(SKNode)
 }
 
+enum PowerUp {
+    case banana
+}
+
 protocol CollisionEventsDispatcherObserver: class {
     func playerWasHitByEnemy(_ enemy: Enemy)
+    func playerCollectedPowerUp(_ powerUp: PowerUp)
     func enemyCollidedWithFloor(_ enemy: Enemy)
 }
 
 extension CollisionEventsDispatcherObserver {
     func playerWasHitByEnemy(_ enemy: Enemy) {}
+    func playerCollectedPowerUp(_ powerUp: PowerUp) {}
     func enemyCollidedWithFloor(_ enemy: Enemy) {}
 }
 

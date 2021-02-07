@@ -68,6 +68,10 @@ extension AudioManager: CollisionEventsDispatcherObserver {
         UIDevice.vibrate()
     }
     
+    func playerCollectedPowerUp(_ powerUp: PowerUp) {
+        // TODO: Play sound for power up
+    }
+    
     func enemyCollidedWithFloor(_ enemy: Enemy) {
         playCollisionSoundEffect(forEnemy: enemy)
     }

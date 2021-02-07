@@ -58,13 +58,7 @@ final class GameViewController: UIViewController {
         Env.applicationEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
         
         setup()
-        
-        let menu = MenuViewController(displayContext: .mainMenu)
-        menu.didClose = { [unowned self] (context) in
-            self.menuDidClose(context)
-        }
-        add(menu, frame: view.frame)
-        isDisplayingMenu = true
+        showMainMenu()
     }
 
     override var shouldAutorotate: Bool {
@@ -88,6 +82,19 @@ final class GameViewController: UIViewController {
         cons_pauseButtonWidth.constant = Layout.Button.regular()
     }
     
+    private func showMainMenu(animated: Bool = false) {
+        let menu = MenuViewController(displayContext: .mainMenu)
+        menu.didClose = { [unowned self] (context) in
+            self.menuDidClose(context)
+        }
+        menu.view.alpha = animated ? 0 : 1
+        add(menu, frame: view.frame)
+        if animated {
+            menu.view.fadeIn()
+        }
+        isDisplayingMenu = true
+    }
+    
     private func menuDidClose(_ context: MenuViewController.ClosingContext) {
         
         self.isDisplayingMenu = false
@@ -95,7 +102,7 @@ final class GameViewController: UIViewController {
         if context == .resumePausedGame {
             Env.gameLogic.resumeGame()
         } else {
-            Env.gameState.shouldReset()
+            Env.gameState.reset()
             let countdown = CountdownView(frame: view.frame) {
                 // Countdown finished
                 switch context {
@@ -124,7 +131,7 @@ extension GameViewController {
             self.menuDidClose(context)
         }
         menu.mainMenuPresentedFromPauseState = {
-            Env.gameState.shouldReset()
+            Env.gameState.reset()
         }
         add(menu, frame: view.frame)
         pauseButton.isHidden = true
@@ -145,6 +152,42 @@ extension GameViewController: GameLogicEventsDispatcherObserver {
     
     func gameResumed() {
         pauseButton.isHidden = false
+    }
+    
+    func gameOver() {
+        
+        func showStats() {
+            let statsView = GameStatsViewController.present(on: self)
+            statsView.didClose = { [weak self] in
+                self?.showMainMenu(animated: true)
+            }
+        }
+        
+        // Present Game Over Image
+        
+        let image = UIImageView(image: UIImage(named: "gameOver")!)
+        let ratio: CGFloat = 298.0/1104.0
+        let newWidth: CGFloat = 650 * Env.gameState.scaleFactor
+        let newHeight = newWidth * ratio
+        image.frame = CGRect(
+            x: view.center.x - (newWidth/2),
+            y: view.center.y - (newHeight/2),
+            width: newWidth,
+            height: newHeight
+        )
+        image.alpha = 0
+        
+        view.addSubview(image)
+        
+        let fadeOut = {
+            image.fadeOut(0.5, delay: 3) { _ in
+                showStats()
+            }
+        }
+        
+        image.fadeIn(0.5, delay: 0.5) { _ in
+            fadeOut()
+        }
     }
     
 }

@@ -53,9 +53,9 @@ enum Stat: CaseIterable {
     
     var value: Int {
         switch self {
-        case .damage: return 80
-        case .distance: return 500
-        case .banana: return 190
+        case .damage: return Env.gameState.totalDamageTaken
+        case .distance: return Env.gameState.playersDistanceStats.overallDistance
+        case .banana: return Env.gameState.totalBananasCollected
         }
     }
     
@@ -133,6 +133,8 @@ extension StatsCoordinator {
 
 final class GameStatsViewController: UIViewController {
     
+    var didClose: (() -> Void)?
+    
     enum Item {
         case header(StatsHeaderFooterView.Config)
         case stat(Stat)
@@ -153,13 +155,14 @@ final class GameStatsViewController: UIViewController {
     private var statItems = [StatsItemView]()
     private var cons_containerOffset: NSLayoutConstraint?
     
-    var containerStackView = UIStackView(frame: .zero)
+    private var containerStackView = UIStackView(frame: .zero)
     
-    static func present(on viewController: UIViewController) {
+    static func present(on viewController: UIViewController) -> GameStatsViewController {
         
         let vc = GameStatsViewController()
         vc.modalPresentationStyle = .overCurrentContext
         viewController.present(vc, animated: false, completion: nil)
+        return vc
     }
     
     override func viewDidLayoutSubviews() {
@@ -215,8 +218,9 @@ final class GameStatsViewController: UIViewController {
         
         super.init(nibName: "GameStatsViewController", bundle: nil)
         
+        let level = Env.gameLogic.currentLevelConfig.level
         items = [
-            .header(.init(lhsText: "LEVEL: 1", rhsText: "SCORE")),
+            .header(.init(lhsText: "LEVEL: \(level)", rhsText: "SCORE")),
             .stat(.distance),
             .stat(.damage),
             .stat(.banana),
@@ -230,7 +234,9 @@ final class GameStatsViewController: UIViewController {
     
     @IBAction private func closeButtonTapped(_ sender: Any) {
         containerView.slideOutToTop(scheduler: scheduler) {
-            self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: false, completion: { [weak self] in
+                self?.didClose?()
+            })
         }
     }
     

@@ -67,8 +67,7 @@ final class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, Colli
                 
                 firstNode.removeFromParent()
                 
-                // TODO: Add game logic for collecting a banana
-                
+                observerStore.forEach { $0.playerCollectedPowerUp(.banana) }
             }
             
             // Damaging collisions

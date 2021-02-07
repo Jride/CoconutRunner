@@ -53,6 +53,8 @@ final class GameState: GameStateDispatcher, Observable {
     
     private(set) var speed: Double = 0.75
     private(set) var playerHealth: Int!
+    private(set) var totalDamageTaken = 0
+    private(set) var totalBananasCollected = 0
     private var playersFullHealth: Int!
     private(set) var playersHealthPercent: CGFloat = 1
     private(set) var playersDistanceStats = PlayersDistanceStats()
@@ -98,10 +100,12 @@ final class GameState: GameStateDispatcher, Observable {
         playersHealthPercent = percent.constrained(min: 0, max: 1)
     }
     
-    func shouldReset() {
+    func reset() {
         Env.gameLogic.resetToFirstLevel()
         configure(withLevelConfig: Env.gameLogic.currentLevelConfig)
         observerStore.forEach { $0.resetGameState() }
+        totalDamageTaken = 0
+        totalBananasCollected = 0
     }
     
 }
@@ -112,17 +116,18 @@ extension GameState: CollisionEventsDispatcherObserver {
         
         guard isPlayerAlive else { return }
         
-        let healthReduction: Int
+        let damageTaken: Int
         switch enemy {
         case .bomb:
-            healthReduction = 7
+            damageTaken = 7
         case .coconut:
-            healthReduction = 3
+            damageTaken = 3
         case .explosion:
-            healthReduction = 5
+            damageTaken = 5
         }
         
-        playerHealth = (playerHealth - healthReduction).constrained(min: 0, max: playersFullHealth)
+        totalDamageTaken += damageTaken
+        playerHealth = (playerHealth - damageTaken).constrained(min: 0, max: playersFullHealth)
         
         let percent = CGFloat(playerHealth) / CGFloat(playersFullHealth)
         playersHealthPercent = percent.constrained(min: 0, max: 1)
@@ -132,6 +137,17 @@ extension GameState: CollisionEventsDispatcherObserver {
         if isPlayerAlive == false {
             observerStore.forEach { $0.playerDied() }
         }
+    }
+    
+    func playerCollectedPowerUp(_ powerUp: PowerUp) {
+        
+        guard isPlayerAlive else { return }
+        
+        switch powerUp {
+        case .banana:
+            totalBananasCollected += 1
+        }
+        
     }
 }
 
