@@ -70,6 +70,10 @@
 		22D02352248BD67F00B12A33 /* GameOverMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02351248BD67F00B12A33 /* GameOverMusic.wav */; };
 		22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22D02353248BD6BA00B12A33 /* PlayerDied.wav */; };
 		22D35D9E244CE7DE005E3E83 /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D35D9D244CE7DE005E3E83 /* GameNode.swift */; };
+		22EF04C425D0354200C3E080 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF04C325D0354200C3E080 /* Fonts.swift */; };
+		22EF04C825D0368200C3E080 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF04C725D0368200C3E080 /* Device.swift */; };
+		22EF04CE25D0383F00C3E080 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF04CD25D0383F00C3E080 /* CGRect+Extensions.swift */; };
+		22EF04D225D0385200C3E080 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF04D125D0385200C3E080 /* CGSize+Extensions.swift */; };
 		22EF07A3245F13D30085ABCC /* CollisionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF07A2245F13D30085ABCC /* CollisionType.swift */; };
 		22EF07A5245F13EC0085ABCC /* CollisionDetectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */; };
 		22EF07A8245F2C4F0085ABCC /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 22EF07A6245F2C4F0085ABCC /* Explosion.sks */; };
@@ -160,6 +164,10 @@
 		22D02351248BD67F00B12A33 /* GameOverMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOverMusic.wav; sourceTree = "<group>"; };
 		22D02353248BD6BA00B12A33 /* PlayerDied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PlayerDied.wav; sourceTree = "<group>"; };
 		22D35D9D244CE7DE005E3E83 /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
+		22EF04C325D0354200C3E080 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		22EF04C725D0368200C3E080 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		22EF04CD25D0383F00C3E080 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
+		22EF04D125D0385200C3E080 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		22EF07A2245F13D30085ABCC /* CollisionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionType.swift; sourceTree = "<group>"; };
 		22EF07A4245F13EC0085ABCC /* CollisionDetectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionDetectionManager.swift; sourceTree = "<group>"; };
 		22EF07A6245F2C4F0085ABCC /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
@@ -238,6 +246,7 @@
 			children = (
 				2242E078246E799C003889EA /* Observable.swift */,
 				2224AF5124BCFE3200D0490A /* DequeuableTableViewCell.swift */,
+				22EF04C725D0368200C3E080 /* Device.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -250,6 +259,7 @@
 				2242E080246E7B8E003889EA /* CollisionEventsDispatcher.swift */,
 				225EC6BD248913EE00ED0DD2 /* Scheduler.swift */,
 				225EC6BF2489249100ED0DD2 /* ActionTimer.swift */,
+				22EF04C325D0354200C3E080 /* Fonts.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -276,6 +286,8 @@
 		2242E09E24731A22003889EA /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				22EF04CC25D0382D00C3E080 /* CGSize */,
+				22EF04CB25D0381900C3E080 /* CGRect */,
 				22B3F1F62493E7F200E1F4E2 /* Int */,
 				2242E09F24731A2C003889EA /* Bundle */,
 			);
@@ -482,6 +494,22 @@
 			path = MenuViews;
 			sourceTree = "<group>";
 		};
+		22EF04CB25D0381900C3E080 /* CGRect */ = {
+			isa = PBXGroup;
+			children = (
+				22EF04CD25D0383F00C3E080 /* CGRect+Extensions.swift */,
+			);
+			path = CGRect;
+			sourceTree = "<group>";
+		};
+		22EF04CC25D0382D00C3E080 /* CGSize */ = {
+			isa = PBXGroup;
+			children = (
+				22EF04D125D0385200C3E080 /* CGSize+Extensions.swift */,
+			);
+			path = CGSize;
+			sourceTree = "<group>";
+		};
 		22EF07A1245F13BC0085ABCC /* Collision */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,12 +587,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22F2CF26243B0C1400858120 /* Build configuration list for PBXNativeTarget "TropicalRunner" */;
 			buildPhases = (
+				22F2CF01243B0C1200858120 /* Resources */,
+				22EF04D925D03AE300C3E080 /* Custom Linting */,
 				22F2CEFF243B0C1200858120 /* Sources */,
 				229D56D2244B5F3F0067465D /* Swiftlint */,
 				22F2CF00243B0C1200858120 /* Frameworks */,
-				22F2CF01243B0C1200858120 /* Resources */,
-				22B3F20824976FD000E1F4E2 /* Carthage Copy Frameworks */,
 				222FB98F24C4C2FD009EE84B /* Set Build Number */,
+				22B3F20824976FD000E1F4E2 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -735,6 +764,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		22EF04D925D03AE300C3E080 /* Custom Linting */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Custom Linting";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python3 \"${SRCROOT}/Custom Linting/custom_linting.py\" \"${SRCROOT}\" \"${SRCROOT}/TropicalRunner\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -744,6 +791,8 @@
 			files = (
 				22100EBC24B852280019F0CA /* GameStatsViewController.swift in Sources */,
 				22F2CF0D243B0C1200858120 /* GameScene.swift in Sources */,
+				22EF04D225D0385200C3E080 /* CGSize+Extensions.swift in Sources */,
+				22EF04C825D0368200C3E080 /* Device.swift in Sources */,
 				22B3F2182497C26A00E1F4E2 /* MainMenuView.swift in Sources */,
 				225EC6B024854FCE00ED0DD2 /* Music.swift in Sources */,
 				22B3F20B249772BA00E1F4E2 /* UIViewController+ChildViewController.swift in Sources */,
@@ -752,6 +801,7 @@
 				229C1271245733F00006F464 /* UIColor+Color.swift in Sources */,
 				2242E0A124731A43003889EA /* Bundle+LoadFromNib.swift in Sources */,
 				224B129B2444EF8600A540E5 /* Background.swift in Sources */,
+				22EF04C425D0354200C3E080 /* Fonts.swift in Sources */,
 				225EC6B4248589FD00ED0DD2 /* Monkey.swift in Sources */,
 				2242E075246E793D003889EA /* ApplicationEventsDispatcher.swift in Sources */,
 				22B3F1FF24965E2E00E1F4E2 /* DistanceBarView.swift in Sources */,
@@ -777,6 +827,7 @@
 				222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */,
 				22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */,
 				225EC6A42482F34600ED0DD2 /* AudioManager.swift in Sources */,
+				22EF04CE25D0383F00C3E080 /* CGRect+Extensions.swift in Sources */,
 				225EC6C02489249100ED0DD2 /* ActionTimer.swift in Sources */,
 				2242E07D246E7A4B003889EA /* Environment.swift in Sources */,
 				2242E07B246E7A0D003889EA /* GameState.swift in Sources */,

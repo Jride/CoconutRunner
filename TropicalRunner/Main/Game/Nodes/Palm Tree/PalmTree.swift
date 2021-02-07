@@ -9,7 +9,7 @@
 import SpriteKit
 import Foundation
 
-class PalmTree: SKNode {
+final class PalmTree: SKNode {
     
     static let originalSize = SKTexture(imageNamed: "palmTree").size()
     
@@ -275,7 +275,7 @@ extension PalmTree {
         }
     }
     
-    class TreeChildNode {
+    final class TreeChildNode {
         
         var coconutPos: CGPoint!
        

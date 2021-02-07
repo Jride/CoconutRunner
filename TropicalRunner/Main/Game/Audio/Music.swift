@@ -9,7 +9,7 @@
 import Foundation
 import AVKit
 
-class Music: NSObject {
+final class Music: NSObject {
     
     var didFinishPlaying: (() -> Void)?
     var volume: Float = 1.0 {

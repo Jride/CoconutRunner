@@ -60,7 +60,7 @@ enum Stat: CaseIterable {
     }
 }
 
-class StatsCoordinator {
+final class StatsCoordinator {
     
     struct Score {
         var damage: Int = 0
@@ -124,7 +124,7 @@ extension StatsCoordinator {
     }
 }
 
-class GameStatsViewController: UIViewController {
+final class GameStatsViewController: UIViewController {
     
     enum Item {
         case header(StatsHeaderFooterView.Config)

@@ -14,7 +14,7 @@ protocol PauseMenuDelegate: class {
     func restartPressed()
 }
 
-class PauseMenuView: UIView {
+final class PauseMenuView: UIView {
     
     @IBOutlet private var messageLabel: UILabel!
     

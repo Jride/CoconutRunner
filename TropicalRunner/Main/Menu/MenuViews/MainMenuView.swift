@@ -14,7 +14,7 @@ protocol MainMenuDelegate: class {
     func mainMenuInfoTapped()
 }
 
-class MainMenuView: UIView {
+final class MainMenuView: UIView {
     
     @IBOutlet private var buttonWidthConstraints: [NSLayoutConstraint]!
     @IBOutlet private var cons_playButtonWidth: NSLayoutConstraint!

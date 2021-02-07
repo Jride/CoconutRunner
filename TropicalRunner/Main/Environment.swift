@@ -16,6 +16,7 @@ struct Environment {
     var applicationEventsDispatcher: ApplicationEventsDispatcher
     var collisionEventsDispatcher: CollisionEventsDispatcher
     var date: DateClosure
+    var device: DeviceProtocol
     var gameLogic: GameLogic
     var gameState: GameState
 }

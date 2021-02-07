@@ -10,7 +10,7 @@ import Foundation
 
 /// A generic Vector2 type
 public struct Vector2<T> {
-    
+        
     public init(_ v0: T, _ v1: T) {
         self.v0 = v0
         self.v1 = v1
@@ -31,6 +31,22 @@ public struct Vector2<T> {
     public var y: T {
         get { return v1 }
         set { v1 = newValue }
+    }
+    
+    public var width: T {
+        get { return v0 }
+        set { v0 = newValue }
+    }
+    public var height: T {
+        get { return v1 }
+        set { v1 = newValue }
+    }
+}
+
+extension Vector2 where T: ExpressibleByIntegerLiteral {
+    
+    public static var zero: Vector2<T> {
+        return Vector2(0, 0)
     }
 }
 
@@ -151,4 +167,3 @@ public struct Vector4<T> {
     }
     
 }
-

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Monkey: GameSpriteNode {
+final class Monkey: GameSpriteNode {
     
     var gameScene: GameScene? {
         scene as? GameScene

@@ -29,7 +29,7 @@ protocol GameStateDispatcher {
     func remove(observer: GameStateDispatcherObserver)
 }
 
-class GameState: GameStateDispatcher, Observable {
+final class GameState: GameStateDispatcher, Observable {
     
     struct PlayersDistanceStats {
         var overallDistance: Int = 0

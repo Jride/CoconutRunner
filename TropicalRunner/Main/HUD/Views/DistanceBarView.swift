@@ -10,7 +10,7 @@ import UIKit
 import FoundationExtended
 import TweenKit
 
-class DistanceBarView: UIView {
+final class DistanceBarView: UIView {
     
     private let scheduler = ActionScheduler()
     

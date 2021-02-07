@@ -9,7 +9,7 @@
 import Foundation
 import FoundationExtended
 
-class ActionTimer {
+final class ActionTimer {
     
     private var lastActionPerformedDate: Date?
     private let timeThreshold: Time

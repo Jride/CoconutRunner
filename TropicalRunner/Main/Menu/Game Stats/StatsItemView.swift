@@ -10,7 +10,7 @@ import UIKit
 import FoundationExtended
 import TweenKit
 
-class StatsItemView: UIView {
+final class StatsItemView: UIView {
     
     @IBOutlet private var iconImage: UIImageView!
     @IBOutlet private var titleLabel: UILabel!

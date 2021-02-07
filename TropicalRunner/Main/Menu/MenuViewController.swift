@@ -10,7 +10,7 @@ import UIKit
 import TweenKit
 import FoundationExtended
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
     
     enum DisplayContext {
         case mainMenu

@@ -9,7 +9,7 @@
 import SpriteKit
 import FoundationExtended
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var player: Player!
     var floorMargin: CGFloat = 50

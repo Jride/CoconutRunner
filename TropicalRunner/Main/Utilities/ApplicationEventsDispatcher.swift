@@ -35,7 +35,7 @@ protocol ApplicationEventsDispatcher {
     func remove(observer: ApplicationEventsDispatcherObserver)
 }
 
-class ApplicationEventsDispatcherImpl: ApplicationEventsDispatcher, Observable {
+final class ApplicationEventsDispatcherImpl: ApplicationEventsDispatcher, Observable {
     
     var observerStore = ObserverStore<ApplicationEventsDispatcherObserver>()
     

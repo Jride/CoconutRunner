@@ -9,7 +9,7 @@
 import Foundation
 import AVKit
 
-class SoundEffect {
+final class SoundEffect {
     
     var volume: Float = 1.0
     

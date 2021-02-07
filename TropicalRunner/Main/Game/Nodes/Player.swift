@@ -23,7 +23,7 @@ protocol PlayerEventsDispatcher {
     func remove(observer: PlayerEventsDispatcherObserver)
 }
 
-class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
+final class Player: SKSpriteNode, PlayerEventsDispatcher, Observable {
     
     var observerStore = ObserverStore<PlayerEventsDispatcherObserver>()
     private static let prefix = "character_malePerson_"

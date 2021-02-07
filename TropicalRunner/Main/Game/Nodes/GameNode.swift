@@ -17,6 +17,7 @@ import SpriteKit
     func move(by dx: CGFloat)
 }
 
+// @NonFinal
 class GameSpriteNode: SKSpriteNode {
     
     private(set) var isMoving = false
@@ -60,7 +61,7 @@ extension GameSpriteNode: GameNode {
     
 }
 
-class GameWrapperNode: SKNode {
+final class GameWrapperNode: SKNode {
     
     private(set) var isMoving = false
     private var amountMoved: CGFloat = 0

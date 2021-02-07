@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 import UIKit
 
-class AudioManager {
+final class AudioManager {
     
     private let backgroundMusic = Music(resource: "GrasslandsTheme.mp3")
     private let gameOverMusic = Music(resource: "GameOverMusic.wav")

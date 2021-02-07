@@ -9,7 +9,7 @@
 import UIKit
 import FoundationExtended
 
-class PromptView: UIView {
+final class PromptView: UIView {
     
     @IBOutlet private var messageLabel: UILabel!
     

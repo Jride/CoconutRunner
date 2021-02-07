@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Coconut: SKSpriteNode {
+final class Coconut: SKSpriteNode {
     
     static func size() -> CGSize {
         let textureSize = SKTexture(imageNamed: "coconut").size()

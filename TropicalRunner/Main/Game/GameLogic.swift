@@ -67,7 +67,7 @@ struct LevelConfiguration {
     )
 }
 
-class GameLogic: GameLogicEventsDispatcher, Observable {
+final class GameLogic: GameLogicEventsDispatcher, Observable {
     
     var observerStore = ObserverStore<GameLogicEventsDispatcherObserver>()
     var gameScene: GameScene!

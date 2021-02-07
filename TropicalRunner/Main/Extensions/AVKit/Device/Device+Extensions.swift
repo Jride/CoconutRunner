@@ -11,7 +11,17 @@ import UIKit
 import Foundation
 
 extension UIDevice {
+    
     static func vibrate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
+    
+    var isPad: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var isPhone: Bool {
+        return UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
 }

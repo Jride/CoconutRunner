@@ -9,7 +9,7 @@
 import UIKit
 import TweenKit
 
-class CountdownView: UIView {
+final class CountdownView: UIView {
     
     private let scheduler = ActionScheduler()
     

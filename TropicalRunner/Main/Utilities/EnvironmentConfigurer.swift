@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EnvironmentConfigurer {
+final class EnvironmentConfigurer {
 
     static func buildEnvironment() -> Environment {
         
@@ -17,6 +17,7 @@ class EnvironmentConfigurer {
             applicationEventsDispatcher: ApplicationEventsDispatcherImpl(),
             collisionEventsDispatcher: CollisionDetectionManager(),
             date: { Date.now },
+            device: Device(),
             gameLogic: GameLogic(),
             gameState: GameState()
         )

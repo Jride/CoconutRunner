@@ -9,7 +9,7 @@
 import SpriteKit
 import FoundationExtended
 
-class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEventsDispatcher, Observable {
+final class CollisionDetectionManager: NSObject, SKPhysicsContactDelegate, CollisionEventsDispatcher, Observable {
     
     var observerStore = ObserverStore<CollisionEventsDispatcherObserver>()
     var gameScene: GameScene!

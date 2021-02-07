@@ -27,7 +27,7 @@ enum DispatchBehaviour {
 
 struct ObserverStore<ObserverType> {
     
-    class StoredObserver {
+    final class StoredObserver {
         weak var observer: AnyObject?
         let dispatchBehaviour: DispatchBehaviour
         

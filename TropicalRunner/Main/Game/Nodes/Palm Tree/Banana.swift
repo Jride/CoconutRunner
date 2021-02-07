@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Banana: SKSpriteNode {
+final class Banana: SKSpriteNode {
     
     static func size() -> CGSize {
         let textureSize = SKTexture(imageNamed: "banana").size()

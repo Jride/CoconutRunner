@@ -19,7 +19,7 @@ struct Layout {
     
 }
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
     
     @IBOutlet private var healthBarView: HealthBarView!
     @IBOutlet private var distanceBarView: DistanceBarView!

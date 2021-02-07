@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatsHeaderFooterView: UIView {
+final class StatsHeaderFooterView: UIView {
     
     struct Config {
         let lhsText: String
@@ -49,6 +49,7 @@ class StatsHeaderFooterView: UIView {
         
         backgroundColor = .clear
         nibView.backgroundColor = .clear
+        
     }
     
 }

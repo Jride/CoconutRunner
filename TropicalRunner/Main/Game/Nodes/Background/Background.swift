@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Background: SKSpriteNode {
+final class Background: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "background").size()
     
@@ -25,7 +25,7 @@ class Background: SKSpriteNode {
     }
 }
 
-class ContinuousMovingNode: SKNode {
+final class ContinuousMovingNode: SKNode {
     
     private let movementSpeed: TimeInterval
     
@@ -45,7 +45,7 @@ class ContinuousMovingNode: SKNode {
     
 }
 
-class BackgroundCloudFront: SKSpriteNode {
+final class BackgroundCloudFront: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "BackgroundCloudLayerA").size()
     
@@ -62,7 +62,7 @@ class BackgroundCloudFront: SKSpriteNode {
     }
 }
 
-class BackgroundCloudBack: SKSpriteNode {
+final class BackgroundCloudBack: SKSpriteNode {
     
     static let originalSize = SKTexture(imageNamed: "BackgroundCloudLayerB").size()
     

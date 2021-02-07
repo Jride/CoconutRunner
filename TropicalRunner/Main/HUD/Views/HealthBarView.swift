@@ -10,7 +10,7 @@ import UIKit
 import FoundationExtended
 import TweenKit
 
-class HealthBarView: UIView {
+final class HealthBarView: UIView {
     
     private let scheduler = ActionScheduler()
     

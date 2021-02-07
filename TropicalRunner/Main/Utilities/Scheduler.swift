@@ -15,7 +15,7 @@ protocol SchedulerProtocol {
     func stop()
 }
 
-class Scheduler: SchedulerProtocol {
+final class Scheduler: SchedulerProtocol {
     
     private let interval: TimeInterval
     private weak var owner: AnyObject?

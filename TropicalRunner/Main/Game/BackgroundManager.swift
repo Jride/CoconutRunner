@@ -9,7 +9,7 @@
 import SpriteKit
 import Foundation
 
-class BackgroundManager {
+final class BackgroundManager {
     
     private var treesContainer: GameWrapperNode?
     private var trees = [PalmTree]()
