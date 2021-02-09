@@ -10,15 +10,25 @@ import Foundation
 import AVFoundation
 import UIKit
 
+struct GameSoundEffects {
+    static let scoreAddVersionOne = SoundEffect(resource: "ScoreAddV1.mp3")
+    static let scoreAddVersionTwo = SoundEffect(resource: "ScoreAddV2.mp3")
+    static let scoreSubtract = SoundEffect(resource: "ScoreSubtract.mp3")
+}
+
 final class AudioManager {
     
+    // Music
     private let backgroundMusic = Music(resource: "GrasslandsTheme.mp3")
     private let gameOverMusic = Music(resource: "GameOverMusic.wav")
-    private let playerHurt = SoundEffect(resource: "PlayerHurt.mp3")
     private let playerDied = Music(resource: "PlayerDied.wav")
+    private let menuMusic = Music(resource: "GameOverMusic.wav")
+    
+    // Sound Effects
+    private let playerHurt = SoundEffect(resource: "PlayerHurt.mp3")
     private let coconutExplosion = SoundEffect(resource: "ImpactFloor.mp3")
     private let bombExplosion = SoundEffect(resource: "Explosion.mp3")
-    private let menuMusic = Music(resource: "GameOverMusic.wav")
+    private let collectItem = SoundEffect(resource: "CollectItem.wav")
     
     private var gameMusic: Music?
     
@@ -33,6 +43,7 @@ final class AudioManager {
         coconutExplosion.volume = 0.2
         playerHurt.volume = 0.4
         bombExplosion.volume = 1.0
+        collectItem.volume = 0.2
         
         DispatchQueue.main.async {
             Env.collisionEventsDispatcher.add(observer: self, dispatchBehaviour: .onQueue(.main))
@@ -57,6 +68,17 @@ final class AudioManager {
 
 extension AudioManager {
     
+    func mainMenuPresented() {
+        gameMusic?.stop()
+        gameMusic = nil
+        menuMusic.play()
+    }
+    
+    func pauseMenuPresented() {
+        gameMusic?.pause()
+        menuMusic.play()
+    }
+    
 }
 
 // MARK: - CollisionEventsDispatcherObserver
@@ -69,7 +91,7 @@ extension AudioManager: CollisionEventsDispatcherObserver {
     }
     
     func playerCollectedPowerUp(_ powerUp: PowerUp) {
-        // TODO: Play sound for power up
+        collectItem.play()
     }
     
     func enemyCollidedWithFloor(_ enemy: Enemy) {
@@ -82,6 +104,9 @@ extension AudioManager: CollisionEventsDispatcherObserver {
 extension AudioManager: GameLogicEventsDispatcherObserver {
     
     func startLevel(withConfig config: LevelConfiguration) {
+        
+        guard config.level == 1 else { return }
+        
         menuMusic.stop()
         gameMusic?.stop()
         gameMusic = backgroundMusic
@@ -103,20 +128,4 @@ extension AudioManager: GameLogicEventsDispatcherObserver {
             self.gameOverMusic.play()
         }
     }
-}
-
-// MARK: - Presenting Menu
-extension AudioManager {
-    
-    func mainMenuPresented() {
-        gameMusic?.stop()
-        gameMusic = nil
-        menuMusic.play()
-    }
-    
-    func pauseMenuPresented() {
-        gameMusic?.pause()
-        menuMusic.play()
-    }
-    
 }

@@ -17,6 +17,9 @@
 		2224B7DD24BF96FC00D0490A /* StatsHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2224B7DB24BF96FC00D0490A /* StatsHeaderFooterView.xib */; };
 		222EDC322454CEC400F38F79 /* BackgroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222EDC312454CEC400F38F79 /* BackgroundManager.swift */; };
 		22301E09245E082E00FF0AD0 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22301E08245E082E00FF0AD0 /* Bomb.swift */; };
+		2231C83925D1D41D00F428D4 /* ScoreAddV1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2231C83625D1D41D00F428D4 /* ScoreAddV1.mp3 */; };
+		2231C83A25D1D41D00F428D4 /* ScoreAddV2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2231C83725D1D41D00F428D4 /* ScoreAddV2.mp3 */; };
+		2231C83B25D1D41D00F428D4 /* ScoreSubtract.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2231C83825D1D41D00F428D4 /* ScoreSubtract.mp3 */; };
 		2242E03F24647623003889EA /* Banana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E03E24647623003889EA /* Banana.swift */; };
 		2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2242E0482469D9CC003889EA /* BananaCollection.sks */; };
 		2242E075246E793D003889EA /* ApplicationEventsDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242E074246E793D003889EA /* ApplicationEventsDispatcher.swift */; };
@@ -88,6 +91,7 @@
 		22F2CF22243B0C1400858120 /* TropicalRunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF21243B0C1400858120 /* TropicalRunnerTests.swift */; };
 		22F2CF63243B9F4A00858120 /* CoconutExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 22F2CF62243B9F4A00858120 /* CoconutExplosion.sks */; };
 		22F2CF67243BDDE500858120 /* PalmTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F2CF66243BDDE500858120 /* PalmTree.swift */; };
+		22F90EB125D34EBC00266247 /* CollectItem.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22F90EB025D34EBC00266247 /* CollectItem.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,9 @@
 		2224B7DB24BF96FC00D0490A /* StatsHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsHeaderFooterView.xib; sourceTree = "<group>"; };
 		222EDC312454CEC400F38F79 /* BackgroundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundManager.swift; sourceTree = "<group>"; };
 		22301E08245E082E00FF0AD0 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
+		2231C83625D1D41D00F428D4 /* ScoreAddV1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ScoreAddV1.mp3; sourceTree = "<group>"; };
+		2231C83725D1D41D00F428D4 /* ScoreAddV2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ScoreAddV2.mp3; sourceTree = "<group>"; };
+		2231C83825D1D41D00F428D4 /* ScoreSubtract.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ScoreSubtract.mp3; sourceTree = "<group>"; };
 		2242E03E24647623003889EA /* Banana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banana.swift; sourceTree = "<group>"; };
 		2242E0482469D9CC003889EA /* BananaCollection.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BananaCollection.sks; sourceTree = "<group>"; };
 		2242E074246E793D003889EA /* ApplicationEventsDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationEventsDispatcher.swift; sourceTree = "<group>"; };
@@ -186,6 +193,7 @@
 		22F2CF23243B0C1400858120 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F2CF62243B9F4A00858120 /* CoconutExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoconutExplosion.sks; sourceTree = "<group>"; };
 		22F2CF66243BDDE500858120 /* PalmTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmTree.swift; sourceTree = "<group>"; };
+		22F90EB025D34EBC00266247 /* CollectItem.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CollectItem.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +247,16 @@
 				224B129A2444EF8600A540E5 /* Background.swift */,
 			);
 			path = Background;
+			sourceTree = "<group>";
+		};
+		2231C83525D1D3E300F428D4 /* Scoring */ = {
+			isa = PBXGroup;
+			children = (
+				2231C83625D1D41D00F428D4 /* ScoreAddV1.mp3 */,
+				2231C83725D1D41D00F428D4 /* ScoreAddV2.mp3 */,
+				2231C83825D1D41D00F428D4 /* ScoreSubtract.mp3 */,
+			);
+			path = Scoring;
 			sourceTree = "<group>";
 		};
 		2242E072246E789D003889EA /* Protocols */ = {
@@ -408,11 +426,8 @@
 		229D56D5244B5FFE0067465D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				225EC6962482BE0A00ED0DD2 /* Background Music */,
-				224B12A12445946800A540E5 /* ImpactPlayer.mp3 */,
-				224B12A32445958C00A540E5 /* ImpactFloor.mp3 */,
-				225EC6A12482CF9E00ED0DD2 /* Explosion.mp3 */,
-				225EC69F2482CB8400ED0DD2 /* PlayerHurt.mp3 */,
+				22F90EAE25D34E9100266247 /* Music */,
+				22F90EAD25D34E8900266247 /* Sound Effects */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -570,6 +585,35 @@
 			path = TropicalRunnerTests;
 			sourceTree = "<group>";
 		};
+		22F90EAD25D34E8900266247 /* Sound Effects */ = {
+			isa = PBXGroup;
+			children = (
+				2231C83525D1D3E300F428D4 /* Scoring */,
+				22F90EAF25D34E9E00266247 /* Collision */,
+			);
+			path = "Sound Effects";
+			sourceTree = "<group>";
+		};
+		22F90EAE25D34E9100266247 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				225EC6962482BE0A00ED0DD2 /* Background Music */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		22F90EAF25D34E9E00266247 /* Collision */ = {
+			isa = PBXGroup;
+			children = (
+				224B12A12445946800A540E5 /* ImpactPlayer.mp3 */,
+				224B12A32445958C00A540E5 /* ImpactFloor.mp3 */,
+				22F90EB025D34EBC00266247 /* CollectItem.wav */,
+				225EC6A12482CF9E00ED0DD2 /* Explosion.mp3 */,
+				225EC69F2482CB8400ED0DD2 /* PlayerHurt.mp3 */,
+			);
+			path = Collision;
+			sourceTree = "<group>";
+		};
 		7C7CA8B34E45830304D81A4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -665,6 +709,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F90EB125D34EBC00266247 /* CollectItem.wav in Resources */,
 				2224B7DD24BF96FC00D0490A /* StatsHeaderFooterView.xib in Resources */,
 				22B3F21B2497CAEC00E1F4E2 /* PauseMenuView.xib in Resources */,
 				2242E099247304D6003889EA /* HealthBarView.xib in Resources */,
@@ -682,17 +727,20 @@
 				225EC6A22482CF9F00ED0DD2 /* Explosion.mp3 in Resources */,
 				225EC69C2482BE2900ED0DD2 /* GrasslandsTheme.mp3 in Resources */,
 				22F2CF17243B0C1400858120 /* LaunchScreen.storyboard in Resources */,
+				2231C83A25D1D41D00F428D4 /* ScoreAddV2.mp3 in Resources */,
 				22EF07A8245F2C4F0085ABCC /* Explosion.sks in Resources */,
 				224B12A42445958C00A540E5 /* ImpactFloor.mp3 in Resources */,
 				225EC69A2482BE2900ED0DD2 /* MenuTheme.mp3 in Resources */,
 				2242E0492469D9CC003889EA /* BananaCollection.sks in Resources */,
 				22B3F20024965E2E00E1F4E2 /* DistanceBarView.xib in Resources */,
+				2231C83B25D1D41D00F428D4 /* ScoreSubtract.mp3 in Resources */,
 				22B3F21F2497CE6A00E1F4E2 /* soupofjustice.ttf in Resources */,
 				225EC69B2482BE2900ED0DD2 /* WorldmapTheme.mp3 in Resources */,
 				22D02354248BD6BA00B12A33 /* PlayerDied.wav in Resources */,
 				22EF07AB245F2D460085ABCC /* ExplosionUp.sks in Resources */,
 				2224AF5624BD8CF000D0490A /* StatsItemView.xib in Resources */,
 				224B12A22445946800A540E5 /* ImpactPlayer.mp3 in Resources */,
+				2231C83925D1D41D00F428D4 /* ScoreAddV1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,7 +1050,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "Set at build time";
-				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
+				DEVELOPMENT_TEAM = RBV9EAC82V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1013,9 +1061,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rideout.TropicalRunner;
 				PRODUCT_NAME = TropicalRunner;
-				PROVISIONING_PROFILE_SPECIFIER = "ITV Development Wildcard Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.rideout.TropicalRunner";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1028,7 +1077,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "Set at build time";
-				DEVELOPMENT_TEAM = 2Z9W7GWNDZ;
+				DEVELOPMENT_TEAM = RBV9EAC82V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1039,9 +1088,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rideout.TropicalRunner;
 				PRODUCT_NAME = TropicalRunner;
-				PROVISIONING_PROFILE_SPECIFIER = "ITV Development Wildcard Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.rideout.TropicalRunner";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

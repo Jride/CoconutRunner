@@ -54,7 +54,10 @@ final class StatsHeaderFooterView: UIView {
         fontSize = fontSize * Fonts.fontCoefficient
         
         [rhsLabel,
-         lhsLabel].forEach { $0.font = Fonts.soupOfJustice(size: fontSize) }
+         lhsLabel].forEach {
+            $0!.font = Fonts.soupOfJustice(size: fontSize)
+            $0!.textColor = .black
+         }
         
     }
     

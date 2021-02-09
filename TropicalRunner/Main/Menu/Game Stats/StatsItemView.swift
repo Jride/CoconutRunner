@@ -18,7 +18,7 @@ final class StatsItemView: UIView {
     @IBOutlet private var scoreLabel: UILabel!
     @IBOutlet private var cons_iconWidth: NSLayoutConstraint!
     
-    var statsCoordinator: StatsCoordinator?
+    private var statsCoordinator: StatsCoordinator?
     var stat: Stat = .damage
     
     struct Config {
@@ -58,7 +58,6 @@ final class StatsItemView: UIView {
     
     func configure(with config: Config) {
         statsCoordinator = config.statsCoordinator
-        
         stat = config.stat
         iconImage.image = stat.icon
         titleLabel.text = "\(stat.title):"
@@ -82,7 +81,6 @@ extension StatsItemView: Animating {
         
         let score = coordinator.score(for: stat)
         
-        let duration: TimeInterval = 1
         var actions = [FiniteTimeAction]()
         
         var plusMinus = score.isPositive ? "+" : "-"
@@ -91,7 +89,7 @@ extension StatsItemView: Animating {
         let scoreAction = InterpolationAction(
             from: 0,
             to: score.abs,
-            duration: duration, easing: .linear) { [weak self] in
+            duration: stat.animationDuration.seconds, easing: .linear) { [weak self] in
                 self?.scoreLabel.text = "\(plusMinus)\($0)"
         }
         
@@ -102,12 +100,14 @@ extension StatsItemView: Animating {
             let totalScoreAction = InterpolationAction(
                 from: currentTotal,
                 to: coordinator.totalScore,
-                duration: duration, easing: .linear) {
+                duration: stat.animationDuration.seconds, easing: .linear) {
                     totalScoreView.rhsText = "\($0)"
             }
             
             actions.append(totalScoreAction)
         }
+        
+        stat.sound.play()
         
         let sequence = ActionSequence(actions: [
             ActionGroup(actions: actions),

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FoundationExtended
 import TweenKit
 
 protocol Animating: class {
@@ -52,10 +53,16 @@ enum Stat: CaseIterable {
     }
     
     var value: Int {
+//        switch self {
+//        case .damage: return Env.gameState.totalDamageTaken
+//        case .distance: return Env.gameState.playersDistanceStats.overallDistance
+//        case .banana: return Env.gameState.totalBananasCollected
+//        }
+        
         switch self {
-        case .damage: return Env.gameState.totalDamageTaken
-        case .distance: return Env.gameState.playersDistanceStats.overallDistance
-        case .banana: return Env.gameState.totalBananasCollected
+        case .damage: return 102
+        case .distance: return 1500
+        case .banana: return 40
         }
     }
     
@@ -63,6 +70,22 @@ enum Stat: CaseIterable {
         switch self {
         case .distance: return "\(value) Meters"
         case .banana, .damage: return "\(value)"
+        }
+    }
+    
+    var animationDuration: Time {
+        switch self {
+        case .damage: return .init(seconds: 1)
+        case .distance: return .init(seconds: 1)
+        case .banana: return .init(seconds: 1)
+        }
+    }
+    
+    var sound: SoundEffect {
+        switch self {
+        case .damage: return GameSoundEffects.scoreSubtract
+        case .distance: return GameSoundEffects.scoreAddVersionOne
+        case .banana: return GameSoundEffects.scoreAddVersionTwo
         }
     }
 }
@@ -169,6 +192,10 @@ final class GameStatsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         scrollview.contentSize.width = scrollview.bounds.width
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     override func viewDidLoad() {

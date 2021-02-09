@@ -63,6 +63,10 @@ final class MenuViewController: UIViewController {
         fatalError()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -173,7 +177,7 @@ extension MenuViewController: MainMenuDelegate {
     }
     
     func mainMenuInfoTapped() {
-        
+        GameStatsViewController.present(on: self)
     }
     
 }
