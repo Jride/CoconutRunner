@@ -53,16 +53,10 @@ enum Stat: CaseIterable {
     }
     
     var value: Int {
-//        switch self {
-//        case .damage: return Env.gameState.totalDamageTaken
-//        case .distance: return Env.gameState.playersDistanceStats.overallDistance
-//        case .banana: return Env.gameState.totalBananasCollected
-//        }
-        
         switch self {
-        case .damage: return 102
-        case .distance: return 1500
-        case .banana: return 40
+        case .damage: return Env.gameState.totalDamageTaken
+        case .distance: return Env.gameState.playersDistanceStats.overallDistance
+        case .banana: return Env.gameState.totalBananasCollected
         }
     }
     

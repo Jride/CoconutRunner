@@ -177,7 +177,7 @@ extension MenuViewController: MainMenuDelegate {
     }
     
     func mainMenuInfoTapped() {
-        GameStatsViewController.present(on: self)
+        
     }
     
 }
